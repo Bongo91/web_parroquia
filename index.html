@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Parroquia Jesús y San Martín</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header" id="header">
+    <div class="container nav">
+      <a href="index.html#inicio" class="logo">
+        <img src="images/templo.png" alt="Logotipo de la parroquia" loading="lazy">
+        <span>Parroquia Jesús y San Martín</span>
+      </a>
+
+      <nav aria-label="Navegación principal">
+        <button class="menu-btn" id="menu-btn" aria-label="Abrir menú">☰</button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="index.html#inicio">Inicio</a></li>
+          <li class="nav-dropdown">
+            <button class="nav-dropdown-toggle" type="button" aria-expanded="false">Comunidades</button>
+            <ul class="nav-dropdown-menu">
+              <li><a href="index.html#despertar">Despertar</a></li>
+              <li><a href="index.html#comunion">Comunión</a></li>
+              <li><a href="index.html#alevines">Alevines</a></li>
+              <li><a href="index.html#juveniles">Juveniles</a></li>
+              <li><a href="index.html#jovenes">Jóvenes</a></li>
+              <li><a href="index.html#adultos">Adultos</a></li>
+            </ul>
+          </li>
+          <li class="nav-dropdown">
+            <button class="nav-dropdown-toggle" type="button" aria-expanded="false">Apoyo social</button>
+            <ul class="nav-dropdown-menu">
+              <li><a href="caritas.html">Cáritas</a></li>
+            </ul>
+          </li>
+          <li class="nav-dropdown">
+            <button class="nav-dropdown-toggle" type="button" aria-expanded="false">Biblioteca</button>
+            <ul class="nav-dropdown-menu">
+              <li><a href="biblioteca.html#lectores">Comunidad de lectores</a></li>
+              <li><a href="biblioteca.html#prestamos">Préstamos y devoluciones</a></li>
+            </ul>
+          </li>
+          <li><a href="cultura-fe.html">Cultura y Fe</a></li>
+          <li><a href="calendario-pastoral.html">Calendario pastoral</a></li>
+          <li><a href="campamentos-peregrinaciones.html">Campamentos</a></li>
+          <li><a href="galeria.html">Galería</a></li>
+          <li><a href="quienes-somos.html">Quiénes somos</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-content reveal">
+        <h1>Una casa abierta para tu encuentro con Dios</h1>
+        <p>Vive la fe en comunidad. Te esperamos con los brazos abiertos.</p>
+
+        <div class="hero-info" aria-label="Información rápida">
+          <article>
+            <span>Misa</span>
+            <strong>L-V 08:30 · D 12:00</strong>
+          </article>
+          <article>
+            <span>Secretaría</span>
+            <strong>L-V 10:00-13:00</strong>
+          </article>
+          <article>
+            <span>Confesiones</span>
+            <strong>30 min antes de misa</strong>
+          </article>
+          <article class="hero-player">
+            <span>Evangelio resumido</span>
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener">Ver mini reflexión</a>
+          </article>
+        </div>
+
+        <a href="#horarios" class="btn">Ver Horarios de Misas</a>
+      </div>
+    </section>
+
+    <section class="social-strip" aria-label="Redes sociales">
+      <div class="container social-strip-inner">
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://wa.me/34916840374" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </section>
+
+    <section id="bienvenida">
+      <div class="container">
+        <div class="welcome-grid">
+          <div class="welcome-image reveal">
+            <div class="welcome-slider">
+              <img src="images/templo.png" alt="Templo parroquial" loading="lazy">
+              <img src="images/Cruz monte.png" alt="Cruz en el paisaje" loading="lazy">
+            </div>
+          </div>
+          <div class="welcome-content reveal">
+            <h2>Bienvenidos a vuestra casa</h2>
+            <p>Queridos hermanos y hermanas, nuestra parroquia quiere ser un lugar de encuentro con Cristo, de escucha de la Palabra de Dios y de fraternidad auténtica.</p>
+            <br>
+            <p>Aquí caminamos juntos como comunidad, compartiendo la alegría del Evangelio, acompañando a quienes necesitan consuelo y celebrando la vida sacramental con esperanza y sencillez.</p>
+            <br>
+            <p>Cada persona que cruza estas puertas es recibida con cariño, porque creemos profundamente que la Iglesia es hogar, acogida y misericordia.</p>
+            <div class="signature">— Pbro. José Manuel Rodríguez</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pillars" id="comunidades">
+      <div class="container">
+        <h2 class="reveal">Vida Parroquial</h2>
+        <p class="section-intro reveal">Comunidades y grupos para crecer en la fe según cada etapa de la vida.</p>
+
+        <div class="visual-grid">
+          <article class="visual-card reveal" id="despertar">
+            <img src="images/templo.png" alt="Comunidad Despertar">
+            <div><span>Infancia</span><h3>Despertar</h3><p>Primeros pasos en la fe desde la alegría, la familia y el descubrimiento.</p></div>
+          </article>
+          <article class="visual-card reveal" id="comunion">
+            <img src="images/Cruz monte.png" alt="Comunidad de Comunión">
+            <div><span>Sacramentos</span><h3>Comunión</h3><p>Camino de preparación para recibir a Jesús en la Eucaristía.</p></div>
+          </article>
+          <article class="visual-card reveal" id="alevines">
+            <img src="images/templo.png" alt="Grupo Alevines">
+            <div><span>Crecimiento</span><h3>Alevines</h3><p>Un grupo para seguir creciendo en comunidad después de la primera comunión.</p></div>
+          </article>
+          <article class="visual-card reveal" id="juveniles">
+            <img src="images/Cruz monte.png" alt="Grupo Juveniles">
+            <div><span>Adolescentes</span><h3>Juveniles</h3><p>Encuentros, oración y amistad para vivir la fe en una etapa decisiva.</p></div>
+          </article>
+          <article class="visual-card reveal" id="jovenes">
+            <img src="images/templo.png" alt="Grupo Jóvenes">
+            <div><span>Jóvenes</span><h3>Jóvenes</h3><p>Espacio de fe, preguntas, servicio y vida compartida.</p></div>
+          </article>
+          <article class="visual-card reveal" id="adultos">
+            <img src="images/Cruz monte.png" alt="Grupo Adultos">
+            <div><span>Adultos</span><h3>Adultos</h3><p>Formación, oración y acompañamiento para vivir la fe en lo cotidiano.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="adultos-detalle">
+      <div class="container">
+        <h2 class="reveal">Adultos</h2>
+        <p class="section-intro reveal">Propuestas sencillas para encontrarse, rezar, formarse y compartir vida.</p>
+        <div class="progressive-grid" data-visible="8">
+          <article class="mini-card reveal"><h3>Café con Fe</h3><p>Conversaciones tranquilas para mirar la vida desde el Evangelio.</p></article>
+          <article class="mini-card reveal"><h3>Madres</h3><p>Acompañamiento, oración y comunidad para mujeres y familias.</p></article>
+          <article class="mini-card reveal"><h3>Varones</h3><p>Encuentros de formación, fraternidad y servicio.</p></article>
+          <article class="mini-card reveal"><h3>Lectio Divina</h3><p>Escucha orante de la Palabra con ritmo pausado y comunitario.</p></article>
+          <article class="mini-card reveal"><h3>Oración de adultos</h3><p>Momentos de silencio, alabanza e intercesión.</p></article>
+          <article class="mini-card reveal"><h3>Taller bíblico</h3><p>Claves sencillas para comprender mejor la Escritura.</p></article>
+          <article class="mini-card reveal"><h3>Acompañamiento</h3><p>Espacios de escucha y orientación espiritual.</p></article>
+          <article class="mini-card reveal"><h3>Servicio parroquial</h3><p>Voluntariado para cuidar la vida cotidiana de la parroquia.</p></article>
+          <article class="mini-card reveal is-extra"><h3>Retiro de adultos</h3><p>Una pausa mensual para rezar y ordenar el corazón.</p></article>
+          <article class="mini-card reveal is-extra"><h3>Formación familiar</h3><p>Encuentros sobre educación, fe y vida doméstica.</p></article>
+        </div>
+        <button class="load-more" type="button">Mostrar más</button>
+      </div>
+    </section>
+
+    <section class="content-section soft-section" id="actividades">
+      <div class="container">
+        <h2 class="reveal">Actividades parroquiales</h2>
+        <p class="section-intro reveal">Una agenda viva, visual y fácil de recorrer.</p>
+        <div class="progressive-grid" data-visible="8">
+          <article class="mini-card reveal"><h3>Eventos comunitarios</h3><p>Celebraciones y encuentros para toda la parroquia.</p></article>
+          <article class="mini-card reveal"><h3>Retiros</h3><p>Tiempos de silencio, oración y renovación interior.</p></article>
+          <article class="mini-card reveal"><h3>Holywins</h3><p>Una celebración luminosa para niños, jóvenes y familias.</p></article>
+          <article class="mini-card reveal"><h3>Actividades parroquiales</h3><p>Propuestas abiertas para compartir la vida de la comunidad.</p></article>
+          <article class="mini-card reveal"><h3>Encuentros familiares</h3><p>Espacios sencillos para crecer juntos.</p></article>
+          <article class="mini-card reveal"><h3>Vigilias</h3><p>Oración comunitaria en momentos fuertes del año litúrgico.</p></article>
+          <article class="mini-card reveal"><h3>Voluntariado</h3><p>Servicio concreto y cercano dentro y fuera de la parroquia.</p></article>
+          <article class="mini-card reveal"><h3>Formación</h3><p>Charlas y talleres para profundizar en la fe.</p></article>
+          <article class="mini-card reveal is-extra"><h3>Convivencias</h3><p>Jornadas para fortalecer los vínculos de comunidad.</p></article>
+          <article class="mini-card reveal is-extra"><h3>Campañas solidarias</h3><p>Iniciativas para responder a necesidades concretas.</p></article>
+        </div>
+        <button class="load-more" type="button">Mostrar más</button>
+      </div>
+    </section>
+
+    <section class="content-section" id="recursos">
+      <div class="container">
+        <h2 class="reveal">Recursos</h2>
+        <p class="section-intro reveal">Materiales prácticos para rezar, aprender y vivir mejor la liturgia.</p>
+        <div class="progressive-grid" data-visible="8">
+          <article class="mini-card reveal"><h3>Cómo rezar el rosario</h3><p>Guía sencilla para rezarlo solo, en familia o en comunidad.</p></article>
+          <article class="mini-card reveal"><h3>Comportamientos en misa</h3><p>Claves para participar con respeto, atención y alegría.</p></article>
+          <article class="mini-card reveal"><h3>Videos de interés</h3><p>Selección de contenidos para formación y oración.</p></article>
+          <article class="mini-card reveal"><h3>Material propio</h3><p>Documentos, guías y propuestas elaboradas por la parroquia.</p></article>
+          <article class="mini-card reveal"><h3>Oraciones básicas</h3><p>Textos para acompañar la oración diaria.</p></article>
+          <article class="mini-card reveal"><h3>Año litúrgico</h3><p>Recursos para vivir Adviento, Navidad, Cuaresma y Pascua.</p></article>
+          <article class="mini-card reveal"><h3>Sacramentos</h3><p>Información breve sobre preparación y celebración.</p></article>
+          <article class="mini-card reveal"><h3>Lecturas recomendadas</h3><p>Libros y artículos para seguir profundizando.</p></article>
+          <article class="mini-card reveal is-extra"><h3>Cantos</h3><p>Material musical para celebraciones y grupos.</p></article>
+          <article class="mini-card reveal is-extra"><h3>Familias</h3><p>Recursos para rezar y dialogar en casa.</p></article>
+        </div>
+        <button class="load-more" type="button">Mostrar más</button>
+      </div>
+    </section>
+
+    <section id="horarios">
+      <div class="container">
+        <h2 class="reveal">El latido de nuestra comunidad</h2>
+        <p class="section-intro reveal">Horarios</p>
+        <div class="schedule-grid">
+          <article class="schedule-card highlight reveal">
+            <div class="schedule-title"><span>⛪</span><h3>Misas</h3></div>
+            <ul class="schedule-list">
+              <li><span>Lunes a Viernes</span><span class="schedule-time">08:30</span></li>
+              <li><span>Domingos</span><span class="schedule-time">12:00</span></li>
+            </ul>
+          </article>
+          <article class="schedule-card reveal">
+            <div class="schedule-title"><span>🕊</span><h3>Confesiones</h3></div>
+            <ul class="schedule-list">
+              <li><span>Lunes a domingo</span><span class="schedule-time">Media hora antes de la misa</span></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="external-links" aria-label="Enlaces externos">
+      <div class="container external-links-inner">
+        <a href="https://www.diocesisgetafe.es/" target="_blank" rel="noopener">Diócesis de Getafe</a>
+        <a href="https://www.djuventudgetafe.es/" target="_blank" rel="noopener">Delegación de Juventud</a>
+        <a href="https://www.conferenciaepiscopal.es/" target="_blank" rel="noopener">Conferencia Episcopal</a>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contacto">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>Contacto</h3>
+          <p>📍 Avenida Juan Carlos I, 3 28905 Getafe</p>
+          <p>☎ +34 916 840 374</p>
+          <p>✉ jesusysanmartin@gmail.com</p>
+        </div>
+        <div>
+          <h3>Horarios</h3>
+          <ul class="footer-links">
+            <li>Misas diarias: 08:30</li>
+            <li>Domingos: 12:00</li>
+            <li><a href="#horarios">Ver todos los horarios</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Pastoral Digital</h3>
+          <p>Síguenos y mantente unido a la vida parroquial.</p>
+          <div class="socials">
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener">Ig</a>
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener">Yt</a>
+            <a href="https://wa.me/34916840374" target="_blank" rel="noopener">Wa</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">© 2026 Parroquia Jesús y San Martín.</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
