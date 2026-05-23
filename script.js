@@ -3,187 +3,217 @@
 const header = document.getElementById('header');
 
 window.addEventListener('scroll', () => {
+  if(!header) return;
 
   if(window.scrollY > 50){
     header.classList.add('scrolled');
   } else {
     header.classList.remove('scrolled');
   }
-
 });
+
 
 // MOBILE MENU
 
 const menuBtn = document.getElementById('menu-btn');
 const navLinks = document.getElementById('nav-links');
 
-menuBtn.addEventListener('click', () => {
-
-  navLinks.classList.toggle('active');
-
+menuBtn?.addEventListener('click', () => {
+  navLinks?.classList.toggle('active');
 });
 
-const navDropdowns = document.querySelectorAll('.nav-dropdown');
 
-navDropdowns.forEach(dropdown => {
-  const toggle = dropdown.querySelector('.nav-dropdown-toggle');
-  const links = dropdown.querySelectorAll('.nav-dropdown-menu a');
+// EDITABLE CARDS
 
-  toggle?.addEventListener('click', () => {
-    const isOpen = dropdown.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', isOpen);
+function getCards(){
+  return typeof parishCards !== 'undefined' && Array.isArray(parishCards) ? parishCards : [];
+}
 
-    navDropdowns.forEach(otherDropdown => {
-      if(otherDropdown !== dropdown){
-        otherDropdown.classList.remove('open');
-        otherDropdown.querySelector('.nav-dropdown-toggle')?.setAttribute('aria-expanded', 'false');
-      }
+function getDetailUrl(card){
+  return `detalle.html?id=${encodeURIComponent(card.id)}`;
+}
+
+function createVisualCard(card){
+  const article = document.createElement('a');
+  article.className = 'visual-card reveal';
+  article.id = card.id;
+  article.href = getDetailUrl(card);
+  article.target = '_blank';
+  article.rel = 'noopener';
+  article.setAttribute('aria-label', `Ver detalle de ${card.title}`);
+
+  article.innerHTML = `
+    <img src="${card.image}" alt="${card.title}" loading="lazy">
+    <div>
+      <span>${card.eyebrow || card.section}</span>
+      <h3>${card.title}</h3>
+      <p>${card.summary}</p>
+    </div>
+  `;
+
+  return article;
+}
+
+function createMiniCard(card, index, visibleCount){
+  const article = document.createElement('a');
+  article.className = `mini-card reveal${index >= visibleCount ? ' is-extra' : ''}`;
+  article.href = getDetailUrl(card);
+  article.target = '_blank';
+  article.rel = 'noopener';
+  article.setAttribute('aria-label', `Ver detalle de ${card.title}`);
+
+  article.innerHTML = `
+    <span>${card.eyebrow || card.section}</span>
+    <h3>${card.title}</h3>
+    <p>${card.summary}</p>
+  `;
+
+  return article;
+}
+
+function renderEditableCards(){
+  const cards = getCards();
+  const containers = document.querySelectorAll('[data-card-section]');
+
+  containers.forEach(container => {
+    const section = container.dataset.cardSection;
+    const visibleCount = Number(container.dataset.visible || cards.length);
+    const sectionCards = cards.filter(card => card.section === section);
+
+    container.innerHTML = '';
+
+    sectionCards.forEach((card, index) => {
+      const element = container.classList.contains('visual-grid')
+        ? createVisualCard(card)
+        : createMiniCard(card, index, visibleCount);
+
+      container.appendChild(element);
     });
   });
+}
 
-  links.forEach(link => {
-    link.addEventListener('click', () => {
-      dropdown.classList.remove('open');
-      toggle?.setAttribute('aria-expanded', 'false');
-      navLinks.classList.remove('active');
-    });
-  });
-});
+function renderDetailPage(){
+  const detailRoot = document.getElementById('detail-root');
+  if(!detailRoot) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  const card = getCards().find(item => item.id === id);
+
+  if(!card){
+    detailRoot.innerHTML = `
+      <section class="page-section detail-empty">
+        <div class="container">
+          <h1>No hemos encontrado esta ficha</h1>
+          <p>Puede que la actividad ya no esté disponible o que el enlace haya cambiado.</p>
+          <a class="btn" href="index.html#comunidades">Volver a la portada</a>
+        </div>
+      </section>
+    `;
+    return;
+  }
+
+  document.title = `${card.title} | Parroquia Jesús y San Martín`;
+
+  const signupButton = card.signupUrl
+    ? `<a class="btn" href="${card.signupUrl}" target="_blank" rel="noopener">Formulario de inscripción</a>`
+    : '';
+
+  const contactButton = card.contactUrl
+    ? `<a class="btn btn-secondary" href="${card.contactUrl}" target="_blank" rel="noopener">${card.contactLabel || 'Contactar'}</a>`
+    : '';
+
+  detailRoot.innerHTML = `
+    <section class="page-hero detail-hero">
+      <div class="container">
+        <span class="page-kicker">${card.eyebrow || card.section}</span>
+        <h1>${card.title}</h1>
+        <p>${card.summary}</p>
+      </div>
+    </section>
+
+    <section class="page-section">
+      <div class="container detail-layout">
+        <div class="detail-copy reveal">
+          <span class="page-kicker">${card.eyebrow || 'Vida parroquial'}</span>
+          <h2>${card.title}</h2>
+          <p>${card.description}</p>
+          <div class="detail-actions">
+            ${signupButton}
+            ${contactButton}
+          </div>
+        </div>
+        <div class="detail-image reveal">
+          <img src="${card.image}" alt="${card.title}" loading="lazy">
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+renderEditableCards();
+renderDetailPage();
+
 
 // REVEAL ON SCROLL
 
-const reveals = document.querySelectorAll('.reveal');
-
 function revealOnScroll(){
-
+  const reveals = document.querySelectorAll('.reveal');
   const triggerBottom = window.innerHeight * 0.88;
 
   reveals.forEach(element => {
-
     const top = element.getBoundingClientRect().top;
 
     if(top < triggerBottom){
       element.classList.add('active');
     }
-
   });
-
 }
 
 window.addEventListener('scroll', revealOnScroll);
-
 revealOnScroll();
 
 
-// Wecolme slider fade
+// WELCOME SLIDER FADE
 
 const slides = document.querySelectorAll('.welcome-slider img');
-
 let current = 0;
 
 if(slides.length){
   slides[current].classList.add('active');
 
   setInterval(() => {
-
     slides[current].classList.remove('active');
-
     current = (current + 1) % slides.length;
-
     slides[current].classList.add('active');
-
-  }, 2000);
+  }, 3000);
 }
 
 
-// Pillars carousel and modal
+// PROGRESSIVE GRIDS
 
-const pillarsTrack = document.querySelector('.pillars-track');
-const pillarCards = document.querySelectorAll('.pillar-card');
-const prevPillar = document.querySelector('.carousel-control.prev');
-const nextPillar = document.querySelector('.carousel-control.next');
-const pillarModal = document.getElementById('pillar-modal');
-const modalTitle = document.getElementById('pillar-modal-title');
-const modalDescription = document.getElementById('pillar-modal-description');
-const modalImage = document.getElementById('pillar-modal-img');
-const closeModalButtons = document.querySelectorAll('[data-close-modal]');
+function setupProgressiveGrids(){
+  const loadMoreButtons = document.querySelectorAll('.load-more');
 
-function scrollPillars(direction){
-  if(!pillarsTrack) return;
+  loadMoreButtons.forEach(button => {
+    const grid = button.previousElementSibling;
 
-  const firstCard = pillarsTrack.querySelector('.pillar-card');
-  const cardWidth = firstCard ? firstCard.offsetWidth + 26 : 360;
+    if(!grid || !grid.classList.contains('progressive-grid')){
+      return;
+    }
 
-  pillarsTrack.scrollBy({
-    left: direction * cardWidth,
-    behavior: 'smooth'
-  });
-}
+    const extraCards = grid.querySelectorAll('.is-extra');
 
-function openPillarModal(card){
-  if(!pillarModal || !card) return;
+    if(!extraCards.length){
+      button.hidden = true;
+    }
 
-  modalTitle.textContent = card.dataset.title;
-  modalDescription.textContent = card.dataset.description;
-  modalImage.src = card.dataset.image;
-  modalImage.alt = card.dataset.title;
-
-  pillarModal.classList.add('open');
-  pillarModal.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-}
-
-function closePillarModal(){
-  if(!pillarModal) return;
-
-  pillarModal.classList.remove('open');
-  pillarModal.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-}
-
-prevPillar?.addEventListener('click', () => scrollPillars(-1));
-nextPillar?.addEventListener('click', () => scrollPillars(1));
-
-pillarCards.forEach(card => {
-  const button = card.querySelector('.pillar-cta');
-
-  button?.addEventListener('click', () => openPillarModal(card));
-});
-
-closeModalButtons.forEach(button => {
-  button.addEventListener('click', closePillarModal);
-});
-
-document.addEventListener('keydown', event => {
-  if(event.key === 'Escape'){
-    closePillarModal();
-    navDropdowns.forEach(dropdown => {
-      dropdown.classList.remove('open');
-      dropdown.querySelector('.nav-dropdown-toggle')?.setAttribute('aria-expanded', 'false');
+    button.addEventListener('click', () => {
+      const isExpanded = grid.classList.toggle('expanded');
+      button.textContent = isExpanded ? 'Mostrar menos' : 'Mostrar más';
+      revealOnScroll();
     });
-  }
-});
-
-
-// Progressive grids
-
-const loadMoreButtons = document.querySelectorAll('.load-more');
-
-loadMoreButtons.forEach(button => {
-  const grid = button.previousElementSibling;
-
-  if(!grid || !grid.classList.contains('progressive-grid')){
-    return;
-  }
-
-  const extraCards = grid.querySelectorAll('.is-extra');
-
-  if(!extraCards.length){
-    button.hidden = true;
-  }
-
-  button.addEventListener('click', () => {
-    const isExpanded = grid.classList.toggle('expanded');
-    button.textContent = isExpanded ? 'Mostrar menos' : 'Mostrar más';
   });
-});
+}
+
+setupProgressiveGrids();
