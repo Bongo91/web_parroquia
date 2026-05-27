@@ -29,6 +29,10 @@ function getCards(){
   return typeof parishCards !== 'undefined' && Array.isArray(parishCards) ? parishCards : [];
 }
 
+function getEvents(){
+  return typeof pastoralEvents !== 'undefined' && Array.isArray(pastoralEvents) ? pastoralEvents : [];
+}
+
 function getDetailUrl(card){
   return `detalle.html?id=${encodeURIComponent(card.id)}`;
 }
@@ -63,9 +67,12 @@ function createMiniCard(card, index, visibleCount){
   article.setAttribute('aria-label', `Ver detalle de ${card.title}`);
 
   article.innerHTML = `
-    <span>${card.eyebrow || card.section}</span>
-    <h3>${card.title}</h3>
-    <p>${card.summary}</p>
+    <img src="${card.image}" alt="${card.title}" loading="lazy">
+    <div>
+      <span>${card.eyebrow || card.section}</span>
+      <h3>${card.title}</h3>
+      <p>${card.summary}</p>
+    </div>
   `;
 
   return article;
@@ -123,6 +130,8 @@ function renderDetailPage(){
     ? `<a class="btn btn-secondary" href="${card.contactUrl}" target="_blank" rel="noopener">${card.contactLabel || 'Contactar'}</a>`
     : '';
 
+  const descriptionContent = card.descriptionHtml || `<p>${card.description || ''}</p>`;
+
   detailRoot.innerHTML = `
     <section class="page-hero detail-hero">
       <div class="container">
@@ -137,7 +146,9 @@ function renderDetailPage(){
         <div class="detail-copy reveal">
           <span class="page-kicker">${card.eyebrow || 'Vida parroquial'}</span>
           <h2>${card.title}</h2>
-          <p>${card.description}</p>
+          <div class="detail-rich-text">
+            ${descriptionContent}
+          </div>
           <div class="detail-actions">
             ${signupButton}
             ${contactButton}
@@ -153,6 +164,132 @@ function renderDetailPage(){
 
 renderEditableCards();
 renderDetailPage();
+
+
+// PASTORAL CALENDAR
+
+function parseLocalDate(dateValue){
+  const [year, month, day] = dateValue.split('-').map(Number);
+  return new Date(year, month - 1, day);
+}
+
+function startOfToday(){
+  const today = new Date();
+  return new Date(today.getFullYear(), today.getMonth(), today.getDate());
+}
+
+function addMonths(date, months){
+  return new Date(date.getFullYear(), date.getMonth() + months, date.getDate());
+}
+
+function formatEventDate(dateValue){
+  return new Intl.DateTimeFormat('es-ES', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  }).format(parseLocalDate(dateValue));
+}
+
+function formatDateObject(dateValue){
+  return new Intl.DateTimeFormat('es-ES', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  }).format(dateValue);
+}
+
+function getLinkedGroup(event){
+  if(!event.groupId) return null;
+  return getCards().find(card => card.id === event.groupId) || null;
+}
+
+function createCalendarEvent(event){
+  const group = getLinkedGroup(event);
+  const groupButton = group
+    ? `<a class="calendar-link" href="${getDetailUrl(group)}" target="_blank" rel="noopener">Ver grupo</a>`
+    : '';
+  const signupButton = event.signupUrl
+    ? `<a class="calendar-link" href="${event.signupUrl}" target="_blank" rel="noopener">Inscripción</a>`
+    : '';
+  const contactButton = event.contactUrl
+    ? `<a class="calendar-link" href="${event.contactUrl}" target="_blank" rel="noopener">Contacto</a>`
+    : '';
+
+  return `
+    <article class="timeline-item calendar-event reveal">
+      <img src="${event.image}" alt="${event.title}" loading="lazy">
+      <div class="calendar-event-copy">
+        <time datetime="${event.date}">${formatEventDate(event.date)}${event.time ? ` · ${event.time}` : ''}</time>
+        <span>${event.category}</span>
+        <h3>${event.title}</h3>
+        <p>${event.summary}</p>
+        <p class="calendar-location">${event.location || ''}</p>
+        <div class="calendar-actions">
+          ${groupButton}
+          ${signupButton}
+          ${contactButton}
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function renderPastoralCalendar(months = 12){
+  const timeline = document.getElementById('pastoral-timeline');
+  const rangeLabel = document.getElementById('calendar-range');
+  if(!timeline) return;
+
+  const today = startOfToday();
+  const limit = addMonths(today, months);
+
+  const events = getEvents()
+    .filter(event => {
+      const eventDate = parseLocalDate(event.date);
+      return eventDate >= today && eventDate <= limit;
+    })
+    .sort((a, b) => {
+      const dateDifference = parseLocalDate(a.date) - parseLocalDate(b.date);
+      if(dateDifference !== 0) return dateDifference;
+      return (a.time || '00:00').localeCompare(b.time || '00:00');
+    });
+
+  if(rangeLabel){
+    rangeLabel.textContent = `Mostrando eventos desde hoy hasta ${formatDateObject(limit)}.`;
+  }
+
+  if(!events.length){
+    timeline.innerHTML = `
+      <article class="timeline-item calendar-event reveal">
+        <div class="calendar-event-copy">
+          <h3>No hay eventos programados</h3>
+          <p>Cuando se añadan nuevos eventos en calendar.js aparecerán aquí automáticamente.</p>
+        </div>
+      </article>
+    `;
+    revealOnScroll();
+    return;
+  }
+
+  timeline.innerHTML = events.map(createCalendarEvent).join('');
+  revealOnScroll();
+}
+
+function setupCalendarFilters(){
+  const filters = document.querySelectorAll('.calendar-filter');
+  if(!filters.length) return;
+
+  filters.forEach(button => {
+    button.addEventListener('click', () => {
+      filters.forEach(filter => filter.classList.remove('active'));
+      button.classList.add('active');
+      renderPastoralCalendar(Number(button.dataset.months || 12));
+    });
+  });
+
+  renderPastoralCalendar(12);
+}
+
+setupCalendarFilters();
 
 
 // REVEAL ON SCROLL

@@ -1,5 +1,7 @@
 // Edita este archivo para añadir, quitar o modificar tarjetas sin tocar el HTML.
 // Copia un bloque completo, cambia el id, section, textos, imagen y enlaces.
+// Para textos largos con formato usa descriptionHtml con etiquetas sencillas:
+// <p>, <strong>, <em>, <ul>, <ol>, <li>, <h3> y <br>.
 
 const parishCards = [
   {
@@ -9,70 +11,31 @@ const parishCards = [
     title: "Despertar",
     image: "images/templo.png",
     summary: "Primeros pasos en la fe desde la alegría, la familia y el descubrimiento.",
-    description: "Despertar acompaña a los más pequeños y a sus familias en el inicio del camino cristiano. Es una propuesta sencilla, cercana y alegre para descubrir que la parroquia también es casa, juego, oración y encuentro.",
+    description: "Despertar acompaña a los más pequeños y a sus familias en el inicio del camino cristiano.",
+    descriptionHtml: `
+      <p><strong>Despertar</strong> es una comunidad parroquial pensada para iniciar a los niños y a sus familias en una experiencia sencilla, alegre y cercana de fe.</p>
+
+      <p>Además de las celebraciones litúrgicas, la parroquia ofrece actividades orientadas al <strong>acompañamiento espiritual</strong>, la formación y la ayuda mutua entre vecinos.</p>
+
+      <h3>¿A quién está dirigido?</h3>
+      <ul>
+        <li>Familias que quieren acercar la fe a sus hijos.</li>
+        <li>Niños que empiezan a descubrir la parroquia como casa.</li>
+        <li>Personas que desean integrarse poco a poco en la vida comunitaria.</li>
+      </ul>
+
+      <h3>Qué se suele trabajar</h3>
+      <ul>
+        <li>Oraciones sencillas y gestos de la fe.</li>
+        <li>Primer contacto con la comunidad parroquial.</li>
+        <li>Dinámicas de convivencia, escucha y participación.</li>
+      </ul>
+
+      <p>Más allá de lo religioso, la parroquia también cumple una función social importante: fomenta la convivencia, el compromiso con los demás y el sentimiento de pertenencia a una comunidad cercana, acogedora y participativa.</p>
+    `,
     signupUrl: "https://forms.gle/",
     contactUrl: "mailto:jesusysanmartin@gmail.com",
     contactLabel: "Contactar con catequesis"
-  },
-  {
-    id: "comunion",
-    section: "vida-parroquial",
-    eyebrow: "Sacramentos",
-    title: "Comunión",
-    image: "images/Cruz monte.png",
-    summary: "Camino de preparación para recibir a Jesús en la Eucaristía.",
-    description: "La comunidad de Comunión prepara a los niños y niñas para recibir a Jesús en la Eucaristía, integrando formación, celebración, vida familiar y participación en la parroquia.",
-    signupUrl: "https://forms.gle/",
-    contactUrl: "mailto:jesusysanmartin@gmail.com",
-    contactLabel: "Consultar inscripción"
-  },
-  {
-    id: "alevines",
-    section: "vida-parroquial",
-    eyebrow: "Crecimiento",
-    title: "Alevines",
-    image: "images/templo.png",
-    summary: "Un grupo para seguir creciendo en comunidad después de la primera comunión.",
-    description: "Alevines ofrece continuidad al camino de fe después de la primera comunión, cuidando la amistad, la oración, la vida de grupo y el sentido de pertenencia a la comunidad parroquial.",
-    signupUrl: "https://forms.gle/",
-    contactUrl: "mailto:jesusysanmartin@gmail.com",
-    contactLabel: "Hablar con responsables"
-  },
-  {
-    id: "juveniles",
-    section: "vida-parroquial",
-    eyebrow: "Adolescentes",
-    title: "Juveniles",
-    image: "images/Cruz monte.png",
-    summary: "Encuentros, oración y amistad para vivir la fe en una etapa decisiva.",
-    description: "Juveniles es un espacio para adolescentes que quieren compartir preguntas, crecer en grupo y vivir una fe cercana a su realidad, con encuentros, dinámicas, oración y actividades comunitarias.",
-    signupUrl: "https://forms.gle/",
-    contactUrl: "mailto:jesusysanmartin@gmail.com",
-    contactLabel: "Contactar con monitores"
-  },
-  {
-    id: "jovenes",
-    section: "vida-parroquial",
-    eyebrow: "Jóvenes",
-    title: "Jóvenes",
-    image: "images/templo.png",
-    summary: "Espacio de fe, preguntas, servicio y vida compartida.",
-    description: "El grupo de Jóvenes reúne a quienes desean vivir la fe con profundidad y naturalidad, compartiendo oración, formación, servicio, amistad y experiencias pastorales.",
-    signupUrl: "https://forms.gle/",
-    contactUrl: "mailto:jesusysanmartin@gmail.com",
-    contactLabel: "Contactar con jóvenes"
-  },
-  {
-    id: "adultos",
-    section: "vida-parroquial",
-    eyebrow: "Adultos",
-    title: "Adultos",
-    image: "images/Cruz monte.png",
-    summary: "Formación, oración y acompañamiento para vivir la fe en lo cotidiano.",
-    description: "Adultos agrupa distintas propuestas para quienes buscan cuidar su vida espiritual, formarse, compartir inquietudes y encontrar espacios de acompañamiento en la comunidad.",
-    signupUrl: "https://forms.gle/",
-    contactUrl: "mailto:jesusysanmartin@gmail.com",
-    contactLabel: "Pedir información"
   },
   {
     id: "cafe-con-fe",
@@ -87,42 +50,6 @@ const parishCards = [
     contactLabel: "Contactar con el equipo"
   },
   {
-    id: "madres",
-    section: "adultos",
-    eyebrow: "Familias",
-    title: "Madres",
-    image: "images/Cruz monte.png",
-    summary: "Acompañamiento, oración y comunidad para mujeres y familias.",
-    description: "El grupo de Madres ofrece un espacio de escucha, oración y acompañamiento para compartir la fe desde la vida familiar, el cuidado y la experiencia cotidiana.",
-    signupUrl: "https://forms.gle/",
-    contactUrl: "mailto:jesusysanmartin@gmail.com",
-    contactLabel: "Contactar con responsables"
-  },
-  {
-    id: "varones",
-    section: "adultos",
-    eyebrow: "Fraternidad",
-    title: "Varones",
-    image: "images/templo.png",
-    summary: "Encuentros de formación, fraternidad y servicio.",
-    description: "Varones es una propuesta para compartir fe, responsabilidades, amistad y servicio, cuidando un camino de madurez cristiana vivido en comunidad.",
-    signupUrl: "https://forms.gle/",
-    contactUrl: "mailto:jesusysanmartin@gmail.com",
-    contactLabel: "Solicitar información"
-  },
-  {
-    id: "lectio-divina",
-    section: "adultos",
-    eyebrow: "Oración",
-    title: "Lectio Divina",
-    image: "images/Cruz monte.png",
-    summary: "Escucha orante de la Palabra con ritmo pausado y comunitario.",
-    description: "Lectio Divina ayuda a escuchar la Palabra de Dios, meditarla, rezarla y dejar que ilumine la vida. Es una oración sencilla, profunda y muy cuidada.",
-    signupUrl: "https://forms.gle/",
-    contactUrl: "mailto:jesusysanmartin@gmail.com",
-    contactLabel: "Contactar"
-  },
-  {
     id: "retiros",
     section: "actividades",
     eyebrow: "Oración",
@@ -135,30 +62,6 @@ const parishCards = [
     contactLabel: "Contactar con organización"
   },
   {
-    id: "holywins",
-    section: "actividades",
-    eyebrow: "Familias",
-    title: "Holywins",
-    image: "images/templo.png",
-    summary: "Una celebración luminosa para niños, jóvenes y familias.",
-    description: "Holywins celebra la alegría de la santidad con actividades para niños, jóvenes y familias, cuidando una experiencia festiva, formativa y llena de sentido cristiano.",
-    signupUrl: "https://forms.gle/",
-    contactUrl: "mailto:jesusysanmartin@gmail.com",
-    contactLabel: "Contactar con monitores"
-  },
-  {
-    id: "eventos-comunitarios",
-    section: "actividades",
-    eyebrow: "Comunidad",
-    title: "Eventos comunitarios",
-    image: "images/Cruz monte.png",
-    summary: "Celebraciones y encuentros para toda la parroquia.",
-    description: "Los eventos comunitarios ayudan a fortalecer los vínculos de la parroquia a través de celebraciones, convivencias y momentos compartidos.",
-    signupUrl: "https://forms.gle/",
-    contactUrl: "mailto:jesusysanmartin@gmail.com",
-    contactLabel: "Pedir información"
-  },
-  {
     id: "rosario",
     section: "recursos",
     eyebrow: "Oración",
@@ -169,41 +72,5 @@ const parishCards = [
     signupUrl: "",
     contactUrl: "mailto:jesusysanmartin@gmail.com",
     contactLabel: "Enviar consulta"
-  },
-  {
-    id: "comportamientos-misa",
-    section: "recursos",
-    eyebrow: "Liturgia",
-    title: "Comportamientos en misa",
-    image: "images/Cruz monte.png",
-    summary: "Claves para participar con respeto, atención y alegría.",
-    description: "Una explicación sencilla de gestos, silencios y actitudes que ayudan a vivir mejor la celebración de la Eucaristía.",
-    signupUrl: "",
-    contactUrl: "mailto:jesusysanmartin@gmail.com",
-    contactLabel: "Enviar consulta"
-  },
-  {
-    id: "videos-interes",
-    section: "recursos",
-    eyebrow: "Formación",
-    title: "Videos de interés",
-    image: "images/templo.png",
-    summary: "Selección de contenidos para formación y oración.",
-    description: "Recopilación de vídeos recomendados para seguir creciendo en la fe, entender mejor la liturgia y acompañar momentos de oración.",
-    signupUrl: "",
-    contactUrl: "https://www.youtube.com/",
-    contactLabel: "Ver canal"
-  },
-  {
-    id: "material-propio",
-    section: "recursos",
-    eyebrow: "Parroquia",
-    title: "Material propio",
-    image: "images/Cruz monte.png",
-    summary: "Documentos, guías y propuestas elaboradas por la parroquia.",
-    description: "Materiales preparados por la parroquia para acompañar catequesis, grupos, celebraciones y tiempos litúrgicos.",
-    signupUrl: "",
-    contactUrl: "mailto:jesusysanmartin@gmail.com",
-    contactLabel: "Solicitar material"
   }
 ];
