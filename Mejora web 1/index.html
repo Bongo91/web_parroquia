@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Parroquia Jesús y San Martín</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header" id="header">
+    <div class="container nav">
+      <a href="index.html#inicio" class="logo">
+        <img src="images/templo.png" alt="Logotipo de la parroquia" loading="lazy">
+        <span>Parroquia Jesús y San Martín</span>
+      </a>
+
+      <nav aria-label="Navegación principal">
+        <button class="menu-btn" id="menu-btn" aria-label="Abrir menú">☰</button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="index.html#inicio">Inicio</a></li>
+          <li><a href="cultura-fe.html">Cultura y Fe</a></li>
+          <li><a href="calendario-pastoral.html">Calendario pastoral</a></li>
+          <li><a href="quienes-somos.html">Quiénes somos</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-content reveal">
+        <h1>Una casa abierta para tu encuentro con Dios</h1>
+        <p>Vive la fe en comunidad. Te esperamos con los brazos abiertos.</p>
+
+        <div class="hero-info" aria-label="Información rápida">
+          <article>
+            <span>Misa</span>
+            <strong>L-V 20:00</strong>
+          </article>
+          <article>
+            <span>Secretaría</span>
+            <strong>L-X 11:00-13:00</strong>
+            <strong>L-V 18:30-19:30</strong>
+          </article>
+          <article>
+            <span>Confesiones</span>
+            <strong>30 min antes de misa</strong>
+          </article>
+          <article class="hero-player">
+            <span>Evangelio resumido</span>
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener">Ver mini reflexión</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="social-strip" aria-label="Redes sociales">
+      <div class="container social-strip-inner">
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+          <img src="images/Icons/instagram-line.png" alt="">
+        </a>
+        <a href="https://wa.me/34916840374" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <img src="images/Icons/whatsapp-line.png" alt="">
+        </a>
+        <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
+          <img src="images/Icons/tiktok-fill.png" alt="">
+        </a>
+        <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube">
+          <img src="images/Icons/youtube-line.png" alt="">
+        </a>
+      </div>
+    </section>
+
+    <section class="featured-section" id="destacados" aria-label="Actividades destacadas">
+      <div class="container">
+        <div class="featured-heading reveal">
+          <span>Destacado</span>
+          <h2>Ahora en la parroquia</h2>
+        </div>
+        <div class="featured-grid" id="featured-content"></div>
+      </div>
+    </section>
+
+    <section id="bienvenida">
+      <div class="container">
+        <div class="welcome-grid">
+          <div class="welcome-image reveal">
+            <div class="welcome-slider">
+              <img src="images/templo.png" alt="Templo parroquial" loading="lazy">
+              <img src="images/Cruz monte.png" alt="Cruz en el paisaje" loading="lazy">
+            </div>
+          </div>
+          <div class="welcome-content reveal">
+            <h2>Bienvenidos a vuestra casa</h2>
+            <p>Queridos hermanos y hermanas, nuestra parroquia quiere ser un lugar de encuentro con Cristo, de escucha de la Palabra de Dios y de fraternidad auténtica.</p>
+            <br>
+            <p>Aquí caminamos juntos como comunidad, compartiendo la alegría del Evangelio, acompañando a quienes necesitan consuelo y celebrando la vida sacramental con esperanza y sencillez.</p>
+            <br>
+            <p>Cada persona que cruza estas puertas es recibida con cariño, porque creemos profundamente que la Iglesia es hogar, acogida y misericordia.</p>
+            <div class="signature">— Pbro. José Manuel Rodríguez</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pillars" id="comunidades">
+      <div class="container">
+        <h2 class="reveal">Vida Parroquial</h2>
+        <p class="section-intro reveal">Comunidades y grupos para crecer en la fe según cada etapa de la vida.</p>
+        <div class="visual-grid" data-card-section="vida-parroquial"></div>
+      </div>
+    </section>
+
+    <section class="content-section" id="adultos-detalle">
+      <div class="container">
+        <h2 class="reveal">Adultos</h2>
+        <p class="section-intro reveal">Propuestas sencillas para encontrarse, rezar, formarse y compartir vida.</p>
+        <div class="progressive-grid" data-card-section="adultos" data-visible="8"></div>
+        <button class="load-more" type="button">Mostrar más</button>
+      </div>
+    </section>
+
+    <section class="content-section soft-section" id="actividades">
+      <div class="container">
+        <h2 class="reveal">Actividades parroquiales</h2>
+        <p class="section-intro reveal">Una agenda viva, visual y fácil de recorrer.</p>
+        <div class="progressive-grid" data-card-section="actividades" data-visible="8"></div>
+        <button class="load-more" type="button">Mostrar más</button>
+      </div>
+    </section>
+
+    <section class="content-section" id="recursos">
+      <div class="container">
+        <h2 class="reveal">Recursos</h2>
+        <p class="section-intro reveal">Materiales prácticos para rezar, aprender y vivir mejor la liturgia.</p>
+        <div class="progressive-grid" data-card-section="recursos" data-visible="8"></div>
+        <button class="load-more" type="button">Mostrar más</button>
+      </div>
+    </section>
+
+    <section id="horarios">
+      <div class="container">
+        <h2 class="reveal">El latido de nuestra comunidad</h2>
+        <p class="section-intro reveal">Horarios</p>
+        <div class="schedule-grid">
+          <article class="schedule-card highlight reveal">
+            <div class="schedule-title"><span>⛪</span><h3>Misas</h3></div>
+            <ul class="schedule-list">
+              <li><span>Lunes a Viernes</span><span class="schedule-time">20:00</span></li>
+              <li><span>Domingos</span><span class="schedule-time">12:00</span></li>
+            </ul>
+          </article>
+          <article class="schedule-card reveal">
+            <div class="schedule-title"><span>🕊</span><h3>Confesiones</h3></div>
+            <ul class="schedule-list">
+              <li><span>Lunes a domingo</span><span class="schedule-time">Media hora antes de la misa</span></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="external-links" aria-label="Enlaces externos">
+      <div class="container external-links-inner">
+        <a href="https://www.diocesisgetafe.es/" target="_blank" rel="noopener">Diócesis de Getafe</a>
+        <a href="https://www.djuventudgetafe.es/" target="_blank" rel="noopener">Delegación de Juventud</a>
+        <a href="https://www.conferenciaepiscopal.es/" target="_blank" rel="noopener">Conferencia Episcopal</a>
+        <a href="https://evangelizaciongetafe.es/" target="_blank" rel="noopener">Catequesis y Evangelización</a>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contacto">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>Contacto</h3>
+          <p>📍 Avenida Juan Carlos I, 3 28905 Getafe</p>
+          <p>☎ +34 916 840 374</p>
+          <p>✉ jesusysanmartin@gmail.com</p>
+        </div>
+        <div>
+          <h3>Horarios</h3>
+          <ul class="footer-links">
+            <li>Misas diarias: 20:00</li>
+            <li>Domingos: 12:00</li>
+            <li><a href="#horarios">Ver todos los horarios</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Pastoral Digital</h3>
+          <p>Síguenos y mantente unido a la vida parroquial.</p>
+          <div class="socials">
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener">Ig</a>
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener">Yt</a>
+            <a href="https://wa.me/34916840374" target="_blank" rel="noopener">Wa</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">© 2026 Parroquia Jesús y San Martín.</div>
+    </div>
+  </footer>
+
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
