@@ -99,6 +99,46 @@ function renderEditableCards(){
   });
 }
 
+function createFeaturedItem(card){
+  const item = document.createElement('a');
+  item.className = 'featured-item reveal';
+  item.href = getDetailUrl(card);
+  item.target = '_blank';
+  item.rel = 'noopener';
+  item.setAttribute('aria-label', `Ver contenido destacado: ${card.title}`);
+
+  item.innerHTML = `
+    <div class="featured-copy">
+      <span>${card.eyebrow || 'Destacado'}</span>
+      <h3>${card.featuredTitle || card.title}</h3>
+      <p>${card.featuredSummary || card.summary}</p>
+      <strong>${card.featuredCta || 'Ver más'}</strong>
+    </div>
+    <img src="${card.image}" alt="${card.title}" loading="lazy">
+  `;
+
+  return item;
+}
+
+function renderFeaturedContent(){
+  const container = document.getElementById('featured-content');
+  if(!container) return;
+
+  const featuredCards = getCards()
+    .filter(card => card.featured)
+    .sort((a, b) => (a.featuredOrder || 99) - (b.featuredOrder || 99));
+
+  const section = container.closest('.featured-section');
+
+  if(!featuredCards.length){
+    section?.setAttribute('hidden', '');
+    return;
+  }
+
+  container.innerHTML = '';
+  featuredCards.forEach(card => container.appendChild(createFeaturedItem(card)));
+}
+
 function renderDetailPage(){
   const detailRoot = document.getElementById('detail-root');
   if(!detailRoot) return;
@@ -163,6 +203,7 @@ function renderDetailPage(){
 }
 
 renderEditableCards();
+renderFeaturedContent();
 renderDetailPage();
 
 

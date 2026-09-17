@@ -59,5 +59,6 @@ const pastoralEvents = [
     location: "Parroquia Jesús y San Martín",
     signupUrl: "https://forms.gle/",
     contactUrl: "mailto:jesusysanmartin@gmail.com"
-  }
+  },
+  
 ];

@@ -2,6 +2,11 @@
 // Copia un bloque completo, cambia el id, section, textos, imagen y enlaces.
 // Para textos largos con formato usa descriptionHtml con etiquetas sencillas:
 // <p>, <strong>, <em>, <ul>, <ol>, <li>, <h3> y <br>.
+// Para destacar una tarjeta en portada usa:
+// featured: true,
+// featuredTitle: "Título destacado",
+// featuredSummary: "Texto breve para la franja destacada",
+// featuredOrder: 1,
 
 const parishCards = [
   {
@@ -11,6 +16,10 @@ const parishCards = [
     title: "Despertar",
     image: "images/templo.png",
     summary: "Primeros pasos en la fe desde la alegría, la familia y el descubrimiento.",
+    featured: false,
+    featuredTitle: "Despertar: primeros pasos en la fe",
+    featuredSummary: "Una propuesta cercana para que niños y familias descubran la parroquia como casa, comunidad y camino.",
+    featuredOrder: 1,
     description: "Despertar acompaña a los más pequeños y a sus familias en el inicio del camino cristiano.",
     descriptionHtml: `
       <p><strong>Despertar</strong> es una comunidad parroquial pensada para iniciar a los niños y a sus familias en una experiencia sencilla, alegre y cercana de fe.</p>
@@ -56,6 +65,10 @@ const parishCards = [
     title: "Retiros",
     image: "images/Cruz monte.png",
     summary: "Tiempos de silencio, oración y renovación interior.",
+    featured: false,
+    featuredTitle: "Retiro parroquial",
+    featuredSummary: "Una pausa para volver a lo esencial, rezar con calma y compartir vida de comunidad.",
+    featuredOrder: 2,
     description: "Los retiros parroquiales son pausas para volver a lo esencial, escuchar a Dios, descansar interiormente y compartir un día de oración con la comunidad.",
     signupUrl: "https://forms.gle/",
     contactUrl: "mailto:jesusysanmartin@gmail.com",
@@ -69,6 +82,18 @@ const parishCards = [
     image: "images/templo.png",
     summary: "Guía sencilla para rezarlo solo, en familia o en comunidad.",
     description: "Este recurso ofrece una guía clara para rezar el rosario paso a paso, con misterios, oraciones y pequeñas indicaciones para vivirlo con calma.",
+    signupUrl: "",
+    contactUrl: "mailto:jesusysanmartin@gmail.com",
+    contactLabel: "Enviar consulta"
+  },
+  {
+    id: "jovenes_trabajadores",
+    section: "adultos",
+    eyebrow: "Jovenes trabajadores",
+    title: "Jovenes trabajadores",
+    image: "images/templo.png",
+    summary: "Jovenes trabajadores.",
+    description: "Jovenes trabajadores",
     signupUrl: "",
     contactUrl: "mailto:jesusysanmartin@gmail.com",
     contactLabel: "Enviar consulta"

@@ -1,15 +1,18 @@
 :root{
-  --color-primary: #f5efe4;
-  --color-primary-dark: #e8dcc6;
-  --color-secondary: #6b4f2c;
-  --color-secondary-deep: #4b3720;
-  --color-accent: #d4a94f;
-  --color-text: #40352a;
-  --color-muted: #7a6d61;
-  --color-card: #fffaf3;
+  --color-primary: #f3fbf7;
+  --color-primary-dark: #dcefe9;
+  --color-secondary: #2f7a5b;
+  --color-secondary-deep: #213f35;
+  --color-accent: #d8b84f;
+  --color-text: #263932;
+  --color-muted: #60746b;
+  --color-card: #ffffff;
   --color-white: #ffffff;
-  --shadow-soft: 0 10px 30px rgba(80, 58, 33, 0.08);
-  --shadow-hover: 0 14px 40px rgba(80, 58, 33, 0.16);
+  --color-liturgical-purple: #6f4aa8;
+  --color-liturgical-red: #b64242;
+  --color-liturgical-rose: #c97892;
+  --shadow-soft: 0 10px 30px rgba(35, 75, 59, 0.09);
+  --shadow-hover: 0 14px 40px rgba(35, 75, 59, 0.17);
   --transition: all .35s ease;
   --max-width: 1200px;
 }
@@ -85,7 +88,7 @@ h2{
 }
 
 .header.scrolled{
-  background:rgba(248,242,233,.96);
+  background:rgba(243,251,247,.96);
   backdrop-filter:blur(12px);
   box-shadow:0 5px 20px rgba(0,0,0,.05);
 }
@@ -169,7 +172,7 @@ h2{
   padding:10px;
   list-style:none;
   background:var(--color-card);
-  border:2px solid rgba(107,79,44,.22);
+  border:2px solid rgba(47,122,91,.22);
   border-radius:16px;
   box-shadow:var(--shadow-hover);
   opacity:0;
@@ -224,7 +227,7 @@ h2{
 .social-strip{
   padding:24px 0;
   background:var(--color-card);
-  border-bottom:1px solid rgba(107,79,44,.12);
+  border-bottom:1px solid rgba(47,122,91,.14);
 }
 
 .social-strip-inner,
@@ -243,7 +246,7 @@ h2{
   justify-content:center;
   min-height:44px;
   padding:10px 18px;
-  border:2px solid rgba(107,79,44,.2);
+  border:2px solid rgba(47,122,91,.22);
   border-radius:999px;
   color:var(--color-secondary-deep);
   font-weight:800;
@@ -274,7 +277,7 @@ h2{
 .timeline-item{
   display:block;
   background:var(--color-card);
-  border:2px solid rgba(107,79,44,.2);
+  border:2px solid rgba(47,122,91,.22);
   border-radius:18px;
   box-shadow:var(--shadow-soft);
   overflow:hidden;
@@ -375,7 +378,7 @@ h2{
   position:relative;
   padding:150px 0 80px;
   background:
-    linear-gradient(rgba(20,20,20,.36), rgba(20,20,20,.58)),
+    linear-gradient(rgba(16,44,36,.34), rgba(34,28,58,.56)),
     url('images/Cruz monte.png') center/cover;
 }
 
@@ -414,7 +417,7 @@ h2{
   bottom:0;
   left:50%;
   width:2px;
-  background:rgba(107,79,44,.22);
+  background:rgba(47,122,91,.22);
 }
 
 .timeline-item{
@@ -466,7 +469,7 @@ h2{
 .calendar-filter{
   min-height:44px;
   padding:10px 18px;
-  border:2px solid rgba(107,79,44,.24);
+  border:2px solid rgba(47,122,91,.24);
   border-radius:999px;
   background:var(--color-card);
   color:var(--color-secondary-deep);
@@ -498,7 +501,7 @@ h2{
   width:100%;
   height:180px;
   object-fit:cover;
-  border-bottom:2px solid rgba(107,79,44,.18);
+  border-bottom:2px solid rgba(47,122,91,.18);
 }
 
 .calendar-event-copy{
@@ -543,7 +546,7 @@ h2{
   justify-content:center;
   min-height:38px;
   padding:8px 14px;
-  border:2px solid rgba(107,79,44,.24);
+  border:2px solid rgba(47,122,91,.24);
   border-radius:999px;
   color:var(--color-secondary-deep);
   font-weight:800;
@@ -560,10 +563,10 @@ h2{
   min-height:240px;
   display:grid;
   place-items:center;
-  border:2px dashed rgba(107,79,44,.26);
+  border:2px dashed rgba(47,122,91,.26);
   border-radius:18px;
   color:var(--color-muted);
-  background:rgba(255,250,243,.7);
+  background:rgba(248,252,250,.82);
 }
 
 .nav-dropdown:hover .nav-dropdown-menu,
@@ -582,7 +585,7 @@ h2{
 
 .nav-dropdown-menu a:hover,
 .nav-dropdown-menu .featured-link{
-  background:rgba(212,169,79,.18);
+  background:rgba(216,184,79,.2);
   color:var(--color-secondary-deep);
 }
 
@@ -606,7 +609,7 @@ h2{
   position:absolute;
   inset:0;
   background:
-  linear-gradient(rgba(20,20,20,.4), rgba(20,20,20,.5)),
+  linear-gradient(rgba(16,44,36,.38), rgba(34,28,58,.5)),
   url('images/Cruz monte.png') center/cover fixed;
 
 }
@@ -617,7 +620,7 @@ h2{
   inset:0;
 
   background:
-    linear-gradient(rgba(20,20,20,.35), rgba(20,20,20,.45)),
+    linear-gradient(rgba(16,44,36,.35), rgba(34,28,58,.45)),
     url('images/templo.png');
 
   background-size: cover;
@@ -671,7 +674,7 @@ h2{
 
 .detail-copy{
   background:var(--color-card);
-  border:2px solid rgba(107,79,44,.18);
+  border:2px solid rgba(47,122,91,.18);
   border-radius:18px;
   padding:44px;
   box-shadow:var(--shadow-soft);
@@ -732,7 +735,7 @@ h2{
 .detail-image img{
   min-height:520px;
   object-fit:cover;
-  border:3px solid rgba(107,79,44,.28);
+  border:3px solid rgba(47,122,91,.28);
   border-radius:22px;
   box-shadow:var(--shadow-hover);
 }
@@ -913,7 +916,7 @@ h2{
 .pillar-modal-backdrop{
   position:absolute;
   inset:0;
-  background:rgba(30, 24, 18, .72);
+  background:rgba(16, 31, 27, .72);
   backdrop-filter:blur(5px);
 }
 
@@ -992,7 +995,7 @@ h2{
 .community-card,
 .culture-panel{
   background:var(--color-card);
-  border:2px solid rgba(107,79,44,.22);
+  border:2px solid rgba(47,122,91,.22);
   border-radius:18px;
   box-shadow:var(--shadow-soft);
 }
@@ -1039,8 +1042,8 @@ h2{
 
 .culture-calendar{
   padding:28px;
-  background:rgba(245,239,228,.78);
-  border:2px solid rgba(107,79,44,.18);
+  background:rgba(243,251,247,.82);
+  border:2px solid rgba(47,122,91,.18);
   border-radius:14px;
 }
 
@@ -1057,7 +1060,7 @@ h2{
 
 .culture-calendar li{
   padding:14px 0;
-  border-bottom:1px solid rgba(107,79,44,.16);
+  border-bottom:1px solid rgba(47,122,91,.16);
 }
 
 .culture-calendar li:last-child{
@@ -1097,7 +1100,7 @@ h2{
 .highlight{
   background:linear-gradient(
     135deg,
-    rgba(212,169,79,.18),
+    rgba(216,184,79,.2),
     rgba(255,255,255,.95)
   );
 }
@@ -1121,7 +1124,7 @@ h2{
 /* FOOTER */
 
 footer{
-  background:#3b2b1b;
+  background:#17372d;
   color:rgba(255,255,255,.85);
   padding-top:80px;
 }
@@ -1260,8 +1263,8 @@ footer h3{
     align-items:stretch;
     gap:8px;
     padding:18px;
-    background:rgba(248,242,233,.98);
-    border:2px solid rgba(107,79,44,.18);
+    background:rgba(243,251,247,.98);
+    border:2px solid rgba(47,122,91,.18);
     border-radius:18px;
     box-shadow:var(--shadow-hover);
   }
