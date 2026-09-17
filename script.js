@@ -18,8 +18,26 @@ window.addEventListener('scroll', () => {
 const menuBtn = document.getElementById('menu-btn');
 const navLinks = document.getElementById('nav-links');
 
+function setMobileMenu(open){
+  if(!menuBtn || !navLinks) return;
+
+  navLinks.classList.toggle('active', open);
+  menuBtn.setAttribute('aria-controls', 'nav-links');
+  menuBtn.setAttribute('aria-expanded', String(open));
+  menuBtn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+}
+
+setMobileMenu(false);
+
 menuBtn?.addEventListener('click', () => {
-  navLinks?.classList.toggle('active');
+  setMobileMenu(!navLinks?.classList.contains('active'));
+});
+
+document.addEventListener('keydown', event => {
+  if(event.key === 'Escape' && navLinks?.classList.contains('active')){
+    setMobileMenu(false);
+    menuBtn?.focus();
+  }
 });
 
 
