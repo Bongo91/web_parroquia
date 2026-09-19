@@ -406,6 +406,58 @@ h2{
   padding:90px 0;
 }
 
+.pastoral-nav{
+  padding:28px 0;
+  background:var(--color-card);
+  border-bottom:2px solid rgba(47,122,91,.12);
+}
+
+.pastoral-nav ul{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+  list-style:none;
+}
+
+.pastoral-nav a{
+  display:flex;
+  align-items:center;
+  min-height:44px;
+  padding:9px 14px;
+  border:2px solid rgba(47,122,91,.2);
+  border-radius:999px;
+  color:var(--color-secondary-deep);
+  font-size:.88rem;
+  font-weight:700;
+  line-height:1.35;
+  transition:var(--transition);
+}
+
+.pastoral-nav a:hover,
+.pastoral-nav a:focus-visible{
+  background:var(--color-secondary);
+  border-color:var(--color-secondary);
+  color:white;
+}
+
+.pastoral-category-card{
+  min-height:220px;
+  scroll-margin-top:110px;
+}
+
+.pastoral-category-card div{
+  display:flex;
+  min-height:100%;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:24px;
+}
+
+.pastoral-category-card strong{
+  color:var(--color-secondary);
+}
+
 .page-intro{
   max-width:760px;
   margin-bottom:42px;
@@ -635,7 +687,7 @@ h2{
   inset:0;
   background:
   linear-gradient(rgba(16,44,36,.38), rgba(34,28,58,.5)),
-  url('images/Cruz monte.png') center/cover fixed;
+  url('images/entrada_parroquia.JPG') center/cover fixed;
 
 }
 
@@ -1238,6 +1290,19 @@ footer h3{
 }
 
 @media(max-width:768px){
+
+  .pastoral-nav ul{
+    flex-wrap:nowrap;
+    justify-content:flex-start;
+    overflow-x:auto;
+    padding-bottom:8px;
+    scrollbar-width:thin;
+  }
+
+  .pastoral-nav li{
+    flex:0 0 auto;
+    max-width:270px;
+  }
 
   .nav-links{
     display:none;
