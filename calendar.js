@@ -1,11 +1,12 @@
 // Edita este archivo para añadir, quitar o modificar eventos sin tocar el HTML.
 // Copia un bloque completo y cambia los datos.
 //
-// Campos importantes:
+// Campos obligatorios: id, date, title y summary.
 // - date: fecha en formato AAAA-MM-DD.
-// - time: hora opcional en formato HH:MM. Sirve para ordenar eventos del mismo día.
+// Campos opcionales: time, category, groupId, image, location, signupUrl y contactUrl.
+// - time: hora en formato HH:MM. Sirve para ordenar eventos del mismo día.
 // - groupId: debe coincidir con el id de una tarjeta en content.js para enlazar al grupo.
-// - image: foto pequeña del evento.
+// Los errores de estructura se muestran en la consola del navegador durante el desarrollo.
 
 const pastoralEvents = [
   {

@@ -412,59 +412,22 @@ h2{
 }
 
 .timeline{
-  position:relative;
   display:grid;
-  gap:28px;
+  gap:54px;
   max-width:980px;
   margin:auto;
 }
 
-.timeline::before{
-  content:"";
-  position:absolute;
-  top:0;
-  bottom:0;
-  left:50%;
-  width:2px;
-  background:rgba(47,122,91,.22);
+.calendar-month h2{
+  margin-bottom:22px;
+  padding-bottom:12px;
+  border-bottom:2px solid rgba(47,122,91,.18);
+  font-size:clamp(2rem, 4vw, 2.7rem);
 }
 
-.timeline-item{
-  position:relative;
-  width:calc(50% - 34px);
-  padding:28px;
-}
-
-.timeline-item:nth-child(odd){
-  justify-self:start;
-}
-
-.timeline-item:nth-child(even){
-  justify-self:end;
-}
-
-.timeline-item::after{
-  content:"";
-  position:absolute;
-  top:32px;
-  width:14px;
-  height:14px;
-  border-radius:50%;
-  background:var(--color-accent);
-  border:3px solid var(--color-card);
-}
-
-.timeline-item:nth-child(odd)::after{
-  right:-42px;
-}
-
-.timeline-item:nth-child(even)::after{
-  left:-42px;
-}
-
-.timeline-item time{
-  color:var(--color-secondary);
-  font-weight:800;
+.calendar-month-events{
+  display:grid;
+  gap:18px;
 }
 
 .calendar-toolbar{
@@ -503,23 +466,72 @@ h2{
 }
 
 .calendar-event{
-  padding:0;
+  display:grid;
+  grid-template-columns:92px minmax(0,1fr);
+  background:var(--color-card);
+  border:2px solid rgba(47,122,91,.18);
+  border-radius:18px;
+  box-shadow:var(--shadow-soft);
+  overflow:hidden;
+  transition:var(--transition);
+}
+
+.calendar-event.has-image{
+  grid-template-columns:92px 180px minmax(0,1fr);
+}
+
+.calendar-event:hover{
+  box-shadow:var(--shadow-hover);
+  transform:translateY(-2px);
+}
+
+.calendar-date{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:20px 12px;
+  background:var(--color-primary-dark);
+  border-right:2px solid rgba(47,122,91,.14);
+  color:var(--color-secondary-deep);
+  line-height:1.2;
+  text-align:center;
+}
+
+.calendar-date strong{
+  font-family:'Cormorant Garamond', serif;
+  font-size:2.5rem;
+}
+
+.calendar-date span{
+  font-size:.8rem;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.calendar-date small{
+  margin-top:8px;
+  color:var(--color-secondary);
+  font-size:.78rem;
+  font-weight:800;
 }
 
 .calendar-event img{
   width:100%;
-  height:180px;
+  height:100%;
+  min-height:190px;
   object-fit:cover;
-  border-bottom:2px solid rgba(47,122,91,.18);
+  border-right:2px solid rgba(47,122,91,.14);
 }
 
 .calendar-event-copy{
-  padding:26px;
+  align-self:center;
+  padding:24px 28px;
 }
 
-.calendar-event-copy span{
+.calendar-category{
   display:block;
-  margin-top:8px;
   color:var(--color-accent);
   font-size:.78rem;
   font-weight:800;
@@ -529,17 +541,21 @@ h2{
 
 .calendar-event-copy h3{
   font-size:1.85rem;
-  margin:8px 0;
+  margin:4px 0 8px;
 }
 
 .calendar-event-copy p{
   color:var(--color-muted);
 }
 
-.calendar-location{
+.calendar-event-copy .calendar-location{
   margin-top:10px;
   color:var(--color-secondary-deep);
   font-weight:700;
+}
+
+.calendar-empty{
+  display:block;
 }
 
 .calendar-actions{
@@ -1206,37 +1222,6 @@ footer h3{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .timeline::before{
-    left:8px;
-  }
-
-  .timeline-item{
-    width:100%;
-    padding-left:34px;
-  }
-
-  .timeline-item.calendar-event{
-    padding-left:0;
-    margin-left:34px;
-    width:calc(100% - 34px);
-  }
-
-  .timeline-item:nth-child(odd),
-  .timeline-item:nth-child(even){
-    justify-self:stretch;
-  }
-
-  .timeline-item:nth-child(odd)::after,
-  .timeline-item:nth-child(even)::after{
-    left:1px;
-    right:auto;
-  }
-
-  .timeline-item.calendar-event:nth-child(odd)::after,
-  .timeline-item.calendar-event:nth-child(even)::after{
-    left:-33px;
-  }
-
   .pillar-modal-dialog{
     grid-template-columns:1fr;
   }
@@ -1310,6 +1295,43 @@ footer h3{
 
   .hero-info{
     grid-template-columns:1fr;
+  }
+
+  .calendar-event,
+  .calendar-event.has-image{
+    grid-template-columns:1fr;
+  }
+
+  .calendar-date{
+    grid-column:1;
+    flex-direction:row;
+    justify-content:flex-start;
+    gap:8px;
+    padding:12px 20px;
+    border-right:0;
+    border-bottom:2px solid rgba(47,122,91,.14);
+    text-align:left;
+  }
+
+  .calendar-date strong{
+    font-size:1.8rem;
+  }
+
+  .calendar-date small{
+    margin:0 0 0 auto;
+  }
+
+  .calendar-event img{
+    grid-column:1;
+    height:180px;
+    min-height:0;
+    border-right:0;
+    border-bottom:2px solid rgba(47,122,91,.14);
+  }
+
+  .calendar-event-copy{
+    grid-column:1;
+    padding:20px;
   }
 
   .hero-info article{

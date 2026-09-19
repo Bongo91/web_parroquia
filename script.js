@@ -228,8 +228,20 @@ renderDetailPage();
 // PASTORAL CALENDAR
 
 function parseLocalDate(dateValue){
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(dateValue || '')) return null;
+
   const [year, month, day] = dateValue.split('-').map(Number);
-  return new Date(year, month - 1, day);
+  const date = new Date(year, month - 1, day);
+
+  if(
+    date.getFullYear() !== year ||
+    date.getMonth() !== month - 1 ||
+    date.getDate() !== day
+  ){
+    return null;
+  }
+
+  return date;
 }
 
 function startOfToday(){
@@ -238,15 +250,32 @@ function startOfToday(){
 }
 
 function addMonths(date, months){
-  return new Date(date.getFullYear(), date.getMonth() + months, date.getDate());
+  const firstDay = new Date(date.getFullYear(), date.getMonth() + months, 1);
+  const lastDay = new Date(firstDay.getFullYear(), firstDay.getMonth() + 1, 0).getDate();
+
+  firstDay.setDate(Math.min(date.getDate(), lastDay));
+  return firstDay;
 }
 
-function formatEventDate(dateValue){
+function formatEventDay(dateValue){
   return new Intl.DateTimeFormat('es-ES', {
-    day: 'numeric',
+    day: '2-digit'
+  }).format(parseLocalDate(dateValue));
+}
+
+function formatEventMonth(dateValue){
+  return new Intl.DateTimeFormat('es-ES', {
+    month: 'short'
+  }).format(parseLocalDate(dateValue)).replace('.', '');
+}
+
+function formatMonthHeading(dateValue){
+  const label = new Intl.DateTimeFormat('es-ES', {
     month: 'long',
     year: 'numeric'
   }).format(parseLocalDate(dateValue));
+
+  return label.charAt(0).toUpperCase() + label.slice(1);
 }
 
 function formatDateObject(dateValue){
@@ -262,6 +291,45 @@ function getLinkedGroup(event){
   return getCards().find(card => card.id === event.groupId) || null;
 }
 
+function validatePastoralEvents(events, cards){
+  const errors = [];
+  const eventIds = new Set();
+  const cardIds = new Set(cards.map(card => card.id));
+
+  events.forEach((event, index) => {
+    const reference = event.id || `evento ${index + 1}`;
+
+    ['id', 'date', 'title', 'summary'].forEach(field => {
+      if(!event[field]) errors.push(`${reference}: falta el campo ${field}.`);
+    });
+
+    if(event.id){
+      if(eventIds.has(event.id)){
+        errors.push(`${reference}: el id está duplicado.`);
+      }
+      eventIds.add(event.id);
+    }
+
+    if(event.date && !parseLocalDate(event.date)){
+      errors.push(`${reference}: la fecha debe ser válida y usar AAAA-MM-DD.`);
+    }
+
+    if(event.time && !/^([01]\d|2[0-3]):[0-5]\d$/.test(event.time)){
+      errors.push(`${reference}: la hora debe usar HH:MM.`);
+    }
+
+    if(event.groupId && !cardIds.has(event.groupId)){
+      errors.push(`${reference}: groupId no existe en content.js.`);
+    }
+  });
+
+  if(errors.length){
+    console.warn('Revisa los datos de calendar.js:\n' + errors.join('\n'));
+  }
+
+  return errors;
+}
+
 function createCalendarEvent(event){
   const group = getLinkedGroup(event);
   const groupButton = group
@@ -273,23 +341,48 @@ function createCalendarEvent(event){
   const contactButton = event.contactUrl
     ? `<a class="calendar-link" href="${event.contactUrl}" target="_blank" rel="noopener">Contacto</a>`
     : '';
+  const image = event.image
+    ? `<img src="${event.image}" alt="${event.title}" loading="lazy">`
+    : '';
+  const category = event.category
+    ? `<span class="calendar-category">${event.category}</span>`
+    : '';
+  const location = event.location
+    ? `<p class="calendar-location">${event.location}</p>`
+    : '';
+  const actions = groupButton || signupButton || contactButton
+    ? `<div class="calendar-actions">${groupButton}${signupButton}${contactButton}</div>`
+    : '';
 
   return `
-    <article class="timeline-item calendar-event reveal">
-      <img src="${event.image}" alt="${event.title}" loading="lazy">
+    <article class="calendar-event reveal${event.image ? ' has-image' : ''}">
+      <time class="calendar-date" datetime="${event.date}${event.time ? `T${event.time}` : ''}">
+        <strong>${formatEventDay(event.date)}</strong>
+        <span>${formatEventMonth(event.date)}</span>
+        ${event.time ? `<small>${event.time}</small>` : ''}
+      </time>
+      ${image}
       <div class="calendar-event-copy">
-        <time datetime="${event.date}">${formatEventDate(event.date)}${event.time ? ` · ${event.time}` : ''}</time>
-        <span>${event.category}</span>
+        ${category}
         <h3>${event.title}</h3>
         <p>${event.summary}</p>
-        <p class="calendar-location">${event.location || ''}</p>
-        <div class="calendar-actions">
-          ${groupButton}
-          ${signupButton}
-          ${contactButton}
-        </div>
+        ${location}
+        ${actions}
       </div>
     </article>
+  `;
+}
+
+function createCalendarMonth(events){
+  const monthKey = events[0].date.slice(0, 7);
+
+  return `
+    <section class="calendar-month" aria-labelledby="month-${monthKey}">
+      <h2 id="month-${monthKey}">${formatMonthHeading(events[0].date)}</h2>
+      <div class="calendar-month-events">
+        ${events.map(createCalendarEvent).join('')}
+      </div>
+    </section>
   `;
 }
 
@@ -304,7 +397,7 @@ function renderPastoralCalendar(months = 12){
   const events = getEvents()
     .filter(event => {
       const eventDate = parseLocalDate(event.date);
-      return eventDate >= today && eventDate <= limit;
+      return eventDate && eventDate >= today && eventDate <= limit;
     })
     .sort((a, b) => {
       const dateDifference = parseLocalDate(a.date) - parseLocalDate(b.date);
@@ -318,7 +411,7 @@ function renderPastoralCalendar(months = 12){
 
   if(!events.length){
     timeline.innerHTML = `
-      <article class="timeline-item calendar-event reveal">
+      <article class="calendar-event calendar-empty reveal">
         <div class="calendar-event-copy">
           <h3>No hay eventos programados</h3>
           <p>Cuando se añadan nuevos eventos en calendar.js aparecerán aquí automáticamente.</p>
@@ -329,7 +422,14 @@ function renderPastoralCalendar(months = 12){
     return;
   }
 
-  timeline.innerHTML = events.map(createCalendarEvent).join('');
+  const eventsByMonth = Object.values(events.reduce((groups, event) => {
+    const month = event.date.slice(0, 7);
+    groups[month] = groups[month] || [];
+    groups[month].push(event);
+    return groups;
+  }, {}));
+
+  timeline.innerHTML = eventsByMonth.map(createCalendarMonth).join('');
   revealOnScroll();
 }
 
@@ -337,10 +437,16 @@ function setupCalendarFilters(){
   const filters = document.querySelectorAll('.calendar-filter');
   if(!filters.length) return;
 
+  validatePastoralEvents(getEvents(), getCards());
+
   filters.forEach(button => {
     button.addEventListener('click', () => {
-      filters.forEach(filter => filter.classList.remove('active'));
+      filters.forEach(filter => {
+        filter.classList.remove('active');
+        filter.setAttribute('aria-pressed', 'false');
+      });
       button.classList.add('active');
+      button.setAttribute('aria-pressed', 'true');
       renderPastoralCalendar(Number(button.dataset.months || 12));
     });
   });
