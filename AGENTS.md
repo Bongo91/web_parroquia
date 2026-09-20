@@ -90,7 +90,18 @@ Cada elemento puede contener:
 - `signupUrl`
 - `contactUrl`
 - `contactLabel`
-- propiedades opcionales para aparecer como destacado
+- `featured` para mostrarlo como destacado
+- `featuredTitle` y `featuredSummary` para adaptar el texto de la tarjeta
+- `featuredPriority` para ordenar los destacados (1 tiene mayor prioridad)
+- `featuredStart` y `featuredEnd` para limitar su periodo de publicación
+
+Reglas de los destacados:
+
+- Sin `featuredStart` ni `featuredEnd`, el destacado es permanente.
+- Las fechas opcionales utilizan el formato `AAAA-MM-DD`.
+- En portada se muestran inicialmente los tres destacados activos con mayor
+  prioridad.
+- El botón «Mostrar más» solo aparece cuando hay más de tres destacados activos.
 
 Cada `id` debe ser único y estable.
 

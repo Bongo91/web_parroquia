@@ -147,22 +147,58 @@ function renderEditableCards(){
   });
 }
 
-function createFeaturedItem(card){
+function formatFeaturedDeadline(dateValue){
+  const date = parseLocalDate(dateValue);
+  if(!date) return '';
+
+  return new Intl.DateTimeFormat('es-ES', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  }).format(date);
+}
+
+function isFeaturedActive(card, today){
+  if(!card.featured) return false;
+
+  const start = card.featuredStart ? parseLocalDate(card.featuredStart) : null;
+  const end = card.featuredEnd ? parseLocalDate(card.featuredEnd) : null;
+
+  if(card.featuredStart && !start){
+    console.warn(`${card.id}: featuredStart debe usar una fecha válida AAAA-MM-DD.`);
+    return false;
+  }
+
+  if(card.featuredEnd && !end){
+    console.warn(`${card.id}: featuredEnd debe usar una fecha válida AAAA-MM-DD.`);
+    return false;
+  }
+
+  return (!start || today >= start) && (!end || today <= end);
+}
+
+function createFeaturedItem(card, hidden){
   const item = document.createElement('a');
   item.className = 'featured-item reveal';
   item.href = getDetailUrl(card);
   item.target = '_blank';
   item.rel = 'noopener';
+  item.hidden = hidden;
   item.setAttribute('aria-label', `Ver contenido destacado: ${card.title}`);
 
+  const deadline = card.featuredEnd
+    ? `<time class="featured-deadline" datetime="${card.featuredEnd}">Hasta el ${formatFeaturedDeadline(card.featuredEnd)}</time>`
+    : '';
+
   item.innerHTML = `
+    <img src="${card.image}" alt="${card.title}" loading="lazy">
     <div class="featured-copy">
       <span>${card.eyebrow || 'Destacado'}</span>
       <h3>${card.featuredTitle || card.title}</h3>
       <p>${card.featuredSummary || card.summary}</p>
+      ${deadline}
       <strong>${card.featuredCta || 'Ver más'}</strong>
     </div>
-    <img src="${card.image}" alt="${card.title}" loading="lazy">
   `;
 
   return item;
@@ -170,21 +206,49 @@ function createFeaturedItem(card){
 
 function renderFeaturedContent(){
   const container = document.getElementById('featured-content');
+  const toggle = document.getElementById('featured-toggle');
   if(!container) return;
 
+  const today = startOfToday();
   const featuredCards = getCards()
-    .filter(card => card.featured)
-    .sort((a, b) => (a.featuredOrder || 99) - (b.featuredOrder || 99));
-
-  const section = container.closest('.featured-section');
+    .filter(card => isFeaturedActive(card, today))
+    .sort((a, b) => {
+      const priorityA = a.featuredPriority ?? a.featuredOrder ?? 99;
+      const priorityB = b.featuredPriority ?? b.featuredOrder ?? 99;
+      return priorityA - priorityB;
+    });
 
   if(!featuredCards.length){
-    section?.setAttribute('hidden', '');
+    container.innerHTML = '<p class="featured-empty">Ahora mismo no hay contenidos destacados.</p>';
+    if(toggle) toggle.hidden = true;
     return;
   }
 
   container.innerHTML = '';
-  featuredCards.forEach(card => container.appendChild(createFeaturedItem(card)));
+  featuredCards.forEach((card, index) => {
+    container.appendChild(createFeaturedItem(card, index >= 3));
+  });
+
+  if(!toggle) return;
+
+  if(featuredCards.length <= 3){
+    toggle.hidden = true;
+    return;
+  }
+
+  toggle.hidden = false;
+  toggle.textContent = 'Mostrar más';
+  toggle.setAttribute('aria-expanded', 'false');
+
+  toggle.addEventListener('click', () => {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    container.querySelectorAll('.featured-item').forEach((item, index) => {
+      if(index >= 3) item.hidden = expanded;
+    });
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    toggle.textContent = expanded ? 'Mostrar más' : 'Mostrar menos';
+    revealOnScroll();
+  });
 }
 
 function renderDetailPage(){

@@ -6,7 +6,10 @@
 // featured: true,
 // featuredTitle: "Título destacado",
 // featuredSummary: "Texto breve para la franja destacada",
-// featuredOrder: 1,
+// featuredPriority: 1,
+// featuredStart: "2026-09-01", // Opcional. Si se omite, empieza inmediatamente.
+// featuredEnd: "2026-12-31",  // Opcional. Si se omite, no caduca.
+// Sin featuredStart ni featuredEnd, el destacado es permanente.
 
 const parishCards = [
   {
@@ -16,10 +19,10 @@ const parishCards = [
     title: "Despertar",
     image: "images/logo_parroquia_1.jpeg",
     summary: "Primeros pasos en la fe desde la alegría, la familia y el descubrimiento.",
-    featured: false,
+    featured: true,
     featuredTitle: "Despertar: primeros pasos en la fe",
     featuredSummary: "Una propuesta cercana para que niños y familias descubran la parroquia como casa, comunidad y camino.",
-    featuredOrder: 1,
+    featuredPriority: 1,
     description: "Despertar acompaña a los más pequeños y a sus familias en el inicio del camino cristiano.",
     descriptionHtml: `
       <p><strong>Despertar</strong> es una comunidad parroquial pensada para iniciar a los niños y a sus familias en una experiencia sencilla, alegre y cercana de fe.</p>
@@ -53,6 +56,10 @@ const parishCards = [
     title: "Café con Fe",
     image: "images/logo_parroquia_1.jpeg",
     summary: "Conversaciones tranquilas para mirar la vida desde el Evangelio.",
+    featured: true,
+    featuredTitle: "Café con Fe",
+    featuredSummary: "Un espacio cercano para conversar, escuchar y mirar juntos la vida desde el Evangelio.",
+    featuredPriority: 4,
     description: "Café con Fe propone conversaciones sencillas y profundas en torno a temas de actualidad, vida cristiana y preguntas cotidianas, en un ambiente cálido y abierto.",
     signupUrl: "https://forms.gle/",
     contactUrl: "mailto:jesusysanmartin@gmail.com",
@@ -65,10 +72,12 @@ const parishCards = [
     title: "Retiros",
     image: "images/Cruz monte.png",
     summary: "Tiempos de silencio, oración y renovación interior.",
-    featured: false,
+    featured: true,
     featuredTitle: "Retiro parroquial",
     featuredSummary: "Una pausa para volver a lo esencial, rezar con calma y compartir vida de comunidad.",
-    featuredOrder: 2,
+    featuredPriority: 2,
+    featuredStart: "2026-09-01",
+    featuredEnd: "2026-12-05",
     description: "Los retiros parroquiales son pausas para volver a lo esencial, escuchar a Dios, descansar interiormente y compartir un día de oración con la comunidad.",
     signupUrl: "https://forms.gle/",
     contactUrl: "mailto:jesusysanmartin@gmail.com",
@@ -81,6 +90,10 @@ const parishCards = [
     title: "Cómo rezar el rosario",
     image: "images/logo_parroquia_1.jpeg",
     summary: "Guía sencilla para rezarlo solo, en familia o en comunidad.",
+    featured: true,
+    featuredTitle: "Cómo rezar el rosario",
+    featuredSummary: "Una guía práctica para rezarlo personalmente, en familia o junto a la comunidad.",
+    featuredPriority: 3,
     description: "Este recurso ofrece una guía clara para rezar el rosario paso a paso, con misterios, oraciones y pequeñas indicaciones para vivirlo con calma.",
     signupUrl: "",
     contactUrl: "mailto:jesusysanmartin@gmail.com",

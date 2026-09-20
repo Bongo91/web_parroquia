@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260920">
+  <link rel="stylesheet" href="styles.css?v=20260920-2">
 </head>
 <body>
   <header class="header" id="header">
@@ -98,16 +98,6 @@
       </div>
     </section>
 
-    <section class="featured-section" id="destacados" aria-label="Actividades destacadas">
-      <div class="container">
-        <div class="featured-heading reveal">
-          <span>Destacado</span>
-          <h2>Ahora en la parroquia</h2>
-        </div>
-        <div class="featured-grid" id="featured-content"></div>
-      </div>
-    </section>
-
     <section id="bienvenida">
       <div class="container">
         <div class="welcome-grid">
@@ -136,15 +126,27 @@
     </section>
 
     <section class="pillars" id="comunidades">
-      <div class="container home-pastoral-layout">
-        <div class="home-pastoral-copy reveal">
-          <span class="page-kicker">Nuestra comunidad</span>
-          <h2>Vida parroquial</h2>
-          <p>Descubre los grupos, celebraciones, espacios de formación y actividades con los que compartimos la fe y construimos comunidad.</p>
-          <a class="btn" href="vida-parroquial.html">Conocer la vida parroquial</a>
+      <div class="container">
+        <div class="home-pastoral-layout">
+          <div class="home-pastoral-copy reveal">
+            <span class="page-kicker">Nuestra comunidad</span>
+            <h2>Vida parroquial</h2>
+            <p>Descubre los grupos, celebraciones, espacios de formación y actividades con los que compartimos la fe y construimos comunidad.</p>
+            <a class="btn" href="vida-parroquial.html">Conocer la vida parroquial</a>
+          </div>
+          <div class="home-pastoral-placeholder reveal" role="img" aria-label="Espacio reservado para una imagen de la vida parroquial">
+            <span>Imagen de la vida parroquial</span>
+          </div>
         </div>
-        <div class="home-pastoral-placeholder reveal" role="img" aria-label="Espacio reservado para una imagen de la vida parroquial">
-          <span>Imagen de la vida parroquial</span>
+
+        <div class="pastoral-featured" aria-labelledby="featured-title">
+          <div class="featured-heading reveal">
+            <span class="page-kicker">Destacados</span>
+            <h2 id="featured-title">Ahora en la parroquia</h2>
+            <p>Propuestas y contenidos que conviene tener especialmente presentes.</p>
+          </div>
+          <div class="featured-grid" id="featured-content"></div>
+          <button class="load-more" id="featured-toggle" type="button" hidden>Mostrar más</button>
         </div>
       </div>
     </section>
