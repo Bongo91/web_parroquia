@@ -21,7 +21,22 @@
         <button class="menu-btn" id="menu-btn" aria-label="Abrir menú">☰</button>
         <ul class="nav-links" id="nav-links">
           <li><a href="index.html#inicio">Inicio</a></li>
-          <li><a href="vida-parroquial.html">Vida parroquial</a></li>
+          <li class="nav-dropdown">
+            <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="vida-parroquial-menu">Vida parroquial</button>
+            <ul class="nav-dropdown-menu" id="vida-parroquial-menu">
+              <li><a class="featured-link" href="vida-parroquial.html">Ver toda Vida parroquial</a></li>
+              <li><a href="vida-parroquial.html#catequesis">Catequesis</a></li>
+              <li><a href="vida-parroquial.html#sacramentos">Preparación para los sacramentos</a></li>
+              <li><a href="vida-parroquial.html#primer-anuncio">Primer anuncio y nueva evangelización</a></li>
+              <li><a href="vida-parroquial.html#jovenes">Jóvenes: Bachillerato y universitarios</a></li>
+              <li><a href="vida-parroquial.html#adultos">Adultos: formación, fe y oración</a></li>
+              <li><a href="vida-parroquial.html#celebracion">Celebración, oración y vida sacramental</a></li>
+              <li><a href="vida-parroquial.html#matrimonio">Matrimonio, novios y vida en pareja</a></li>
+              <li><a href="vida-parroquial.html#belenismo">Belenismo y preparación de la Navidad</a></li>
+              <li><a href="vida-parroquial.html#retiros">Retiros y tiempos fuertes</a></li>
+              <li><a href="vida-parroquial.html#comunidad">Actividades en comunidad</a></li>
+            </ul>
+          </li>
           <li><a href="comisiones-parroquiales.html">Comisiones parroquiales</a></li>
           <li><a href="calendario-pastoral.html">Calendario pastoral</a></li>
           <li><a href="Donar.html">Donar</a></li>
@@ -41,6 +56,7 @@
           <article>
             <span>Misa</span>
             <strong>L-V 20:00</strong>
+            <strong>D 12:00</strong>
           </article>
           <article>
             <span>Secretaría</span>
@@ -113,32 +129,6 @@
       </div>
     </section>
 
-    <section class="pillars" id="comunidades">
-      <div class="container">
-        <h2 class="reveal">Vida Parroquial</h2>
-        <p class="section-intro reveal">Comunidades y grupos para crecer en la fe según cada etapa de la vida.</p>
-        <div class="visual-grid" data-card-section="vida-parroquial"></div>
-      </div>
-    </section>
-
-    <section class="content-section" id="adultos-detalle">
-      <div class="container">
-        <h2 class="reveal">Adultos</h2>
-        <p class="section-intro reveal">Propuestas sencillas para encontrarse, rezar, formarse y compartir vida.</p>
-        <div class="progressive-grid" data-card-section="adultos" data-visible="8"></div>
-        <button class="load-more" type="button">Mostrar más</button>
-      </div>
-    </section>
-
-    <section class="content-section soft-section" id="actividades">
-      <div class="container">
-        <h2 class="reveal">Actividades parroquiales</h2>
-        <p class="section-intro reveal">Una agenda viva, visual y fácil de recorrer.</p>
-        <div class="progressive-grid" data-card-section="actividades" data-visible="8"></div>
-        <button class="load-more" type="button">Mostrar más</button>
-      </div>
-    </section>
-
     <section class="content-section" id="recursos">
       <div class="container">
         <h2 class="reveal">Recursos</h2>
@@ -201,9 +191,10 @@
           <h3>Pastoral Digital</h3>
           <p>Síguenos y mantente unido a la vida parroquial.</p>
           <div class="socials">
-            <a href="https://www.instagram.com/" target="_blank" rel="noopener">Ig</a>
-            <a href="https://www.youtube.com/" target="_blank" rel="noopener">Yt</a>
-            <a href="https://wa.me/34916840374" target="_blank" rel="noopener">Wa</a>
+            <a href="https://www.instagram.com/parroquiajesusysanmartin?utm_source=qr&stkn=MTljOHAwdmFvZXk2Nw%3D%3D" target="_blank" rel="noopener" aria-label="Instagram">Ig</a>
+            <a href="https://chat.whatsapp.com/J4hEDbLKEdw9IwA11eyHxp?s=sw&p=a&mlu=4&ilr=4" target="_blank" rel="noopener" aria-label="WhatsApp">Wa</a>
+            <a href="https://www.tiktok.com/@parroquiajesusysanmartin" target="_blank" rel="noopener" aria-label="TikTok">Tt</a>
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube">Yt</a>
           </div>
         </div>
       </div>

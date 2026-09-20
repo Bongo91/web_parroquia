@@ -146,6 +146,7 @@ h2{
   border:0;
   cursor:pointer;
   font:inherit;
+  text-align:center;
 }
 
 .header.scrolled .nav-links a,
@@ -171,9 +172,11 @@ h2{
 
 .nav-dropdown-menu{
   position:absolute;
-  top:calc(100% + 16px);
-  right:0;
-  min-width:220px;
+  top:100%;
+  left:50%;
+  width:min(360px, 90vw);
+  max-height:min(70vh, 560px);
+  overflow-y:auto;
   padding:10px;
   list-style:none;
   background:var(--color-card);
@@ -182,7 +185,7 @@ h2{
   box-shadow:var(--shadow-hover);
   opacity:0;
   pointer-events:none;
-  transform:translateY(8px);
+  transform:translate(-50%, 8px);
   transition:var(--transition);
 }
 
@@ -650,7 +653,7 @@ h2{
 .nav-dropdown.open .nav-dropdown-menu{
   opacity:1;
   pointer-events:auto;
-  transform:translateY(0);
+  transform:translate(-50%, 0);
 }
 
 .nav-dropdown-menu a{
@@ -714,6 +717,7 @@ h2{
 
 .hero h1{
   color:white;
+  line-height:.92;
   margin-bottom:1rem;
 }
 
@@ -830,6 +834,10 @@ h2{
   grid-template-columns:1fr 1fr;
   gap:70px;
   align-items:center;
+}
+
+.welcome-content h2{
+  line-height:.92;
 }
 
 .welcome-image img{
@@ -1335,7 +1343,7 @@ footer h3{
 
   .nav-dropdown-toggle{
     width:100%;
-    text-align:left;
+    text-align:center;
     padding:8px 0;
   }
 
@@ -1352,6 +1360,7 @@ footer h3{
 
   .nav-dropdown.open .nav-dropdown-menu{
     display:block;
+    transform:none;
   }
 
 }
