@@ -191,7 +191,7 @@ h2{
 
 .hero-info{
   display:grid;
-  grid-template-columns:repeat(4, minmax(140px, 1fr));
+  grid-template-columns:repeat(5, minmax(140px, 1fr));
   gap:12px;
   width:min(880px, 100%);
   margin:0 auto 28px;
@@ -205,6 +205,19 @@ h2{
   backdrop-filter:blur(8px);
   color:white;
   text-align:left;
+}
+
+.hero-link-card a{
+  display:flex;
+  height:100%;
+  flex-direction:column;
+  justify-content:center;
+  border-radius:12px;
+}
+
+.hero-link-card a:hover,
+.hero-link-card a:focus-visible{
+  color:var(--color-accent);
 }
 
 .hero-info span,
@@ -715,10 +728,33 @@ h2{
   padding:0 20px;
 }
 
-.hero h1{
+.hero-content > h1{
   color:white;
-  line-height:.92;
+  line-height:.82;
   margin-bottom:1rem;
+}
+
+.columbarium-layout{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) minmax(320px, .9fr);
+  gap:56px;
+  align-items:start;
+}
+
+.columbarium-copy p{
+  color:var(--color-muted);
+}
+
+.columbarium-placeholder{
+  min-height:520px;
+  display:grid;
+  place-items:center;
+  padding:32px;
+  border:2px dashed rgba(47,122,91,.3);
+  border-radius:24px;
+  background:rgba(255,255,255,.68);
+  color:var(--color-muted);
+  text-align:center;
 }
 
 .hero p{
@@ -838,6 +874,31 @@ h2{
 
 .welcome-content h2{
   line-height:.92;
+}
+
+.home-pastoral-layout{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) minmax(320px, 1fr);
+  gap:64px;
+  align-items:center;
+}
+
+.home-pastoral-copy p{
+  max-width:620px;
+  margin-bottom:28px;
+  color:var(--color-muted);
+}
+
+.home-pastoral-placeholder{
+  min-height:360px;
+  display:grid;
+  place-items:center;
+  padding:32px;
+  border:2px dashed rgba(47,122,91,.3);
+  border-radius:24px;
+  background:rgba(255,255,255,.58);
+  color:var(--color-muted);
+  text-align:center;
 }
 
 .welcome-image img{
@@ -1266,9 +1327,11 @@ footer h3{
 @media(max-width:992px){
 
   .welcome-grid,
+  .home-pastoral-layout,
   .community-grid,
   .culture-panel,
   .detail-layout,
+  .columbarium-layout,
   .visual-grid,
   .progressive-grid,
   .page-card-grid,

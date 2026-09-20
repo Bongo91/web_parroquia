@@ -8,12 +8,27 @@
   <title>Cultura y Fe | Parroquia Jesús y San Martín</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260920">
 </head>
 <body>
   <header class="header scrolled" id="header"><div class="container nav"><a href="index.html#inicio" class="logo"><img src="images/logo_parroquia_1.jpeg" alt="Logotipo de la parroquia"><span>Parroquia Jesús y San Martín</span></a><nav aria-label="Navegación principal"><button class="menu-btn" id="menu-btn" aria-label="Abrir menú">☰</button><ul class="nav-links" id="nav-links">
           <li><a href="index.html#inicio">Inicio</a></li>
-          <li><a href="vida-parroquial.html">Vida parroquial</a></li>
+          <li class="nav-dropdown">
+            <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="vida-parroquial-menu">Vida parroquial</button>
+            <ul class="nav-dropdown-menu" id="vida-parroquial-menu">
+              <li><a class="featured-link" href="vida-parroquial.html">Ver toda Vida parroquial</a></li>
+              <li><a href="vida-parroquial.html#catequesis">Catequesis</a></li>
+              <li><a href="vida-parroquial.html#sacramentos">Preparación para los sacramentos</a></li>
+              <li><a href="vida-parroquial.html#primer-anuncio">Primer anuncio y nueva evangelización</a></li>
+              <li><a href="vida-parroquial.html#jovenes">Jóvenes: Bachillerato y universitarios</a></li>
+              <li><a href="vida-parroquial.html#adultos">Adultos: formación, fe y oración</a></li>
+              <li><a href="vida-parroquial.html#celebracion">Celebración, oración y vida sacramental</a></li>
+              <li><a href="vida-parroquial.html#matrimonio">Matrimonio, novios y vida en pareja</a></li>
+              <li><a href="vida-parroquial.html#belenismo">Belenismo y preparación de la Navidad</a></li>
+              <li><a href="vida-parroquial.html#retiros">Retiros y tiempos fuertes</a></li>
+              <li><a href="vida-parroquial.html#comunidad">Actividades en comunidad</a></li>
+            </ul>
+          </li>
           <li><a href="comisiones-parroquiales.html">Comisiones parroquiales</a></li>
           <li><a href="calendario-pastoral.html">Calendario pastoral</a></li>
           <li><a href="Donar.html">Donar</a></li>
