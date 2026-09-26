@@ -278,10 +278,8 @@ function renderDetailPage(){
     ? `<a class="btn" href="${card.signupUrl}" target="_blank" rel="noopener">Formulario de inscripción</a>`
     : '';
 
-  const contactButton = card.contactUrl
-    ? `<a class="btn btn-secondary" href="${card.contactUrl}" target="_blank" rel="noopener">${card.contactLabel || 'Contactar'}</a>`
-    : '';
-
+  const categoryLinks = getCategories().filter(category => (card.categories || []).includes(category.id))
+    .map(category => `<a href="categoria.html?id=${category.id}">${category.title}</a>`).join('');
   const descriptionContent = card.descriptionHtml || `<p>${card.description || ''}</p>`;
 
   detailRoot.innerHTML = `
@@ -303,8 +301,14 @@ function renderDetailPage(){
           </div>
           <div class="detail-actions">
             ${signupButton}
-            ${contactButton}
           </div>
+          <div id="group-contact"></div>
+          <nav class="detail-navigation" aria-label="Categorías del grupo">
+            <span class="navigation-label">También en</span>
+            <div class="navigation-links">${categoryLinks}
+              <a href="vida-parroquial.html">Todas las categorías</a>
+            </div>
+          </nav>
         </div>
         <div class="detail-image reveal">
           <img src="${card.image}" alt="${card.title}" loading="lazy">
@@ -312,7 +316,166 @@ function renderDetailPage(){
       </div>
     </section>
   `;
+  renderGroupContact(card);
 }
+
+// Los campos opcionales se convierten en enlaces mediante el DOM.
+function getGroupContacts(card){
+  const contacts = [];
+  const common = typeof parishContact !== 'undefined' ? parishContact : {};
+  if(common.email) contacts.push({label: `Correo: ${common.email}`, href: `mailto:${common.email}`});
+  if(common.phone) contacts.push({label: `Teléfono: ${common.phone}`, href: `tel:${common.phone.replace(/[^+0-9]/g, '')}`});
+  if(common.whatsappUrl) contacts.push({label: 'Grupo de WhatsApp', href: common.whatsappUrl});
+  const formUrl = card.contactFormUrl || (/^https?:/i.test(card.contactUrl || '') ? card.contactUrl : '');
+  if(formUrl) contacts.push({label: 'Formulario de contacto', href: formUrl});
+  return contacts;
+}
+
+function buildInquiryMailto(email, groupTitle, subject, message){
+  return `mailto:${email}?subject=${encodeURIComponent(`[${groupTitle}] ${subject.trim()}`)}&body=${encodeURIComponent(message.trim())}`;
+}
+
+function renderGroupContact(card){
+  const root = document.getElementById('group-contact');
+  if(!root) return;
+  const contacts = getGroupContacts(card);
+  if(!contacts.length) return;
+  const section = document.createElement('section');
+  section.className = 'group-contact';
+  section.setAttribute('aria-labelledby', 'group-contact-title');
+  const heading = document.createElement('h3');
+  heading.id = 'group-contact-title';
+  heading.textContent = 'Contacto';
+  const links = document.createElement('div');
+  links.className = 'detail-actions';
+  contacts.forEach(contact => {
+    const link = document.createElement('a');
+    link.className = 'btn btn-secondary';
+    link.href = contact.href;
+    link.textContent = contact.label;
+    if(/^https?:/i.test(contact.href)){
+      link.target = '_blank';
+      link.rel = 'noopener';
+    }
+    links.appendChild(link);
+  });
+  section.append(heading, links);
+  if(typeof parishContact !== 'undefined' && parishContact.email){
+    const inquiry = document.createElement('details');
+    inquiry.className = 'group-inquiry';
+    inquiry.innerHTML = `<summary>Enviar una consulta</summary>
+      <form class="inquiry-form">
+        <p id="inquiry-help">Se abrirá tu aplicación de correo con el mensaje preparado. Revísalo y pulsa Enviar allí. Si no se abre, puedes escribirnos al correo indicado arriba.</p>
+        <label for="inquiry-subject">Asunto</label>
+        <input id="inquiry-subject" name="subject" required maxlength="150" placeholder="¿En qué podemos ayudarte?">
+        <label for="inquiry-message">Mensaje</label>
+        <textarea id="inquiry-message" name="message" rows="5" required maxlength="2000"></textarea>
+        <button class="btn" type="submit" aria-describedby="inquiry-help">Abrir correo para enviar</button>
+      </form>`;
+    const form = inquiry.querySelector('form');
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const subject = form.elements.namedItem('subject');
+      const message = form.elements.namedItem('message');
+      if(!subject.value.trim() || !message.value.trim()) return;
+      window.location.href = buildInquiryMailto(parishContact.email, card.title, subject.value, message.value);
+    });
+    section.appendChild(inquiry);
+  }
+  root.appendChild(section);
+}
+
+// DIRECTORIO Y CATEGORÍAS (contenido local de content.js)
+function getCategories(){
+  return typeof parishCategories !== 'undefined' ? parishCategories : [];
+}
+
+function getCategoryCards(id){
+  return getCards().filter(card => (card.categories || []).includes(id));
+}
+
+function createCategoryCard(category){
+  const groups = getCategoryCards(category.id);
+  const article = document.createElement('article');
+  article.className = 'page-card pastoral-category-card';
+  article.id = category.id;
+  article.innerHTML = `
+    <figure class="category-media" aria-label="Propuestas de ${category.title}">
+      <img loading="lazy" width="1200" height="800" alt="">
+      <figcaption aria-live="polite" aria-atomic="true"></figcaption>
+    </figure>
+    <div class="category-copy">
+      <h3>${category.title}</h3>
+      <p>${category.summary}</p>
+      <a class="btn" href="${groups.length === 1 ? getDetailUrl(groups[0]) : `categoria.html?id=${category.id}`}">${groups.length === 1 ? 'Conocer el grupo' : 'Ver grupos'}</a>
+    </div>`;
+  const media = article.querySelector('figure');
+  const image = media.querySelector('img');
+  const caption = media.querySelector('figcaption');
+  let currentIndex = 0;
+  function showGroup(){
+    const group = groups[currentIndex];
+    const src = group?.image || 'images/logo_parroquia_1.jpeg';
+    image.src = src;
+    image.alt = src.includes('logo_parroquia_1') ? 'Logotipo de la parroquia, imagen provisional' : (group.imageAlt || group.title);
+    image.classList.toggle('is-placeholder', src.includes('logo_parroquia_1'));
+    caption.textContent = group ? `${group.title}${groups.length > 1 ? ` · ${currentIndex + 1} de ${groups.length}` : ''}` : 'Próximamente';
+  }
+  if(groups.length > 1){
+    for(const [step, label, symbol] of [[-1, 'Anterior', '‹'], [1, 'Siguiente', '›']]){
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = `carousel-arrow ${step < 0 ? 'previous' : 'next'}`;
+      button.setAttribute('aria-label', `${label}: ${category.title}`);
+      button.textContent = symbol;
+      button.addEventListener('click', () => {
+        currentIndex = (currentIndex + step + groups.length) % groups.length;
+        showGroup();
+      });
+      media.appendChild(button);
+    }
+  }
+  showGroup();
+  return article;
+}
+
+function renderPastoralCategories(){
+  const grid = document.getElementById('pastoral-categories');
+  if(!grid) return;
+  getCategories().forEach(category => grid.appendChild(createCategoryCard(category)));
+  // Conserva los enlaces antiguos a las categorías reorganizadas.
+  const aliases = {catequesis:'infancia', jovenes:'juventud', celebracion:'oracion', matrimonio:'sacramentos', belenismo:'comunidad', retiros:'oracion'};
+  const target = aliases[location.hash.slice(1)] || location.hash.slice(1);
+  if(target) document.getElementById(target)?.scrollIntoView();
+}
+
+function renderCategoryPage(){
+  const root = document.getElementById('category-root');
+  if(!root) return;
+  const id = new URLSearchParams(location.search).get('id');
+  const category = getCategories().find(item => item.id === id);
+  if(!category){
+    document.title = 'Categoría no encontrada | Parroquia Jesús y San Martín';
+    root.innerHTML = '<section class="page-hero"><div class="container"><h1>No hemos encontrado esta categoría</h1><a class="btn" href="vida-parroquial.html">Volver a Vida parroquial</a></div></section>';
+    return;
+  }
+  document.title = `${category.title} | Parroquia Jesús y San Martín`;
+  root.innerHTML = `<section class="page-hero"><div class="container"><a href="vida-parroquial.html#${category.id}">← Vida parroquial</a><h1>${category.title}</h1><p>${category.summary}</p></div></section><section class="page-section"><div class="container"><h2>Grupos y propuestas</h2><div class="page-card-grid category-groups"></div></div></section>`;
+  const grid = root.querySelector('.page-card-grid');
+  const groups = getCategoryCards(id);
+  if(!groups.length) grid.textContent = 'Próximamente compartiremos las propuestas de esta categoría.';
+  groups.forEach(group => {
+    const article = document.createElement('article');
+    article.className = 'page-card group-card';
+    const groupImage = group.image || 'images/logo_parroquia_1.jpeg';
+    const placeholder = groupImage.includes('logo_parroquia_1');
+    article.innerHTML = `<img class="${placeholder ? 'is-placeholder' : ''}" src="${groupImage}" alt="${placeholder ? 'Logotipo de la parroquia, imagen provisional' : (group.imageAlt || group.title)}" loading="lazy" width="1200" height="800"><div><h3>${group.title}</h3><p>${group.summary}</p><a class="btn" href="${getDetailUrl(group)}">Conocer el grupo<span class="sr-only">: ${group.title}</span></a></div>`;
+    grid.appendChild(article);
+  });
+}
+
+renderPastoralCategories();
+renderCategoryPage();
 
 renderEditableCards();
 renderFeaturedContent();

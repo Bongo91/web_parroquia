@@ -261,6 +261,7 @@ h2{
 }
 
 .social-strip a,
+.socials a,
 .external-links a{
   display:inline-flex;
   align-items:center;
@@ -276,6 +277,9 @@ h2{
 }
 
 .social-strip a:hover,
+.social-strip a:focus-visible,
+.socials a:hover,
+.socials a:focus-visible,
 .external-links a:hover{
   background:var(--color-secondary);
   border-color:var(--color-secondary);
@@ -457,22 +461,24 @@ h2{
   color:white;
 }
 
-.pastoral-category-card{
-  min-height:220px;
-  scroll-margin-top:110px;
-}
-
-.pastoral-category-card div{
-  display:flex;
-  min-height:100%;
-  flex-direction:column;
-  justify-content:space-between;
-  gap:24px;
-}
-
-.pastoral-category-card strong{
-  color:var(--color-secondary);
-}
+.pastoral-category-card{ scroll-margin-top:110px; display:flex; flex-direction:column; }
+.pastoral-category-card .category-copy{ display:flex; flex-direction:column; gap:16px; flex:1; }
+.category-copy .btn{ margin-top:auto; align-self:flex-start; }
+.category-media{ position:relative; margin:0; background:white; }
+.page-card .category-media img{ width:100%; height:auto; aspect-ratio:3/2; object-fit:cover; }
+.page-card img.is-placeholder{ object-fit:contain; padding:28px; background:white; }
+.category-media figcaption{ min-height:64px; padding:14px 20px; background:var(--color-card); color:var(--color-secondary-deep); font-weight:600; }
+.carousel-arrow{ position:absolute; top:calc((100% - 64px)/2); transform:translateY(-50%); width:44px; height:44px; border:1px solid var(--color-secondary); border-radius:50%; background:var(--color-card); color:var(--color-secondary-deep); font-size:30px; cursor:pointer; }
+.carousel-arrow.previous{ left:10px; }
+.carousel-arrow.next{ right:10px; }
+.carousel-arrow:hover{ background:var(--color-secondary); color:white; }
+.carousel-arrow:focus-visible, .category-copy .btn:focus-visible, .group-card .btn:focus-visible{ outline:3px solid var(--color-secondary-deep); outline-offset:3px; }
+#category-root .page-hero a{ color:white; text-decoration:underline; text-underline-offset:4px; }
+.category-groups{ margin-top:28px; }
+.group-card{ display:flex; flex-direction:column; }
+.group-card > div{ display:flex; flex-direction:column; flex:1; gap:16px; }
+.group-card .btn{ margin-top:auto; align-self:flex-start; }
+.sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
 
 .page-intro{
   max-width:760px;
@@ -703,7 +709,7 @@ h2{
   inset:0;
   background:
   linear-gradient(rgba(16,44,36,.38), rgba(34,28,58,.5)),
-  url('images/parroquia_interior_1.jpeg') center/cover no-repeat fixed;
+  url('images/parroquia_interior_1.jpeg') center 25%/cover no-repeat fixed;
 
 }
 
@@ -1384,19 +1390,11 @@ footer h3{
 
 .socials{
   display:flex;
+  flex-wrap:wrap;
   gap:14px;
   margin-top:18px;
 }
 
-.socials a{
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  background:rgba(255,255,255,.08);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
 
 .footer-bottom{
   border-top:1px solid rgba(255,255,255,.08);
@@ -1655,3 +1653,27 @@ footer h3{
   }
 
 }
+
+/* Contacto de la ficha, separado de la navegación. */
+.group-contact{ padding:24px 0; margin-top:24px; border-top:1px solid rgba(47,122,91,.22); }
+.group-contact h3, .detail-navigation h3{ margin-bottom:16px; }
+.group-contact .btn{ overflow-wrap:anywhere; min-width:0; max-width:100%; }
+.detail-navigation{ margin-top:24px; }
+.group-contact a:focus-visible{ outline:3px solid var(--color-secondary-deep); outline-offset:3px; }
+
+/* Navegación secundaria y consulta por correo. */
+.detail-navigation{ border-top:1px solid rgba(47,122,91,.18); padding-top:18px; font-size:.85rem; }
+.navigation-label{ display:block; margin-bottom:6px; color:#52665e; }
+.navigation-links{ display:flex; flex-wrap:wrap; column-gap:18px; row-gap:4px; }
+.navigation-links a{ display:inline-flex; align-items:center; min-height:44px; text-decoration:underline; text-underline-offset:4px; color:#365b4b; }
+.navigation-links a:hover{ color:var(--color-secondary-deep); }
+.navigation-links a:focus-visible, .group-inquiry summary:focus-visible{ outline:2px solid var(--color-secondary-deep); outline-offset:3px; }
+.group-inquiry{ margin-top:24px; }
+.group-inquiry summary{ cursor:pointer; font-weight:600; padding:12px 0; color:var(--color-secondary-deep); }
+.inquiry-form{ display:grid; gap:12px; margin-top:12px; }
+.inquiry-form p{ font-size:.9rem; }
+.inquiry-form label{ font-weight:600; }
+.inquiry-form input, .inquiry-form textarea{ width:100%; min-width:0; font:inherit; padding:12px; border:1px solid #688779; border-radius:8px; background:white; color:#17372d; }
+.inquiry-form textarea{ resize:vertical; }
+.inquiry-form input:focus-visible, .inquiry-form textarea:focus-visible, .inquiry-form button:focus-visible{ outline:2px solid var(--color-secondary-deep); outline-offset:3px; }
+.inquiry-form .btn{ justify-self:start; }

@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260921-2">
+  <link rel="stylesheet" href="styles.css?v=20260926-5">
 </head>
 <body>
   <header class="header" id="header">
@@ -21,26 +21,25 @@
         <button class="menu-btn" id="menu-btn" aria-label="Abrir menú">☰</button>
         <ul class="nav-links" id="nav-links">
           <li><a href="index.html#inicio">Inicio</a></li>
+          <li><a href="quienes-somos.html">Quiénes somos</a></li>
           <li class="nav-dropdown">
             <button class="nav-dropdown-toggle" type="button" aria-expanded="false" aria-controls="vida-parroquial-menu">Vida parroquial</button>
             <ul class="nav-dropdown-menu" id="vida-parroquial-menu">
               <li><a class="featured-link" href="vida-parroquial.html">Ver toda Vida parroquial</a></li>
-              <li><a href="vida-parroquial.html#catequesis">Catequesis</a></li>
-              <li><a href="vida-parroquial.html#sacramentos">Preparación para los sacramentos</a></li>
-              <li><a href="vida-parroquial.html#primer-anuncio">Primer anuncio y nueva evangelización</a></li>
-              <li><a href="vida-parroquial.html#jovenes">Jóvenes: Bachillerato y universitarios</a></li>
-              <li><a href="vida-parroquial.html#adultos">Adultos: formación, fe y oración</a></li>
-              <li><a href="vida-parroquial.html#celebracion">Celebración, oración y vida sacramental</a></li>
-              <li><a href="vida-parroquial.html#matrimonio">Matrimonio, novios y vida en pareja</a></li>
-              <li><a href="vida-parroquial.html#belenismo">Belenismo y preparación de la Navidad</a></li>
-              <li><a href="vida-parroquial.html#retiros">Retiros y tiempos fuertes</a></li>
-              <li><a href="vida-parroquial.html#comunidad">Actividades en comunidad</a></li>
+              <li><a href="categoria.html?id=infancia">Infancia</a></li>
+              <li><a href="categoria.html?id=juventud">Juventud</a></li>
+              <li><a href="categoria.html?id=primer-anuncio">Primeros pasos en la fe</a></li>
+              <li><a href="categoria.html?id=adultos">Formación y comunidad adulta</a></li>
+              <li><a href="categoria.html?id=sacramentos">Sacramentos y vida en pareja</a></li>
+              <li><a href="categoria.html?id=oracion">Oración, celebraciones y retiros</a></li>
+              <li><a href="categoria.html?id=comunidad">Encuentros y actividades</a></li>
+
+              <li><a href="comisiones-parroquiales.html">Comisiones parroquiales</a></li>
             </ul>
           </li>
-          <li><a href="comisiones-parroquiales.html">Comisiones parroquiales</a></li>
-          <li><a href="calendario-pastoral.html">Calendario pastoral</a></li>
+          <li><a href="calendario-pastoral.html">Calendario</a></li>
+          <li><a role="link" aria-disabled="true" tabindex="0">Blog</a></li>
           <li><a href="Donar.html">Donar</a></li>
-          <li><a href="quienes-somos.html">Quiénes somos</a></li>
         </ul>
       </nav>
     </div>
@@ -55,7 +54,7 @@
         <div class="hero-info" aria-label="Información rápida">
           <article>
             <span>Misa</span>
-            <strong>L-V 20:00</strong>
+            <strong>L-S 20:00</strong>
             <strong>D 12:00</strong>
           </article>
           <article>
@@ -161,6 +160,7 @@
             <div class="schedule-title"><span>⛪</span><h3>Misas</h3></div>
             <ul class="schedule-list">
               <li><span>Lunes a Viernes</span><span class="schedule-time">20:00</span></li>
+              <li><span>Sábados</span><span class="schedule-time">20:00</span></li>
               <li><span>Domingos</span><span class="schedule-time">12:00</span></li>
             </ul>
           </article>
@@ -191,12 +191,13 @@
           <h3>Contacto</h3>
           <p>📍 Avenida Juan Carlos I, 3 28905 Getafe</p>
           <p>☎ +34 916 840 374</p>
+          <p>Móvil: <a href="tel:+34618811654">618 811 654</a></p>
           <p>✉ jesusysanmartin@gmail.com</p>
         </div>
         <div>
           <h3>Horarios</h3>
           <ul class="footer-links">
-            <li>Misas diarias: 20:00</li>
+            <li>Lunes a sábado: 20:00</li>
             <li>Domingos: 12:00</li>
             <li><a href="#horarios">Ver todos los horarios</a></li>
           </ul>
@@ -204,19 +205,27 @@
         <div>
           <h3>Pastoral Digital</h3>
           <p>Síguenos y mantente unido a la vida parroquial.</p>
-          <div class="socials">
-            <a href="https://www.instagram.com/parroquiajesusysanmartin?utm_source=qr&stkn=MTljOHAwdmFvZXk2Nw%3D%3D" target="_blank" rel="noopener" aria-label="Instagram">Ig</a>
-            <a href="https://chat.whatsapp.com/J4hEDbLKEdw9IwA11eyHxp?s=sw&p=a&mlu=4&ilr=4" target="_blank" rel="noopener" aria-label="WhatsApp">Wa</a>
-            <a href="https://www.tiktok.com/@parroquiajesusysanmartin" target="_blank" rel="noopener" aria-label="TikTok">Tt</a>
-            <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube">Yt</a>
-          </div>
+            <div class="socials" aria-label="Redes sociales">
+                <a href="https://www.instagram.com/parroquiajesusysanmartin?utm_source=qr&stkn=MTljOHAwdmFvZXk2Nw%3D%3D" target="_blank" rel="noopener" aria-label="Instagram">
+                  <img src="images/Icons/instagram-line.png" alt="">
+                </a>
+                <a href="https://chat.whatsapp.com/J4hEDbLKEdw9IwA11eyHxp?s=sw&p=a&mlu=4&ilr=4" target="_blank" rel="noopener" aria-label="WhatsApp">
+                  <img src="images/Icons/whatsapp-line.png" alt="">
+                </a>
+                <a href="https://www.tiktok.com/@parroquiajesusysanmartin" target="_blank" rel="noopener" aria-label="TikTok">
+                  <img src="images/Icons/tiktok-fill.png" alt="">
+                </a>
+                <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube">
+                  <img src="images/Icons/youtube-line.png" alt="">
+                </a>
+              </div>
         </div>
       </div>
       <div class="footer-bottom">© 2026 Parroquia Jesús y San Martín.</div>
     </div>
   </footer>
 
-  <script src="content.js"></script>
-  <script src="script.js"></script>
+  <script src="content.js?v=20260926-5"></script>
+  <script src="script.js?v=20260926-5"></script>
 </body>
 </html>

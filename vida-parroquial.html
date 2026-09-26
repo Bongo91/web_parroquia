@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260920-2">
+  <link rel="stylesheet" href="styles.css?v=20260926-5">
 </head>
 <body>
   <header class="header scrolled" id="header">
@@ -20,11 +20,11 @@
         <button class="menu-btn" id="menu-btn" aria-label="Abrir menú">☰</button>
         <ul class="nav-links" id="nav-links">
           <li><a href="index.html#inicio">Inicio</a></li>
-          <li><a href="vida-parroquial.html">Vida parroquial</a></li>
-          <li><a href="comisiones-parroquiales.html">Comisiones parroquiales</a></li>
-          <li><a href="calendario-pastoral.html">Calendario pastoral</a></li>
-          <li><a href="Donar.html">Donar</a></li>
           <li><a href="quienes-somos.html">Quiénes somos</a></li>
+          <li><a href="vida-parroquial.html">Vida parroquial</a></li>
+          <li><a href="calendario-pastoral.html">Calendario</a></li>
+          <li><a role="link" aria-disabled="true" tabindex="0">Blog</a></li>
+          <li><a href="Donar.html">Donar</a></li>
         </ul>
       </nav>
     </div>
@@ -42,16 +42,13 @@
     <nav class="pastoral-nav" aria-label="Categorías de vida parroquial">
       <div class="container">
         <ul>
-          <li><a href="#catequesis">Catequesis</a></li>
-          <li><a href="#sacramentos">Preparación para los sacramentos</a></li>
-          <li><a href="#primer-anuncio">Primer anuncio y nueva evangelización</a></li>
-          <li><a href="#jovenes">Jóvenes: Bachillerato y universitarios</a></li>
-          <li><a href="#adultos">Adultos: formación, fe y oración</a></li>
-          <li><a href="#celebracion">Celebración, oración y vida sacramental</a></li>
-          <li><a href="#matrimonio">Matrimonio, novios y vida en pareja</a></li>
-          <li><a href="#belenismo">Belenismo y preparación de la Navidad</a></li>
-          <li><a href="#retiros">Retiros y tiempos fuertes</a></li>
-          <li><a href="#comunidad">Actividades en comunidad</a></li>
+          <li><a href="#infancia">Infancia</a></li>
+          <li><a href="#juventud">Juventud</a></li>
+          <li><a href="#primer-anuncio">Primeros pasos en la fe</a></li>
+          <li><a href="#adultos">Formación y comunidad adulta</a></li>
+          <li><a href="#sacramentos">Sacramentos y vida en pareja</a></li>
+          <li><a href="#oracion">Oración, celebraciones y retiros</a></li>
+          <li><a href="#comunidad">Encuentros y actividades</a></li>
         </ul>
       </div>
     </nav>
@@ -61,21 +58,11 @@
         <div class="page-intro">
           <span class="page-kicker">Grupos y propuestas</span>
           <h2 id="categorias-title">Elige un ámbito de la vida parroquial</h2>
-          <p>Estas secciones están preparadas para incorporar progresivamente la información de cada grupo.</p>
+          <p>Descubre los grupos y propuestas de cada ámbito y encuentra tu lugar en la comunidad.</p>
         </div>
 
-        <div class="page-card-grid">
-          <a class="page-card pastoral-category-card reveal" id="catequesis" href="#catequesis"><div><h3>Catequesis</h3><strong>Contenido próximamente</strong></div></a>
-          <a class="page-card pastoral-category-card reveal" id="sacramentos" href="#sacramentos"><div><h3>Preparación para los sacramentos</h3><strong>Contenido próximamente</strong></div></a>
-          <a class="page-card pastoral-category-card reveal" id="primer-anuncio" href="#primer-anuncio"><div><h3>Primer anuncio y nueva evangelización</h3><strong>Contenido próximamente</strong></div></a>
-          <a class="page-card pastoral-category-card reveal" id="jovenes" href="#jovenes"><div><h3>Jóvenes: Bachillerato y universitarios</h3><strong>Contenido próximamente</strong></div></a>
-          <a class="page-card pastoral-category-card reveal" id="adultos" href="#adultos"><div><h3>Adultos: formación, fe y oración</h3><strong>Contenido próximamente</strong></div></a>
-          <a class="page-card pastoral-category-card reveal" id="celebracion" href="#celebracion"><div><h3>Celebración, oración y vida sacramental</h3><strong>Contenido próximamente</strong></div></a>
-          <a class="page-card pastoral-category-card reveal" id="matrimonio" href="#matrimonio"><div><h3>Matrimonio, novios y vida en pareja</h3><strong>Contenido próximamente</strong></div></a>
-          <a class="page-card pastoral-category-card reveal" id="belenismo" href="#belenismo"><div><h3>Belenismo y preparación de la Navidad</h3><strong>Contenido próximamente</strong></div></a>
-          <a class="page-card pastoral-category-card reveal" id="retiros" href="#retiros"><div><h3>Retiros y tiempos fuertes</h3><strong>Contenido próximamente</strong></div></a>
-          <a class="page-card pastoral-category-card reveal" id="comunidad" href="#comunidad"><div><h3>Actividades en comunidad</h3><strong>Contenido próximamente</strong></div></a>
-        </div>
+        <div class="page-card-grid" id="pastoral-categories"></div>
+        <noscript>Activa JavaScript para consultar las categorías y sus grupos.</noscript>
       </div>
     </section>
   </main>
@@ -89,12 +76,13 @@
           <h3>Contacto</h3>
           <p>📍 Avenida Juan Carlos I, 3 28905 Getafe</p>
           <p>☎ +34 916 840 374</p>
+          <p>Móvil: <a href="tel:+34618811654">618 811 654</a></p>
           <p>✉ jesusysanmartin@gmail.com</p>
         </div>
         <div>
           <h3>Horarios</h3>
           <ul class="footer-links">
-            <li>Misas diarias: 20:00</li>
+            <li>Lunes a sábado: 20:00</li>
             <li>Domingos: 12:00</li>
             <li><a href="index.html#horarios">Ver todos los horarios</a></li>
           </ul>
@@ -103,10 +91,10 @@
           <h3>Pastoral Digital</h3>
           <p>Síguenos y mantente unido a la vida parroquial.</p>
           <div class="socials">
-            <a href="https://www.instagram.com/parroquiajesusysanmartin?utm_source=qr&stkn=MTljOHAwdmFvZXk2Nw%3D%3D" target="_blank" rel="noopener" aria-label="Instagram">Ig</a>
-            <a href="https://chat.whatsapp.com/J4hEDbLKEdw9IwA11eyHxp?s=sw&p=a&mlu=4&ilr=4" target="_blank" rel="noopener" aria-label="WhatsApp">Wa</a>
-            <a href="https://www.tiktok.com/@parroquiajesusysanmartin" target="_blank" rel="noopener" aria-label="TikTok">Tt</a>
-            <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube">Yt</a>
+            <a href="https://www.instagram.com/parroquiajesusysanmartin?utm_source=qr&stkn=MTljOHAwdmFvZXk2Nw%3D%3D" target="_blank" rel="noopener" aria-label="Instagram"><img src="images/Icons/instagram-line.png" alt=""></a>
+            <a href="https://chat.whatsapp.com/J4hEDbLKEdw9IwA11eyHxp?s=sw&p=a&mlu=4&ilr=4" target="_blank" rel="noopener" aria-label="WhatsApp"><img src="images/Icons/whatsapp-line.png" alt=""></a>
+            <a href="https://www.tiktok.com/@parroquiajesusysanmartin" target="_blank" rel="noopener" aria-label="TikTok"><img src="images/Icons/tiktok-fill.png" alt=""></a>
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube"><img src="images/Icons/youtube-line.png" alt=""></a>
           </div>
         </div>
       </div>
@@ -114,6 +102,7 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="content.js?v=20260926-5"></script>
+  <script src="script.js?v=20260926-5"></script>
 </body>
 </html>
