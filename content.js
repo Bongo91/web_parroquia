@@ -614,12 +614,12 @@ const parishCategories = [
   },
   {
     "id": "juventud",
-    "title": "Juventud",
+    "title": "Jovenes y adolescentes",
     "summary": "Amistad, acompañamiento y fe compartida desde la adolescencia."
   },
   {
     "id": "primer-anuncio",
-    "title": "Primeros pasos en la fe",
+    "title": "Primer anuncio",
     "summary": "Un espacio para acercarte, preguntar y descubrir la fe."
   },
   {
