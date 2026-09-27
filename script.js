@@ -33,6 +33,109 @@ menuBtn?.addEventListener('click', () => {
   setMobileMenu(!navLinks?.classList.contains('active'));
 });
 
+// NAVEGACIÓN PRINCIPAL
+// Se mantiene aquí para que la misma estructura llegue a todas las páginas.
+function createNavigationDropdown(label, menuId, items, featuredHref = ''){
+  const wrapper = document.createElement('li');
+  wrapper.className = 'nav-dropdown';
+
+  const toggle = document.createElement('button');
+  toggle.className = 'nav-dropdown-toggle';
+  toggle.type = 'button';
+  toggle.setAttribute('aria-expanded', 'false');
+  toggle.setAttribute('aria-controls', menuId);
+  toggle.textContent = label;
+
+  const menu = document.createElement('ul');
+  menu.className = 'nav-dropdown-menu';
+  menu.id = menuId;
+
+  items.forEach((item, index) => {
+    const row = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = item.href;
+    link.textContent = item.label;
+    if(index === 0 && featuredHref) link.className = 'featured-link';
+    row.appendChild(link);
+    menu.appendChild(row);
+  });
+
+  wrapper.append(toggle, menu);
+  return wrapper;
+}
+
+function setupGlobalNavigation(){
+  if(!navLinks) return;
+
+  const pastoralLink = [...navLinks.querySelectorAll('a')]
+    .find(link => link.getAttribute('href') === 'vida-parroquial.html');
+  if(pastoralLink && !document.getElementById('vida-parroquial-menu')){
+    const pastoralDropdown = createNavigationDropdown('Vida parroquial', 'vida-parroquial-menu', [
+      {label: 'Ver toda Vida parroquial', href: 'vida-parroquial.html'},
+      {label: 'Infancia', href: 'categoria.html?id=infancia'},
+      {label: 'Adolescentes y jóvenes', href: 'categoria.html?id=juventud'},
+      {label: 'Primer anuncio', href: 'categoria.html?id=primer-anuncio'},
+      {label: 'Adultos', href: 'categoria.html?id=adultos'},
+      {label: 'Sacramentos', href: 'categoria.html?id=sacramentos'},
+      {label: 'Novios', href: 'categoria.html?id=novios'},
+      {label: 'Matrimonios', href: 'categoria.html?id=matrimonios'},
+      {label: 'Oración, celebraciones y retiros', href: 'categoria.html?id=oracion'},
+      {label: 'Encuentros y actividades', href: 'categoria.html?id=comunidad'}
+    ], 'vida-parroquial.html');
+    pastoralLink.closest('li')?.replaceWith(pastoralDropdown);
+  }
+
+  const whoLink = [...navLinks.querySelectorAll('a')]
+    .find(link => link.getAttribute('href') === 'quienes-somos.html');
+  if(whoLink && !document.getElementById('quienes-somos-menu')){
+    const whoMenu = createNavigationDropdown('Quiénes somos', 'quienes-somos-menu', [
+      {label: 'Conocer la parroquia', href: 'quienes-somos.html'},
+      {label: 'Comisión de Comunicaciones', href: 'comisiones-parroquiales.html#comunicaciones'},
+      {label: 'Cultura y Fe', href: 'comisiones-parroquiales.html#cultura-fe'},
+      {label: 'Montaña', href: 'comisiones-parroquiales.html#montana'}
+    ], 'quienes-somos.html');
+    whoLink.closest('li')?.replaceWith(whoMenu);
+  }
+
+  const pastoralMenu = document.getElementById('vida-parroquial-menu');
+  if(pastoralMenu){
+    pastoralMenu.replaceChildren();
+    [
+      {label: 'Ver toda Vida parroquial', href: 'vida-parroquial.html'},
+      {label: 'Infancia', href: 'categoria.html?id=infancia'},
+      {label: 'Adolescentes y jóvenes', href: 'categoria.html?id=juventud'},
+      {label: 'Primer anuncio', href: 'categoria.html?id=primer-anuncio'},
+      {label: 'Adultos', href: 'categoria.html?id=adultos'},
+      {label: 'Sacramentos', href: 'categoria.html?id=sacramentos'},
+      {label: 'Novios', href: 'categoria.html?id=novios'},
+      {label: 'Matrimonios', href: 'categoria.html?id=matrimonios'},
+      {label: 'Oración, celebraciones y retiros', href: 'categoria.html?id=oracion'},
+      {label: 'Encuentros y actividades', href: 'categoria.html?id=comunidad'}
+    ].forEach((item, index) => {
+      const row = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = item.href;
+      link.textContent = item.label;
+      if(index === 0) link.className = 'featured-link';
+      row.appendChild(link);
+      pastoralMenu.appendChild(row);
+    });
+  }
+
+  if(!document.getElementById('servicios-menu')){
+    const services = createNavigationDropdown('Servicios', 'servicios-menu', [
+      {label: 'Cáritas', href: 'caritas.html'},
+      {label: 'Biblioteca', href: 'biblioteca.html'},
+      {label: 'Visita de enfermos', href: 'visita-enfermos.html'}
+    ]);
+    const blog = [...navLinks.querySelectorAll('a')]
+      .find(link => link.textContent.trim() === 'Blog');
+    blog?.closest('li')?.before(services);
+  }
+}
+
+setupGlobalNavigation();
+
 const navDropdowns = document.querySelectorAll('.nav-dropdown');
 
 function closeNavDropdowns(except = null){
@@ -281,6 +384,10 @@ function renderDetailPage(){
   const categoryLinks = getCategories().filter(category => (card.categories || []).includes(category.id))
     .map(category => `<a href="categoria.html?id=${category.id}">${category.title}</a>`).join('');
   const descriptionContent = card.descriptionHtml || `<p>${card.description || ''}</p>`;
+  const detailImage = card.detailImage || card.image || 'images/logo_parroquia_1.jpeg';
+  const detailImageAlt = detailImage.includes('logo_parroquia_1')
+    ? 'Logotipo de la parroquia, imagen provisional'
+    : (card.detailImageAlt || card.imageAlt || card.title);
 
   detailRoot.innerHTML = `
     <section class="page-hero detail-hero">
@@ -311,7 +418,7 @@ function renderDetailPage(){
           </nav>
         </div>
         <div class="detail-image reveal">
-          <img src="${card.image}" alt="${card.title}" loading="lazy">
+          <img src="${detailImage}" alt="${detailImageAlt}" loading="lazy" width="1200" height="1500">
         </div>
       </div>
     </section>
@@ -392,6 +499,20 @@ function getCategories(){
 
 function getCategoryCards(id){
   return getCards().filter(card => (card.categories || []).includes(id));
+}
+
+function renderPastoralNavigation(){
+  const navigation = document.querySelector('.pastoral-nav ul');
+  if(!navigation) return;
+  navigation.replaceChildren();
+  getCategories().forEach(category => {
+    const item = document.createElement('li');
+    const link = document.createElement('a');
+    link.href = `#${category.id}`;
+    link.textContent = category.title;
+    item.appendChild(link);
+    navigation.appendChild(item);
+  });
 }
 
 function createCategoryCard(category){
@@ -475,6 +596,7 @@ function renderCategoryPage(){
 }
 
 renderPastoralCategories();
+renderPastoralNavigation();
 renderCategoryPage();
 
 renderEditableCards();

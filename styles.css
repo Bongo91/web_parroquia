@@ -856,6 +856,8 @@ h2{
 }
 
 .detail-image img{
+  aspect-ratio:4/5;
+  height:auto;
   min-height:520px;
   object-fit:cover;
   border:3px solid rgba(47,122,91,.28);

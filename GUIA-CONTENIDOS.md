@@ -140,8 +140,8 @@ cuando afecten al contenido que se vaya a publicar.
 ## Actualización: directorio por categorías (26 de septiembre de 2026)
 
 Esta implementación sustituye la descripción anterior de las diez cajas provisionales.
-Vida parroquial muestra siete categorías: Infancia; Juventud; Primeros pasos en
-la fe; Formación y comunidad adulta; Sacramentos y vida en pareja; Oración,
+Vida parroquial muestra nueve categorías: Infancia; Adolescentes y jóvenes;
+Primer anuncio; Adultos; Sacramentos; Novios; Matrimonios; Oración,
 celebraciones y retiros; Encuentros y actividades.
 
 - `parishCategories`, en `content.js`, define títulos y presentaciones.
@@ -151,9 +151,12 @@ celebraciones y retiros; Encuentros y actividades.
 - `detalle.html?id=despertar` conserva la ficha individual y sus enlaces existentes.
 - Las cajas usan carruseles manuales cuando contienen varios grupos, con una
   imagen por ficha, nombre e indicador de posición. No avanzan automáticamente.
-- Para cambiar una fotografía, modifica `image` en la ficha correspondiente;
-  opcionalmente añade `imageAlt` para describirla. Recomendación: WebP o JPEG
-  horizontal de 1200 × 800 píxeles, con margen alrededor del motivo principal.
+- Para cambiar la fotografía de una tarjeta o carrusel, modifica `image` y
+  describe la escena con `imageAlt`. Recomendación: WebP o JPEG horizontal de
+  1200 × 800 píxeles, con margen alrededor del motivo principal.
+- Para usar una fotografía diferente en la ficha individual, añade `detailImage`
+  y `detailImageAlt`. Recomendación: WebP o JPEG vertical de 1200 × 1500 píxeles.
+  Si `detailImage` está vacío o no existe, la ficha reutiliza `image`.
 - Las fichas nuevas emplean el logo provisional. Se conservan las imágenes y
   los textos de las fichas anteriores. Los detalles pendientes no se inventan.
 - Las categorías con un solo grupo enlazan directamente a su ficha y no muestran
@@ -181,3 +184,14 @@ La web no envía ni almacena el mensaje y no requiere backend ni servicios exter
 
 La navegación al final de las fichas se muestra como enlaces secundarios bajo
 «También en»: categorías relacionadas y «Todas las categorías».
+
+## Navegación de comisiones y servicios
+
+Las comisiones quedan bajo el desplegable «Quiénes somos»: Comisión de
+Comunicaciones, Cultura y Fe y Montaña. Por ello, Cultura y Fe y Montaña no se
+muestran como tarjetas de Vida parroquial.
+
+«Servicios» tiene un desplegable propio con Cáritas, Biblioteca y Visita de
+enfermos. La visita de enfermos cuenta con una página informativa y un enlace
+para preparar una consulta por correo; no publica horarios ni condiciones que
+aún no estén confirmados.
