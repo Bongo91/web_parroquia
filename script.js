@@ -90,9 +90,10 @@ function setupGlobalNavigation(){
   if(whoLink && !document.getElementById('quienes-somos-menu')){
     const whoMenu = createNavigationDropdown('Quiénes somos', 'quienes-somos-menu', [
       {label: 'Conocer la parroquia', href: 'quienes-somos.html'},
-      {label: 'Comisión de Comunicaciones', href: 'comisiones-parroquiales.html#comunicaciones'},
-      {label: 'Cultura y Fe', href: 'comisiones-parroquiales.html#cultura-fe'},
-      {label: 'Montaña', href: 'comisiones-parroquiales.html#montana'}
+      {label: 'Clero', href: 'quienes-detalle.html?id=clero'},
+      {label: 'Comisión de Comunicaciones', href: 'quienes-detalle.html?id=comunicaciones'},
+      {label: 'Cultura y Fe', href: 'quienes-detalle.html?id=cultura-fe'},
+      {label: 'Montaña', href: 'quienes-detalle.html?id=montana'}
     ], 'quienes-somos.html');
     whoLink.closest('li')?.replaceWith(whoMenu);
   }
@@ -598,6 +599,89 @@ function renderCategoryPage(){
 renderPastoralCategories();
 renderPastoralNavigation();
 renderCategoryPage();
+
+function getIdentityCards(){
+  return typeof parishIdentityCards !== 'undefined' ? parishIdentityCards : [];
+}
+
+function renderIdentityDetailPage(){
+  const root = document.getElementById('identity-detail-root');
+  if(!root) return;
+
+  const id = new URLSearchParams(location.search).get('id');
+  const card = getIdentityCards().find(item => item.id === id);
+
+  if(!card){
+    document.title = 'Contenido no encontrado | Parroquia Jesús y San Martín';
+    root.innerHTML = `
+      <section class="page-section detail-empty">
+        <div class="container">
+          <h1>No hemos encontrado este contenido</h1>
+          <p>Puede que la información todavía no esté disponible o que el enlace haya cambiado.</p>
+          <a class="btn" href="quienes-somos.html">Volver a Quiénes somos</a>
+        </div>
+      </section>`;
+    return;
+  }
+
+  document.title = `${card.title} | Parroquia Jesús y San Martín`;
+  const image = card.detailImage || card.image || 'images/logo_parroquia_1.jpeg';
+  const placeholder = image.includes('logo_parroquia_1');
+  const imageAlt = placeholder
+    ? 'Logotipo de la parroquia, imagen provisional'
+    : (card.detailImageAlt || card.imageAlt || card.title);
+  const description = card.descriptionHtml || `<p>${card.description || ''}</p>`;
+
+  const membersSection = Array.isArray(card.members)
+    ? `
+      <section class="page-section identity-members" aria-labelledby="identity-members-title">
+        <div class="container">
+          <span class="page-kicker">Personas</span>
+          <h2 id="identity-members-title">Miembros del clero</h2>
+          ${card.members.length
+            ? `<div class="page-card-grid identity-member-grid">${card.members.map(member => `
+                <article class="page-card identity-member-card reveal">
+                  <img src="${member.image || 'images/logo_parroquia_1.jpeg'}" alt="${member.imageAlt || member.name}" loading="lazy" width="800" height="800">
+                  <div>
+                    <h3>${member.name}</h3>
+                    ${member.role ? `<p class="identity-member-role">${member.role}</p>` : ''}
+                    ${member.description ? `<p>${member.description}</p>` : ''}
+                  </div>
+                </article>`).join('')}</div>`
+            : '<div class="identity-members-empty"><p>Próximamente incorporaremos aquí los nombres, responsabilidades y fotografías de los miembros del clero de la parroquia.</p></div>'}
+        </div>
+      </section>`
+    : '';
+
+  root.innerHTML = `
+    <section class="page-hero detail-hero">
+      <div class="container">
+        <span class="page-kicker">${card.eyebrow || 'Quiénes somos'}</span>
+        <h1>${card.title}</h1>
+        <p>${card.summary}</p>
+      </div>
+    </section>
+    <section class="page-section">
+      <div class="container detail-layout">
+        <div class="detail-copy reveal">
+          <span class="page-kicker">${card.eyebrow || 'Quiénes somos'}</span>
+          <h2>${card.title}</h2>
+          <div class="detail-rich-text">${description}</div>
+          <nav class="detail-navigation" aria-label="Navegación de Quiénes somos">
+            <div class="navigation-links"><a href="quienes-somos.html">Volver a Quiénes somos</a></div>
+          </nav>
+        </div>
+        <div class="detail-image identity-detail-image reveal">
+          <img class="${placeholder ? 'is-placeholder' : ''}" src="${image}" alt="${imageAlt}" loading="lazy" width="1200" height="1500">
+        </div>
+      </div>
+    </section>
+    ${membersSection}`;
+
+  revealOnScroll();
+}
+
+renderIdentityDetailPage();
 
 renderEditableCards();
 renderFeaturedContent();

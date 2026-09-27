@@ -6,7 +6,7 @@
   <title>Quiénes somos | Parroquia Jesús y San Martín</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260927-1">
+  <link rel="stylesheet" href="styles.css?v=20260927-3">
 </head>
 <body>
   <header class="header scrolled" id="header"><div class="container nav"><a href="index.html#inicio" class="logo"><img src="images/logo_parroquia_1.jpeg" alt="Logotipo de la parroquia"><span>Parroquia Jesús y San Martín</span></a><nav aria-label="Navegación principal"><button class="menu-btn" id="menu-btn" aria-label="Abrir menú">☰</button><ul class="nav-links" id="nav-links">
@@ -32,8 +32,56 @@
           <li><a href="Donar.html">Donar</a></li>
         </ul></nav></div></header>
   <main>
-    <section class="page-hero"><div class="container"><span class="page-kicker">Quiénes somos</span><h1>Una comunidad en camino</h1><p>Página preparada para incorporar fotografías, miembros, equipos y secciones de presentación parroquial.</p></div></section>
-    <section class="page-section"><div class="container"><div class="page-card-grid"><article class="page-card reveal"><div><h3>Fotografías</h3><p>Espacio reservado para imágenes del equipo parroquial y la vida comunitaria.</p><div class="placeholder-frame">Pendiente de contenido</div></div></article><article class="page-card reveal"><div><h3>Miembros</h3><p>Estructura preparada para presentar sacerdotes, responsables y equipos.</p><div class="placeholder-frame">Pendiente de contenido</div></div></article><article class="page-card reveal"><div><h3>Secciones</h3><p>Bloques listos para historia, misión, servicios y áreas pastorales.</p><div class="placeholder-frame">Pendiente de contenido</div></div></article></div></div></section>
+    <section class="page-hero"><div class="container"><span class="page-kicker">Quiénes somos</span><h1>Una comunidad en camino</h1><p>Conoce a las personas, equipos y ámbitos que acompañan y sirven la vida de nuestra parroquia.</p></div></section>
+    <section class="page-section who-section">
+      <div class="container">
+        <article class="who-featured-card reveal" id="clero" aria-labelledby="clero-title">
+          <div class="who-featured-copy">
+            <span class="page-kicker">Servicio pastoral</span>
+            <h2 id="clero-title">Clero</h2>
+            <p>El clero está formado por los ministros ordenados que han recibido la misión de guiar y servir a la comunidad cristiana, anunciar el Evangelio y administrar los sacramentos.</p>
+            <p>Junto a ellos, las personas consagradas colaboran con su vocación, su oración y su servicio en la vida de la comunidad de fieles.</p>
+            <a class="btn who-featured-button" href="quienes-detalle.html?id=clero">Ver miembros del clero</a>
+          </div>
+          <figure class="who-featured-image">
+            <img src="images/logo_parroquia_1.jpeg" alt="Logotipo de la Parroquia Jesús y San Martín">
+            <figcaption>Al servicio de la comunidad parroquial</figcaption>
+          </figure>
+        </article>
+
+        <div class="who-section-heading">
+          <span class="page-kicker">Equipos y ámbitos</span>
+          <h2 id="who-sections-title">Conoce el resto de la comunidad</h2>
+        </div>
+
+        <div class="page-card-grid who-card-grid">
+          <article class="page-card reveal" id="comunicaciones">
+            <img src="images/logo_parroquia_1.jpeg" alt="Logotipo de la Parroquia Jesús y San Martín">
+            <div>
+              <h3>Comisión de Comunicaciones</h3>
+              <p>Equipo que ayuda a compartir la vida de la parroquia, sus celebraciones, actividades y propuestas.</p>
+              <a class="who-card-link" href="quienes-detalle.html?id=comunicaciones">Conocer la comisión</a>
+            </div>
+          </article>
+          <article class="page-card reveal" id="cultura-fe">
+            <img src="images/Cruz monte.png" alt="Cruz sobre el monte al atardecer">
+            <div>
+              <h3>Cultura y Fe</h3>
+              <p>Encuentros y propuestas culturales para compartir inquietudes y profundizar en la fe.</p>
+              <a class="who-card-link" href="quienes-detalle.html?id=cultura-fe">Conocer Cultura y Fe</a>
+            </div>
+          </article>
+          <article class="page-card reveal" id="montana">
+            <img src="images/logo_parroquia_1.jpeg" alt="Logotipo de la Parroquia Jesús y San Martín">
+            <div>
+              <h3>Montaña</h3>
+              <p>Salidas y encuentros con la naturaleza para compartir camino, fe y convivencia.</p>
+              <a class="who-card-link" href="quienes-detalle.html?id=montana">Conocer Montaña</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
     <section class="external-links" aria-label="Enlaces externos"><div class="container external-links-inner"><a href="https://www.diocesisgetafe.es/" target="_blank" rel="noopener">Diócesis de Getafe</a><a href="https://www.djuventudgetafe.es/" target="_blank" rel="noopener">Delegación de Juventud</a><a href="https://www.conferenciaepiscopal.es/" target="_blank" rel="noopener">Conferencia Episcopal</a></div></section>
   </main>
 
@@ -72,6 +120,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20260927-1"></script>
+  <script src="script.js?v=20260927-3"></script>
 </body>
 </html>

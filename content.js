@@ -775,3 +775,67 @@ const parishCategories = [
     "summary": "Compartir aficiones, colaborar y construir comunidad."
   }
 ];
+
+// ==================================================
+// CONTENIDOS DE QUIÉNES SOMOS
+// ==================================================
+// Cada elemento genera una ficha propia en quienes-detalle.html?id=...
+// Modifica image, imageAlt, summary y descriptionHtml para actualizar su contenido.
+// En Clero, members permite añadir personas con name, role, image, imageAlt y description.
+const parishIdentityCards = [
+  {
+    id: "clero",
+    eyebrow: "Servicio pastoral",
+    title: "Clero",
+    image: "images/logo_parroquia_1.jpeg",
+    imageAlt: "Logotipo de la Parroquia Jesús y San Martín",
+    summary: "Ministros ordenados al servicio de la comunidad parroquial.",
+    descriptionHtml: `
+      <p>El clero está formado por los ministros ordenados que han recibido la misión de guiar y servir a la comunidad cristiana, anunciar el Evangelio y administrar los sacramentos.</p>
+      <p>Junto a ellos, las personas consagradas colaboran con su vocación, su oración y su servicio en la vida de la comunidad de fieles.</p>
+      <h3>Su misión en la parroquia</h3>
+      <ul>
+        <li>Acompañar a la comunidad en su camino de fe.</li>
+        <li>Celebrar la liturgia y administrar los sacramentos.</li>
+        <li>Anunciar el Evangelio y servir a quienes más lo necesitan.</li>
+      </ul>
+    `,
+    members: []
+  },
+  {
+    id: "comunicaciones",
+    eyebrow: "Equipo parroquial",
+    title: "Comisión de Comunicaciones",
+    image: "images/logo_parroquia_1.jpeg",
+    imageAlt: "Logotipo de la Parroquia Jesús y San Martín",
+    summary: "Comunicar y compartir la vida de la parroquia con cercanía y claridad.",
+    descriptionHtml: `
+      <p>La Comisión de Comunicaciones ayuda a dar a conocer las celebraciones, actividades y propuestas de la parroquia.</p>
+      <p>Su servicio facilita que la información llegue a la comunidad a través de la web, las redes sociales y los demás canales parroquiales.</p>
+    `
+  },
+  {
+    id: "cultura-fe",
+    eyebrow: "Encuentro y formación",
+    title: "Cultura y Fe",
+    image: "images/Cruz monte.png",
+    imageAlt: "Cruz sobre el monte al atardecer",
+    summary: "Cultura, diálogo y fe para comprender mejor la realidad que vivimos.",
+    descriptionHtml: `
+      <p>Cultura y Fe propone encuentros y actividades que ayudan a poner en diálogo la experiencia cristiana con la cultura y las preguntas de nuestro tiempo.</p>
+      <p>Es un espacio abierto para compartir inquietudes, aprender juntos y profundizar en la fe.</p>
+    `
+  },
+  {
+    id: "montana",
+    eyebrow: "Naturaleza y convivencia",
+    title: "Montaña",
+    image: "images/logo_parroquia_1.jpeg",
+    imageAlt: "Logotipo de la Parroquia Jesús y San Martín",
+    summary: "Caminar juntos, disfrutar de la naturaleza y fortalecer la convivencia.",
+    descriptionHtml: `
+      <p>Montaña reúne salidas y encuentros en la naturaleza para compartir camino, conversación y convivencia.</p>
+      <p>Estas actividades permiten descubrir la creación, fortalecer los vínculos de la comunidad y vivir la fe también fuera de los espacios habituales.</p>
+    `
+  }
+];

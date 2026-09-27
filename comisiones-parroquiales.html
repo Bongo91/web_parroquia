@@ -3,11 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Comisiones parroquiales | Parroquia Jesús y San Martín</title>
+  <title>Equipos y ámbitos parroquiales | Parroquia Jesús y San Martín</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260927-1">
+  <link rel="stylesheet" href="styles.css?v=20260927-3">
+  <script>
+    // Conserva los enlaces antiguos y los dirige a las nuevas fichas individuales.
+    const legacyIdentityIds = new Set(['comunicaciones', 'cultura-fe', 'montana']);
+    const legacyIdentityId = location.hash.slice(1);
+    location.replace(legacyIdentityIds.has(legacyIdentityId)
+      ? `quienes-detalle.html?id=${legacyIdentityId}`
+      : 'quienes-somos.html');
+  </script>
 </head>
 <body>
   <header class="header scrolled" id="header">
@@ -48,8 +56,8 @@
     <section class="page-hero">
       <div class="container">
         <span class="page-kicker">Quiénes somos</span>
-        <h1>Comisiones parroquiales</h1>
-        <p>Equipos que ponen sus capacidades al servicio de la comunicación, la cultura y la vida de la parroquia.</p>
+        <h1>Equipos y ámbitos parroquiales</h1>
+        <p>Personas y propuestas que ponen sus capacidades al servicio de la comunicación, la cultura y la vida de la parroquia.</p>
       </div>
     </section>
 
@@ -107,6 +115,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20260927-1"></script>
+  <script src="script.js?v=20260927-3"></script>
 </body>
 </html>
