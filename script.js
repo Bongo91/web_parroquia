@@ -445,7 +445,7 @@ function buildInquiryMailto(email, groupTitle, subject, message){
 
 function renderGroupContact(card){
   const root = document.getElementById('group-contact');
-  if(!root) return;
+  if(!root || card.showContact === false) return;
   const contacts = getGroupContacts(card);
   if(!contacts.length) return;
   const section = document.createElement('section');
@@ -941,16 +941,19 @@ revealOnScroll();
 
 // WELCOME SLIDER FADE
 
-const slides = document.querySelectorAll('.welcome-slider img');
+const slides = document.querySelectorAll('.welcome-slider .welcome-slide');
 let current = 0;
 
 if(slides.length){
-  slides[current].classList.add('active');
+  function showWelcomeSlide(index){
+    slides.forEach((slide, slideIndex) => slide.classList.toggle('active', slideIndex === index));
+  }
+
+  showWelcomeSlide(current);
 
   setInterval(() => {
-    slides[current].classList.remove('active');
     current = (current + 1) % slides.length;
-    slides[current].classList.add('active');
+    showWelcomeSlide(current);
   }, 3000);
 }
 

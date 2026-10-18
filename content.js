@@ -5,6 +5,7 @@ const parishContact = {
   whatsappUrl: "https://chat.whatsapp.com/J4hEDbLKEdw9IwA11eyHxp?s=sw&p=a&mlu=4&ilr=4"
 };
 // En cada ficha: signupUrl para inscripción y contactFormUrl para formulario de contacto.
+// Añade showContact: false cuando una ficha no deba mostrar el contacto común.
 
 // GUÍA PARA PUBLICAR IMÁGENES
 // 1. Guarda todas las fotografías dentro de la carpeta images.
@@ -60,32 +61,22 @@ const parishCards = [
     eyebrow: "Infancia",
     title: "Despertar",
     image: "images/jesus_ninos.jpeg",
-    summary: "Primeros pasos en la fe desde la alegría, la familia y el descubrimiento.",
+    summary: "Primeros pasos en la fe para niños de 3 a 6 años, vividos junto a sus familias con alegría, cercanía y descubrimiento.",
     featured: true,
     featuredTitle: "Despertar: primeros pasos en la fe",
     featuredSummary: "Una propuesta cercana para que niños y familias descubran la parroquia como casa, comunidad y camino.",
     featuredPriority: 1,
-    description: "Despertar acompaña a los más pequeños y a sus familias en el inicio del camino cristiano.",
+    description: "Una propuesta para acompañar a los niños más pequeños y a sus familias en sus primeros encuentros con la fe y con la comunidad parroquial.",
     descriptionHtml: `
-      <p><strong>Despertar</strong> es una comunidad parroquial pensada para iniciar a los niños y a sus familias en una experiencia sencilla, alegre y cercana de fe.</p>
+      <p><strong>Despertar</strong> es una propuesta para acompañar a los niños más pequeños y a sus familias en sus primeros encuentros con la fe y con la comunidad parroquial.</p>
 
-      <p>Además de las celebraciones litúrgicas, la parroquia ofrece actividades orientadas al <strong>acompañamiento espiritual</strong>, la formación y la ayuda mutua entre vecinos.</p>
+      <p>A través de celebraciones sencillas, dinámicas adaptadas a su edad y momentos compartidos en familia, los niños comienzan a descubrir a Jesús, la oración y la parroquia como una casa cercana y acogedora.</p>
 
       <h3>¿A quién está dirigido?</h3>
       <ul>
-        <li>Familias que quieren acercar la fe a sus hijos.</li>
-        <li>Niños que empiezan a descubrir la parroquia como casa.</li>
-        <li>Personas que desean integrarse poco a poco en la vida comunitaria.</li>
+        <li>Familias con niños de 3 a 6 años.</li>
+        <li>Quienes desean iniciar este camino de forma gradual, alegre y acompañada.</li>
       </ul>
-
-      <h3>Qué se suele trabajar</h3>
-      <ul>
-        <li>Oraciones sencillas y gestos de la fe.</li>
-        <li>Primer contacto con la comunidad parroquial.</li>
-        <li>Dinámicas de convivencia, escucha y participación.</li>
-      </ul>
-
-      <p>Más allá de lo religioso, la parroquia también cumple una función social importante: fomenta la convivencia, el compromiso con los demás y el sentimiento de pertenencia a una comunidad cercana, acogedora y participativa.</p>
     `,
     signupUrl: "https://forms.gle/",
 
@@ -107,9 +98,21 @@ const parishCards = [
   ],
   "section": "infancia",
   "title": "Alevines",
-  "image": "images/jesus_ninos.jpeg",
-  "summary": "Un camino de fe y comunidad para alumnos de 6.º de Primaria a 1.º de ESO.",
-  "description": "Un camino de fe y comunidad para alumnos de 6.º de Primaria a 1.º de ESO. Próximamente ampliaremos la información de esta propuesta.",
+  "image": "images/alevines.JPG",
+  "summary": "Un espacio cercano para quienes cursan de 6.º de Primaria a 1.º de ESO, donde crecer en amistad, fe y vida de comunidad.",
+  "description": "Un espacio para compartir, hacer amigos, plantear preguntas y descubrir que la fe también forma parte de la vida cotidiana.",
+  "descriptionHtml": `
+    <p><strong>Alevines</strong> acompaña a quienes viven una etapa de cambio entre la infancia y la adolescencia. Es un espacio para compartir, hacer amistades, plantear preguntas y descubrir que la fe también forma parte de la vida cotidiana.</p>
+
+    <p>Mediante encuentros, juegos, conversación, oración y actividades de grupo, cada persona puede encontrar su lugar en la parroquia y avanzar acompañada por otras personas de su edad.</p>
+
+    <h3>¿A quién está dirigido?</h3>
+    <ul>
+      <li>Quienes cursan 6.º de Primaria y 1.º de ESO.</li>
+      <li>Quienes desean compartir amistad, fe y vida de comunidad.</li>
+    </ul>
+  `,
+  "showContact": false,
   "signupUrl": "",
 
 
@@ -130,9 +133,17 @@ const parishCards = [
   ],
   "section": "infancia",
   "title": "Primera Comunión",
-  "image": "images/logo_parroquia_1.jpeg",
-  "summary": "Catequesis para descubrir la fe y prepararse para recibir la Primera Comunión.",
-  "description": "Catequesis para descubrir la fe y prepararse para recibir la Primera Comunión. Próximamente ampliaremos la información de esta propuesta.",
+  "image": "images/catequesis_caja.jpeg",
+  "summary": "Un itinerario de catequesis para conocer a Jesús, crecer en la fe y prepararse para recibir la Primera Comunión.",
+  "description": "Un camino progresivo de catequesis para niños y familias que desean preparar la Primera Comunión.",
+  "descriptionHtml": `
+    <p>La catequesis de <strong>Primera Comunión</strong> acompaña a los niños y a sus familias en el descubrimiento de Jesús, del Evangelio y de la vida de la Iglesia.</p>
+
+    <p>Es un camino progresivo, pensado aproximadamente para niños de 6 a 9 años y desarrollado a lo largo de tres años. Durante este tiempo se profundiza en la oración, la celebración, el perdón, la Eucaristía y el sentido de pertenecer a una comunidad cristiana.</p>
+
+    <p>La preparación no se limita al día de la celebración: busca que los niños y sus familias vivan la fe de manera cercana, compartida y continuada en la parroquia.</p>
+  `,
+  "showContact": false,
   "signupUrl": "",
 
 
@@ -157,8 +168,19 @@ const parishCards = [
   "section": "juventud",
   "title": "Juveniles",
   "image": "images/grupo_jovenes.jpeg",
-  "summary": "Encuentros de fe y acompañamiento para adolescentes de 2.º a 4.º de ESO.",
-  "description": "Encuentros de fe y acompañamiento para adolescentes de 2.º a 4.º de ESO. Próximamente ampliaremos la información de esta propuesta.",
+  "summary": "Un espacio de catequesis para compartir la fe, la amistad y las preguntas propias de los años de ESO.",
+  "description": "Un espacio de catequesis para crecer en la fe y compartir las preguntas de la adolescencia.",
+  "descriptionHtml": `
+    <p><strong>Juveniles</strong> está dirigido a quienes cursan de 2.º a 4.º de ESO. Es un espacio para crecer en la fe, hablar con libertad sobre las preguntas de esta etapa y compartir el camino con personas de la misma edad.</p>
+
+    <p>La catequesis ayuda a descubrir a Jesús de forma cercana y a sentirse parte de la comunidad parroquial.</p>
+
+    <h3>¿A quién está dirigido?</h3>
+    <ul>
+      <li>A quienes cursan de 2.º a 4.º de ESO.</li>
+      <li>A quienes desean compartir la fe y sus preguntas con personas de su edad.</li>
+    </ul>
+  `,
   "signupUrl": "",
 
 
@@ -179,8 +201,13 @@ const parishCards = [
   "section": "juventud",
   "title": "Bachillerato y universitarios",
   "image": "images/grupo_bachiller_uni.jpeg",
-  "summary": "Compartir la fe, las preguntas y la vida durante Bachillerato y la universidad.",
-  "description": "Compartir la fe, las preguntas y la vida durante Bachillerato y la universidad. Próximamente ampliaremos la información de esta propuesta.",
+  "summary": "Un grupo para seguir creciendo en la fe y compartir la vida durante Bachillerato y la universidad.",
+  "description": "Un lugar de encuentro, amistad y reflexión para integrar la fe en esta etapa vital.",
+  "descriptionHtml": `
+    <p><strong>Bachillerato y universitarios</strong> es un lugar para quienes viven Bachillerato o la universidad y desean seguir vinculados a la parroquia.</p>
+
+    <p>Ofrece un espacio de encuentro, amistad y reflexión para integrar la fe en los cambios, decisiones y experiencias de esta etapa vital.</p>
+  `,
   "signupUrl": "",
 
 
@@ -201,11 +228,10 @@ const parishCards = [
   "id": "alpha-jovenes",
   "categories": [
     "primer-anuncio",
-    "juventud"
   ],
   "section": "primer-anuncio",
   "title": "Alpha Jóvenes",
-  "image": "images/cena_alfa_1.jpg",
+  "image": "images/alpha_oficial.jpeg",
   "summary": "Encuentros para explorar las preguntas sobre la vida y la fe junto a otros jóvenes.",
   "description": "Encuentros para explorar las preguntas sobre la vida y la fe junto a otros jóvenes. Próximamente ampliaremos la información de esta propuesta.",
   "signupUrl": "",
@@ -376,8 +402,13 @@ const parishCards = [
   "section": "sacramentos",
   "title": "Confirmación de adolescentes y jóvenes",
   "image": "images/Confirmation_card.jpeg",
-  "summary": "Un itinerario de preparación para profundizar en la fe y recibir la Confirmación.",
-  "description": "Un itinerario de preparación para profundizar en la fe y recibir la Confirmación. Próximamente ampliaremos la información de esta propuesta.",
+  "summary": "Un camino de preparación para recibir la Confirmación, profundizar en la fe y vivirla en comunidad.",
+  "description": "Un itinerario para conocer mejor el Evangelio y prepararse para recibir este sacramento.",
+  "descriptionHtml": `
+    <p>La preparación para la <strong>Confirmación de adolescentes y jóvenes</strong> acompaña a quienes desean dar un paso consciente en su fe.</p>
+
+    <p>Es un itinerario para conocer mejor el Evangelio, profundizar en la relación con Jesús y prepararse para recibir este sacramento junto a la comunidad.</p>
+  `,
   "signupUrl": "",
 
 
