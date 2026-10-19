@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261019-2">
+  <link rel="stylesheet" href="styles.css?v=20261019-5">
 </head>
 <body>
   <header class="header" id="header">
@@ -142,12 +142,12 @@
 
         <div class="pastoral-featured" aria-labelledby="featured-title">
           <div class="featured-heading reveal">
-            <span class="page-kicker">Destacados</span>
-            <h2 id="featured-title">Ahora en la parroquia</h2>
-            <p>Propuestas y contenidos que conviene tener especialmente presentes.</p>
+            <span class="page-kicker">Vida de la comunidad</span>
+            <h2 id="featured-title">Tablón de anuncios</h2>
+            <p>Noticias, actividades y avisos de nuestra comunidad.</p>
           </div>
           <div class="featured-grid" id="featured-content"></div>
-          <button class="load-more" id="featured-toggle" type="button" hidden>Mostrar más</button>
+          <button class="load-more" id="featured-toggle" aria-controls="featured-content" type="button" hidden>Mostrar más</button>
         </div>
       </div>
     </section>
@@ -222,11 +222,18 @@
               </div>
         </div>
       </div>
+      <section class="footer-collaborators" aria-label="Entidades colaboradoras">
+        <h3>Entidades colaboradoras</h3>
+        <ul class="footer-links">
+          <li><a href="https://fundacionjesusysanmartin.org/" target="_blank" rel="noopener">Fundación Jesús y San Martín</a></li>
+          <li><a href="https://www.fundacioncofgetafe.org/" target="_blank" rel="noopener">COF · Centro de Orientación Familiar</a></li>
+        </ul>
+      </section>
       <div class="footer-bottom">© 2026 Parroquia Jesús y San Martín.</div>
     </div>
   </footer>
 
-  <script src="content.js?v=20260927-4"></script>
-  <script src="script.js?v=20260927-4"></script>
+  <script src="content.js?v=20261019-5"></script>
+  <script src="script.js?v=20261019-5"></script>
 </body>
 </html>

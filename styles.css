@@ -1882,3 +1882,41 @@ footer h3{
 .inquiry-form textarea{ resize:vertical; }
 .inquiry-form input:focus-visible, .inquiry-form textarea:focus-visible, .inquiry-form button:focus-visible{ outline:2px solid var(--color-secondary-deep); outline-offset:3px; }
 .inquiry-form .btn{ justify-self:start; }
+
+/* Donaciones y entidades colaboradoras */
+.donation-iban { overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.donation-steps { padding-left: 1.5rem; margin: 1rem 0; }
+.donation-steps li + li { margin-top: .6rem; }
+.footer-collaborators { border-top: 1px solid rgba(255,255,255,.2); margin-top: 2rem; padding-top: 1.5rem; }
+.footer-collaborators .footer-links { display: flex; flex-wrap: wrap; gap: .75rem 2rem; }
+.featured-item img.announcement-placeholder { object-fit: contain; padding: 16px; background: white; }
+.resource-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.resource-grid h2 { font-size: 2rem; line-height: 1.2; margin-bottom: 1rem; }
+@media (max-width: 600px) { .resource-grid { grid-template-columns: 1fr; } }
+
+/* Buscador y accesos del ámbito que se está visitando. */
+.collaborators-section { text-align: center; }
+.collaborators-section .who-card-grid { grid-template-columns: repeat(2, minmax(0, 380px)); justify-content: center; }
+.collaborators-section .who-card-link { align-self: center; }
+@media (max-width: 700px) {
+  .collaborators-section .who-card-grid { grid-template-columns: minmax(0, 380px); }
+}
+
+.parish-browser { margin: 24px 0; }
+.parish-search label { display: block; font-weight: 700; margin-bottom: 10px; }
+.parish-search-row { display: flex; gap: 12px; align-items: stretch; }
+.parish-search input { min-width: 0; flex: 1; padding: 14px 16px; border: 2px solid rgba(47,122,91,.35); border-radius: 12px; background: white; color: var(--color-text); font: inherit; }
+.parish-search input:focus-visible, .contextual-nav a:focus-visible { outline: 3px solid var(--color-secondary-deep); outline-offset: 3px; }
+.parish-search button:disabled { opacity: .55; cursor: default; }
+.parish-search-status { margin-top: 10px; color: var(--color-secondary-deep); }
+.contextual-nav { background: transparent; border: 0; padding: 18px 0 0; }
+.contextual-nav ul { flex-wrap: wrap; overflow: visible; justify-content: flex-start; padding: 0; }
+.contextual-nav li { max-width: 100%; }
+.contextual-nav li[hidden] { display: none; }
+.contextual-nav a[aria-current="page"] { background: var(--color-secondary); border-color: var(--color-secondary); color: white; }
+.detail-group-navigation { width: min(1200px, calc(100% - 32px)); margin: 24px auto 0; }
+.group-card { scroll-margin-top: 110px; }
+@media (max-width: 600px) {
+  .parish-search-row { flex-direction: column; }
+  .parish-search-row button { align-self: flex-start; }
+}

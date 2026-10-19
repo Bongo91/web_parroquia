@@ -49,6 +49,26 @@ const parishContact = {
 // Sin featuredStart ni featuredEnd, el destacado es permanente.
 
 const parishCards = [
+  {
+    id: "coro-parroquial",
+    categories: ["oracion", "comunidad"],
+    section: "vida-parroquial",
+    eyebrow: "Para todas las edades",
+    title: "Coro parroquial",
+    image: "images/logo_parroquia_1.jpeg",
+    summary: "Cantamos juntos para alabar a Dios y cuidar la belleza de la liturgia.",
+    descriptionHtml: `<p>¡Nos gustaría formar un coro en la parroquia Jesús y San Martín para alabar a Dios en la liturgia, cuidando especialmente su belleza! Si tienes oído, voz y disponibilidad, te invitamos a participar.</p>
+      <p><strong>Para todas las edades.</strong></p>
+      <h3>Ensayos</h3><p>Los domingos a las 11:00, antes de la misa de las 12:00.</p>
+      <p>El inicio está previsto para el domingo 25; os confirmaremos la fecha por WhatsApp.</p>
+      <p>Para cualquier duda, puedes contactar con Pilar: 634 549 291.</p>
+      <p>¡Muchas gracias! «Cantad al Señor un cántico nuevo» (Salmo 96, 1).</p>`,
+    signupUrl: "https://forms.gle/fCbndzJzs2QAc45H7",
+    contacts: [
+      {label: "Llamar a Pilar", href: "tel:+34634549291"},
+      {label: "WhatsApp de Pilar", href: "https://wa.me/34634549291"}
+    ]
+  },
   // ==================================================
   // TARJETA: INFANCIA
   // ==================================================
@@ -94,6 +114,7 @@ const parishCards = [
   {
   "id": "alevines",
   "categories": [
+    "juventud",
     "infancia"
   ],
   "section": "infancia",
@@ -381,34 +402,6 @@ const parishCards = [
   "image": "images/logo_parroquia_1.jpeg",
   "summary": "Acompañamiento para preparar el Bautismo con itinerarios según la edad.",
   "description": "Acompañamiento para preparar el Bautismo con itinerarios según la edad. Próximamente ampliaremos la información de esta propuesta.",
-  "signupUrl": "",
-
-
-
-  contactFormUrl: "",
-
-
-
-  "contactUrl": ""
-},
-
-  // GRUPO: Confirmación de adolescentes y jóvenes (también aparece en: Adolescentes y jóvenes)
-  {
-  "id": "confirmacion-jovenes",
-  "categories": [
-    "sacramentos",
-    "juventud"
-  ],
-  "section": "sacramentos",
-  "title": "Confirmación de adolescentes y jóvenes",
-  "image": "images/Confirmation_card.jpeg",
-  "summary": "Un camino de preparación para recibir la Confirmación, profundizar en la fe y vivirla en comunidad.",
-  "description": "Un itinerario para conocer mejor el Evangelio y prepararse para recibir este sacramento.",
-  "descriptionHtml": `
-    <p>La preparación para la <strong>Confirmación de adolescentes y jóvenes</strong> acompaña a quienes desean dar un paso consciente en su fe.</p>
-
-    <p>Es un itinerario para conocer mejor el Evangelio, profundizar en la relación con Jesús y prepararse para recibir este sacramento junto a la comunidad.</p>
-  `,
   "signupUrl": "",
 
 
@@ -817,12 +810,12 @@ const parishIdentityCards = [
   {
     id: "clero",
     eyebrow: "Servicio pastoral",
-    title: "Clero",
+    title: "Conoce al equipo parroquial",
     image: "images/logo_parroquia_1.jpeg",
     imageAlt: "Logotipo de la Parroquia Jesús y San Martín",
-    summary: "Ministros ordenados al servicio de la comunidad parroquial.",
+    summary: "Sacerdotes, seminaristas, fraternidad de hermanas y laicos al servicio de la comunidad.",
     descriptionHtml: `
-      <p>El clero está formado por los ministros ordenados que han recibido la misión de guiar y servir a la comunidad cristiana, anunciar el Evangelio y administrar los sacramentos.</p>
+      <p>Nuestro equipo parroquial está formado por sacerdotes, seminaristas, una fraternidad de hermanas y laicos que comparten la misión de acompañar y servir a la comunidad.</p>
       <p>Junto a ellos, las personas consagradas colaboran con su vocación, su oración y su servicio en la vida de la comunidad de fieles.</p>
       <h3>Su misión en la parroquia</h3>
       <ul>
@@ -869,4 +862,14 @@ const parishIdentityCards = [
       <p>Estas actividades permiten descubrir la creación, fortalecer los vínculos de la comunidad y vivir la fe también fuera de los espacios habituales.</p>
     `
   }
+];
+
+// TABLÓN: sin fechas el anuncio es fijo. Con start/end se publica en ese periodo.
+// Para un mes de publicación, indica las dos fechas AAAA-MM-DD. href es opcional.
+const parishAnnouncements = [
+  {id: "hollywins", title: "Hollywins", summary: "Una nueva actividad para compartir en la parroquia. Próximamente publicaremos los detalles.", image: "images/logo_parroquia_1.jpeg", priority: 1},
+  {id: "confirmacion-adultos", title: "Catequesis de Confirmación de adultos", summary: "Un camino para profundizar en la fe y preparar la Confirmación.", image: "images/Confirmation_card.jpeg", href: "detalle.html?id=confirmacion-adultos", priority: 2},
+  {id: "alpha", title: "Cenas Alpha · Jóvenes y adultos", summary: "Las cenas Alpha ya han comenzado. Un espacio para compartir mesa y conversar sobre la vida y la fe.", image: "images/cena_alfa_1.jpg", href: "categoria.html?id=primer-anuncio", priority: 3},
+  {id: "alcala", title: "Próxima salida: Alcalá", summary: "Cultura y Fe prepara su próxima salida a Alcalá. Fecha y detalles próximamente.", image: "images/Cruz monte.png", href: "cultura-fe.html#proxima-salida", priority: 4},
+  {id: "coro", title: "¡Forma parte del coro parroquial!", summary: "Para todas las edades. Ensayos los domingos a las 11:00, antes de la misa de las 12:00.", image: "images/logo_parroquia_1.jpeg", href: "detalle.html?id=coro-parroquial", priority: 5}
 ];

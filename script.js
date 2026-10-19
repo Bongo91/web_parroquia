@@ -90,9 +90,9 @@ function setupGlobalNavigation(){
   if(whoLink && !document.getElementById('quienes-somos-menu')){
     const whoMenu = createNavigationDropdown('Quiénes somos', 'quienes-somos-menu', [
       {label: 'Conocer la parroquia', href: 'quienes-somos.html'},
-      {label: 'Clero', href: 'quienes-detalle.html?id=clero'},
+      {label: 'Equipo parroquial', href: 'quienes-detalle.html?id=clero'},
       {label: 'Comisión de Comunicaciones', href: 'quienes-detalle.html?id=comunicaciones'},
-      {label: 'Cultura y Fe', href: 'quienes-detalle.html?id=cultura-fe'},
+      {label: 'Cultura y Fe', href: 'cultura-fe.html'},
       {label: 'Montaña', href: 'quienes-detalle.html?id=montana'}
     ], 'quienes-somos.html');
     whoLink.closest('li')?.replaceWith(whoMenu);
@@ -127,6 +127,7 @@ function setupGlobalNavigation(){
     const services = createNavigationDropdown('Servicios', 'servicios-menu', [
       {label: 'Cáritas', href: 'caritas.html'},
       {label: 'Biblioteca', href: 'biblioteca.html'},
+      {label: 'Recursos', href: 'recursos.html'},
       {label: 'Visita de enfermos', href: 'visita-enfermos.html'}
     ]);
     const blog = [...navLinks.querySelectorAll('a')]
@@ -165,7 +166,9 @@ document.addEventListener('click', event => {
 
 document.addEventListener('keydown', event => {
   if(event.key === 'Escape'){
+    const openToggle = document.querySelector('.nav-dropdown.open .nav-dropdown-toggle');
     closeNavDropdowns();
+    openToggle?.focus();
 
     if(navLinks?.classList.contains('active')){
       setMobileMenu(false);
@@ -282,26 +285,24 @@ function isFeaturedActive(card, today){
 }
 
 function createFeaturedItem(card, hidden){
-  const item = document.createElement('a');
+  const item = document.createElement(card.href ? 'a' : 'article');
   item.className = 'featured-item reveal';
-  item.href = getDetailUrl(card);
-  item.target = '_blank';
-  item.rel = 'noopener';
+  if(card.href) item.href = card.href;
   item.hidden = hidden;
-  item.setAttribute('aria-label', `Ver contenido destacado: ${card.title}`);
+  if(card.href) item.setAttribute('aria-label', `Ver anuncio: ${card.title}`);
 
   const deadline = card.featuredEnd
     ? `<time class="featured-deadline" datetime="${card.featuredEnd}">Hasta el ${formatFeaturedDeadline(card.featuredEnd)}</time>`
     : '';
 
   item.innerHTML = `
-    <img src="${card.image}" alt="${card.title}" loading="lazy">
+    <img class="${card.image.includes('logo_parroquia_1') ? 'announcement-placeholder' : ''}" src="${card.image}" alt="${card.image.includes('logo_parroquia_1') ? 'Logotipo de la parroquia, imagen provisional' : card.title}" loading="lazy">
     <div class="featured-copy">
-      <span>${card.eyebrow || 'Destacado'}</span>
+      <span>${card.eyebrow || 'Anuncio parroquial'}</span>
       <h3>${card.featuredTitle || card.title}</h3>
       <p>${card.featuredSummary || card.summary}</p>
       ${deadline}
-      <strong>${card.featuredCta || 'Ver más'}</strong>
+      ${card.href ? '<strong>Ver más</strong>' : ''}
     </div>
   `;
 
@@ -314,7 +315,9 @@ function renderFeaturedContent(){
   if(!container) return;
 
   const today = startOfToday();
-  const featuredCards = getCards()
+  const announcements = typeof parishAnnouncements !== 'undefined' ? parishAnnouncements : [];
+  const featuredCards = announcements.map(item => ({...item, featured: true,
+    featuredStart: item.start, featuredEnd: item.end, featuredPriority: item.priority}))
     .filter(card => isFeaturedActive(card, today))
     .sort((a, b) => {
       const priorityA = a.featuredPriority ?? a.featuredOrder ?? 99;
@@ -323,7 +326,7 @@ function renderFeaturedContent(){
     });
 
   if(!featuredCards.length){
-    container.innerHTML = '<p class="featured-empty">Ahora mismo no hay contenidos destacados.</p>';
+    container.innerHTML = '<p class="featured-empty">Ahora mismo no hay anuncios publicados.</p>';
     if(toggle) toggle.hidden = true;
     return;
   }
@@ -425,10 +428,17 @@ function renderDetailPage(){
     </section>
   `;
   renderGroupContact(card);
+  const related = getCards().filter(group => (group.categories || []).some(id => (card.categories || []).includes(id)));
+  if(related.length > 1){
+    const navigation = createPastoralLinks(related, 'Grupos relacionados', group => getDetailUrl(group), card.id);
+    navigation.classList.add('detail-group-navigation');
+    detailRoot.querySelector('.detail-hero').after(navigation);
+  }
 }
 
 // Los campos opcionales se convierten en enlaces mediante el DOM.
 function getGroupContacts(card){
+  if(Array.isArray(card.contacts)) return card.contacts;
   const contacts = [];
   const common = typeof parishContact !== 'undefined' ? parishContact : {};
   if(common.email) contacts.push({label: `Correo: ${common.email}`, href: `mailto:${common.email}`});
@@ -468,7 +478,7 @@ function renderGroupContact(card){
     links.appendChild(link);
   });
   section.append(heading, links);
-  if(typeof parishContact !== 'undefined' && parishContact.email){
+  if(!card.contacts && typeof parishContact !== 'undefined' && parishContact.email){
     const inquiry = document.createElement('details');
     inquiry.className = 'group-inquiry';
     inquiry.innerHTML = `<summary>Enviar una consulta</summary>
@@ -502,18 +512,76 @@ function getCategoryCards(id){
   return getCards().filter(card => (card.categories || []).includes(id));
 }
 
-function renderPastoralNavigation(){
-  const navigation = document.querySelector('.pastoral-nav ul');
-  if(!navigation) return;
-  navigation.replaceChildren();
-  getCategories().forEach(category => {
+function createPastoralLinks(items, label, href, currentId = ''){
+  const navigation = document.createElement('nav');
+  navigation.className = 'pastoral-nav contextual-nav';
+  navigation.setAttribute('aria-label', label);
+  const list = document.createElement('ul');
+  items.forEach(entry => {
     const item = document.createElement('li');
     const link = document.createElement('a');
-    link.href = `#${category.id}`;
-    link.textContent = category.title;
+    link.href = href(entry);
+    link.textContent = entry.title;
+    if(entry.id === currentId) link.setAttribute('aria-current', 'page');
     item.appendChild(link);
-    navigation.appendChild(item);
+    list.appendChild(item);
   });
+  navigation.appendChild(list);
+  return navigation;
+}
+
+function createGroupCard(group){
+  const article = document.createElement('article');
+  article.className = 'page-card group-card';
+  article.id = `grupo-${group.id}`;
+  const groupImage = group.image || 'images/logo_parroquia_1.jpeg';
+  const placeholder = groupImage.includes('logo_parroquia_1');
+  article.innerHTML = `<img class="${placeholder ? 'is-placeholder' : ''}" src="${groupImage}" alt="${placeholder ? 'Logotipo de la parroquia, imagen provisional' : (group.imageAlt || group.title)}" loading="lazy" width="1200" height="800"><div><h3>${group.title}</h3><p>${group.summary}</p><a class="btn" href="${getDetailUrl(group)}">Conocer el grupo<span class="sr-only">: ${group.title}</span></a></div>`;
+  return article;
+}
+
+function normalizeParishSearch(value){
+  return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('es').trim();
+}
+
+// Busca únicamente en las fichas locales; no necesita servicios externos.
+function setupParishBrowser(grid, category = null){
+  const groups = category ? getCategoryCards(category.id) : getCards().filter(card => card.categories?.length);
+  const controls = document.createElement('div');
+  controls.className = 'parish-browser';
+  controls.innerHTML = `<div class="parish-search"><label for="parish-search">${category ? 'Buscar en esta categoría' : 'Buscar un grupo o actividad'}</label><div class="parish-search-row"><input type="search" id="parish-search" placeholder="Por ejemplo: coro, Alpha, catequesis…" aria-controls="${grid.id}" autocomplete="off"><button type="button" class="btn btn-secondary">Limpiar búsqueda</button></div><p class="parish-search-status" role="status" aria-live="polite" aria-atomic="true"></p></div>`;
+  const navigation = createPastoralLinks(category ? groups : getCategories(), category ? 'Grupos de esta categoría' : 'Categorías de vida parroquial', item => category ? `#grupo-${item.id}` : `categoria.html?id=${item.id}`);
+  controls.appendChild(navigation);
+  grid.before(controls);
+  const input = controls.querySelector('input');
+  const clear = controls.querySelector('button');
+  const status = controls.querySelector('[role="status"]');
+  const searchable = groups.map(group => {
+    const description = document.createElement('div');
+    description.innerHTML = group.descriptionHtml || '';
+    const categories = getCategories().filter(item => group.categories?.includes(item.id)).map(item => item.title).join(' ');
+    return {group, text: normalizeParishSearch([group.title, group.summary, group.description || '', description.textContent, categories].join(' '))};
+  });
+  function update(){
+    const query = normalizeParishSearch(input.value);
+    const words = query.split(/\s+/).filter(Boolean);
+    const matches = searchable.filter(item => words.every(word => item.text.includes(word))).map(item => item.group);
+    grid.replaceChildren();
+    if(!query && !category){
+      getCategories().forEach(item => grid.appendChild(createCategoryCard(item)));
+      status.textContent = '';
+    } else {
+      matches.forEach(group => grid.appendChild(createGroupCard(group)));
+      status.textContent = matches.length ? `${matches.length} ${matches.length === 1 ? 'propuesta encontrada' : 'propuestas encontradas'}.` : 'No encontramos propuestas. Prueba con otro nombre o limpia la búsqueda.';
+    }
+    if(category){
+      navigation.querySelectorAll('li').forEach((item, index) => { item.hidden = !matches.includes(groups[index]); });
+    }
+    clear.disabled = !input.value;
+  }
+  input.addEventListener('input', update);
+  clear.addEventListener('click', () => { input.value = ''; update(); input.focus(); });
+  update();
 }
 
 function createCategoryCard(category){
@@ -564,7 +632,7 @@ function createCategoryCard(category){
 function renderPastoralCategories(){
   const grid = document.getElementById('pastoral-categories');
   if(!grid) return;
-  getCategories().forEach(category => grid.appendChild(createCategoryCard(category)));
+  setupParishBrowser(grid);
   // Conserva los enlaces antiguos a las categorías reorganizadas.
   const aliases = {catequesis:'infancia', jovenes:'juventud', celebracion:'oracion', matrimonio:'sacramentos', belenismo:'comunidad', retiros:'oracion'};
   const target = aliases[location.hash.slice(1)] || location.hash.slice(1);
@@ -584,20 +652,11 @@ function renderCategoryPage(){
   document.title = `${category.title} | Parroquia Jesús y San Martín`;
   root.innerHTML = `<section class="page-hero"><div class="container"><a href="vida-parroquial.html#${category.id}">← Vida parroquial</a><h1>${category.title}</h1><p>${category.summary}</p></div></section><section class="page-section"><div class="container"><h2>Grupos y propuestas</h2><div class="page-card-grid category-groups"></div></div></section>`;
   const grid = root.querySelector('.page-card-grid');
-  const groups = getCategoryCards(id);
-  if(!groups.length) grid.textContent = 'Próximamente compartiremos las propuestas de esta categoría.';
-  groups.forEach(group => {
-    const article = document.createElement('article');
-    article.className = 'page-card group-card';
-    const groupImage = group.image || 'images/logo_parroquia_1.jpeg';
-    const placeholder = groupImage.includes('logo_parroquia_1');
-    article.innerHTML = `<img class="${placeholder ? 'is-placeholder' : ''}" src="${groupImage}" alt="${placeholder ? 'Logotipo de la parroquia, imagen provisional' : (group.imageAlt || group.title)}" loading="lazy" width="1200" height="800"><div><h3>${group.title}</h3><p>${group.summary}</p><a class="btn" href="${getDetailUrl(group)}">Conocer el grupo<span class="sr-only">: ${group.title}</span></a></div>`;
-    grid.appendChild(article);
-  });
+  grid.id = 'category-groups';
+  setupParishBrowser(grid, category);
 }
 
 renderPastoralCategories();
-renderPastoralNavigation();
 renderCategoryPage();
 
 function getIdentityCards(){
@@ -607,6 +666,10 @@ function getIdentityCards(){
 function renderIdentityDetailPage(){
   const root = document.getElementById('identity-detail-root');
   if(!root) return;
+  if(new URLSearchParams(window.location.search).get('id') === 'cultura-fe'){
+    window.location.replace('cultura-fe.html');
+    return;
+  }
 
   const id = new URLSearchParams(location.search).get('id');
   const card = getIdentityCards().find(item => item.id === id);
@@ -637,7 +700,7 @@ function renderIdentityDetailPage(){
       <section class="page-section identity-members" aria-labelledby="identity-members-title">
         <div class="container">
           <span class="page-kicker">Personas</span>
-          <h2 id="identity-members-title">Miembros del clero</h2>
+          <h2 id="identity-members-title">Miembros del equipo parroquial</h2>
           ${card.members.length
             ? `<div class="page-card-grid identity-member-grid">${card.members.map(member => `
                 <article class="page-card identity-member-card reveal">
@@ -648,7 +711,7 @@ function renderIdentityDetailPage(){
                     ${member.description ? `<p>${member.description}</p>` : ''}
                   </div>
                 </article>`).join('')}</div>`
-            : '<div class="identity-members-empty"><p>Próximamente incorporaremos aquí los nombres, responsabilidades y fotografías de los miembros del clero de la parroquia.</p></div>'}
+            : '<div class="identity-members-empty"><p>Próximamente incorporaremos aquí los nombres, responsabilidades y fotografías de los miembros del equipo parroquial.</p></div>'}
         </div>
       </section>`
     : '';

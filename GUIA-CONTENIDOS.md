@@ -1,5 +1,45 @@
 # Guía provisional de contenidos parroquiales
 
+## Buscador y navegación contextual
+
+Vida parroquial permite buscar entre las fichas que tienen categorías. La búsqueda
+incluye nombre, resumen, descripción y categorías; ignora mayúsculas y tildes.
+Al buscar se muestran fichas individuales, sin duplicar grupos que pertenecen a
+varias categorías. Limpiar restaura las tarjetas de categorías.
+
+Los accesos situados justo sobre las tarjetas abren las categorías. Dentro de una
+categoría, cambian a sus grupos y llevan a sus tarjetas. La búsqueda queda limitada
+a esa categoría y los accesos se ajustan a los resultados. En una ficha individual
+se muestran los grupos relacionados y se marca el actual. Todo se deriva de
+`parishCards` y `parishCategories`, sin mantener listas nuevas ni servicios externos.
+
+## Actualización: tablón, donaciones y nuevos contenidos (19 de octubre de 2026)
+
+- El tablón de portada utiliza `parishAnnouncements` en `content.js`, separado
+  de las fichas de grupos. Los antiguos campos `featured` se conservan, pero ya
+  no determinan los anuncios de portada.
+- Cada anuncio tiene `id`, `title`, `summary`, `image` y `priority` (menor primero).
+  `href` es opcional: sin él se muestra una tarjeta informativa, como Hollywins.
+- `start` y `end` son fechas opcionales `AAAA-MM-DD`, ambos días incluidos.
+  Sin fechas, el anuncio permanece publicado. Para un mes, por ejemplo,
+  `start: "2026-11-01", end: "2026-11-30"`. Los anuncios futuros y caducados
+  se ocultan automáticamente al cargar la página. No se han inventado fechas
+  de caducidad para los anuncios solicitados.
+- Se muestran tres anuncios inicialmente; «Mostrar más» permite ver el resto.
+- Alevines y Juveniles encabezan Adolescentes y jóvenes. Se retira la
+  ficha independiente de Confirmación de adolescentes y jóvenes.
+- El coro aparece en Oración y en Encuentros y actividades. Su ficha usa
+  `contacts` para mostrar el teléfono y WhatsApp de Pilar, además de `signupUrl`.
+  El día 25 de inicio queda pendiente de confirmar; no se crea un evento fechado.
+- `cultura-fe.html` presenta el grupo, enlaza al calendario y contiene el anuncio
+  de la próxima salida a Alcalá. Fecha, recorrido e inscripción están pendientes.
+- `recursos.html`, bajo Servicios, prepara tarjetas de Eucaristía, Confesión,
+  Rosario y Biblia para ir incorporando materiales.
+- «Conoce al equipo parroquial» sustituye a «Clero». Se conserva el identificador
+  `clero` para que los enlaces anteriores sigan funcionando.
+- Los colaboradores aparecen en el pie de todas las páginas. Donar incorpora
+  los datos bancarios facilitados, Bizum 08139 e información sobre desgravación.
+
 ## Fuente y alcance
 
 Fuente: `C:\Users\franc\Downloads\programa parroquial (1).docx`, revisada el 21 de septiembre de 2026.
