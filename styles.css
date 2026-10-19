@@ -1061,16 +1061,15 @@ h2{
   color:var(--color-muted);
 }
 
-.home-pastoral-placeholder{
-  min-height:360px;
-  display:grid;
-  place-items:center;
-  padding:32px;
-  border:2px dashed rgba(47,122,91,.3);
+.home-pastoral-image{
   border-radius:24px;
-  background:rgba(255,255,255,.58);
-  color:var(--color-muted);
-  text-align:center;
+  overflow:hidden;
+}
+
+.home-pastoral-image img{
+  display:block;
+  width:100%;
+  height:auto;
 }
 
 .pastoral-featured{
