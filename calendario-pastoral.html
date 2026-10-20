@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261019-5">
+  <link rel="stylesheet" href="styles.css?v=20261020-6">
 </head>
 <body>
   <header class="header scrolled" id="header">
@@ -49,7 +49,7 @@
       <div class="container">
         <span class="page-kicker">Próximo año pastoral</span>
         <h1>Calendario pastoral</h1>
-        <p>Un camino visual con las próximas actividades de la comunidad, filtrable a 3 meses, 6 meses o 1 año.</p>
+        <p>Las próximas actividades de la comunidad y las propuestas pendientes de confirmar. Elige el periodo que quieres consultar.</p>
       </div>
     </section>
 
@@ -59,11 +59,13 @@
           <button class="calendar-filter" type="button" data-months="3" aria-pressed="false">3 meses</button>
           <button class="calendar-filter" type="button" data-months="6" aria-pressed="false">6 meses</button>
           <button class="calendar-filter active" type="button" data-months="12" aria-pressed="true">1 año</button>
+          <button class="calendar-filter" type="button" data-months="24" aria-pressed="false">2 años</button>
         </div>
 
         <p class="calendar-range" id="calendar-range" aria-live="polite"></p>
 
         <div class="timeline" id="pastoral-timeline" aria-live="polite"></div>
+        <section class="donation-block" id="calendar-pending" aria-live="polite" hidden></section>
       </div>
     </section>
 
@@ -118,10 +120,10 @@
     </div>
   </footer>
 
-  <script src="content.js?v=20261019-5"></script>
+  <script src="content.js?v=20261020-6"></script>
 
-  <script src="calendar.js"></script>
+  <script src="calendar.js?v=20261020-6"></script>
 
-  <script src="script.js?v=20261019-5"></script>
+  <script src="script.js?v=20261020-6"></script>
 </body>
 </html>

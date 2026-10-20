@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261019-5">
+  <link rel="stylesheet" href="styles.css?v=20261020-6">
 </head>
 <body>
   <header class="header scrolled" id="header">
@@ -48,7 +48,36 @@
     <section class="page-hero"><div class="container"><span class="page-kicker">Comisiones parroquiales</span><h1>Cultura y Fe</h1><p>Descubrir, aprender y compartir la fe a través de la cultura.</p></div></section>
     <section class="page-section"><div class="container donation-content">
       <article class="donation-intro"><h2>Un lugar de encuentro</h2><p>Cultura y Fe es una comisión parroquial que propone actividades culturales para poner en diálogo la fe con el arte, la historia y las preguntas de nuestro tiempo.</p><p>Queremos compartir inquietudes, aprender juntos y descubrir el patrimonio cultural desde una mirada cristiana, haciendo de cada encuentro una ocasión para construir comunidad.</p><a class="btn" href="calendario-pastoral.html">Ver el calendario parroquial</a></article>
-      <section class="donation-block" id="proxima-salida"><span class="page-kicker">Próxima salida</span><h2>Alcalá</h2><p>Estamos preparando una salida a Alcalá. Aquí anunciaremos la fecha, el recorrido y la información para participar cuando estén confirmados.</p></section>
+      <section class="donation-block" id="proxima-salida" aria-labelledby="salida-title">
+        <span class="page-kicker">Cultura y Fe</span>
+        <h2 id="salida-title">Próxima salida: Alcalá de Henares</h2>
+        <p><strong>Fecha: <time datetime="2026-11-14">14 de noviembre de 2026</time>.</strong></p>
+        <div class="outing-intro">
+          <figure class="outing-image" data-outing-carousel role="region" aria-roledescription="carrusel" aria-label="Imágenes de Cultura y Fe">
+            <!-- Imágenes provisionales: sustituir src y alt por fotografías de la salida o del destino. -->
+            <div class="outing-slides" id="outing-slides">
+              <img src="images/alcala_1.webp" alt="alcala_1" loading="lazy" width="1200" height="900">
+              <img src="images/alcala_2.webp" alt="alcala_2" loading="lazy" width="1200" height="900" hidden>
+              <img src="images/alcala_3.webp" alt="alcala_3" loading="lazy" width="1200" height="900" hidden>
+            </div>
+            <div class="outing-controls" hidden>
+              <button type="button" data-slide-step="-1" aria-label="Fotografía anterior" aria-controls="outing-slides">‹</button>
+              <span class="outing-position" aria-live="off" aria-atomic="true">1 de 3</span>
+              <button type="button" data-slide-step="1" aria-label="Fotografía siguiente" aria-controls="outing-slides">›</button>
+              <button type="button" class="outing-pause" aria-controls="outing-slides">Pausar</button>
+            </div>
+            <figcaption>Cultura, fe y un día para compartir.</figcaption>
+          </figure>
+          <div>
+            <p>Compartiremos una visita guiada a la Catedral Magistral y un recorrido por la ciudad de Alcalá de Henares.</p>
+            <p>Comeremos juntos: cada participante llevará su propia comida.</p>
+          </div>
+        </div>
+        <h3>Inscripción en secretaría</h3>
+        <p>La inscripción se realizará en la secretaría parroquial, entregando el importe de la actividad. <strong>El precio está pendiente de concretar</strong>; lo publicaremos aquí cuando esté confirmado.</p>
+        <p>Una vez inscrito, se te incorporará a un grupo de WhatsApp para concretar los detalles de la salida.</p>
+        <p>Próximamente ampliaremos la información sobre horarios y organización.</p>
+      </section>
     </div></section>
 </main>
 
@@ -94,6 +123,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20261019-5"></script>
+  <script src="script.js?v=20261020-6"></script>
 </body>
 </html>

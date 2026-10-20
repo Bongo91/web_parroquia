@@ -1,5 +1,50 @@
 # Guía provisional de contenidos parroquiales
 
+## Tablón en carrusel
+
+Los anuncios activos se muestran en un carrusel: tres tarjetas en escritorio,
+dos en tablet y una con la siguiente parcialmente visible en móvil. Avanza una
+tarjeta cada 8 segundos mientras está visible. Se detiene al pasar el ratón,
+al cambiar de pestaña o al interactuar mediante teclado o tacto. Incluye flechas,
+contador y pausa; «Ver todos los anuncios» despliega todas las tarjetas en la
+misma página. La preferencia de movimiento reducido desactiva el avance automático.
+
+## Programa de Cultura y Fe incorporado al calendario
+
+Fuente: `CULTURA_Y_FE_CURSO_2026_2027_maquetado.pdf`. La secuencia de meses se
+interpreta desde septiembre de 2026 hasta diciembre de 2027. Se conservan las
+actividades pasadas, aunque el calendario solo muestra las próximas.
+Las nueve actividades fechadas están en `pastoralEvents`; Fátima utiliza
+`endDate` para mantener visible la salida hasta el 2 de mayo.
+Las cuatro actividades sin día confirmado se recogen en `pastoralPendingEvents`
+con `month`, `title` y `summary`. Por indicación del usuario, se excluyen
+«Campamentos», «Vacaciones» y «Aterrizando». Las actividades pendientes se muestran
+en «Por confirmar», respetando el filtro de meses. El filtro de 2 años permite
+consultar también diciembre de 2027. Los enlaces de Cultura y Fe llevan siempre
+a `cultura-fe.html#proxima-salida`.
+
+## Cultura y Fe e inscripciones (20 de octubre de 2026)
+
+- Todos los anuncios de Cultura y Fe deben enlazar a
+  `cultura-fe.html#proxima-salida`, también cuando anuncien otras actividades culturales.
+- Próxima salida: 14 de noviembre de 2026, Alcalá de Henares. Visita guiada a la
+  Catedral Magistral, recorrido urbano y comida compartida llevando cada uno la suya.
+  Inscripción en secretaría con entrega del importe; precio y horarios pendientes.
+  Tras inscribirse se incorporará a los participantes a un grupo de WhatsApp.
+- La próxima salida incluye una fotografía junto a la presentación y, en móvil,
+  encima del texto. En `cultura-fe.html`, sustituir `src`, `alt` y el pie de la
+  figura `outing-image`. Se recomienda una imagen horizontal 4:3; de momento se
+  reutiliza la cruz al atardecer como imagen provisional.
+- Ese espacio es un carrusel: cambia cada 3 segundos mientras está visible.
+  Las fotos se funden durante 1,8 segundos, como en la portada; el fundido se
+  desactiva cuando el dispositivo solicita movimiento reducido.
+  Incluye flechas, contador y pausa; la navegación manual detiene el avance.
+  Con movimiento reducido se usan solo las flechas. Para añadir fotos, copiar
+  una imagen dentro de `.outing-slides`, con `hidden`, `loading="lazy"` y su texto
+  alternativo. Las tres imágenes actuales son provisionales, no fotos de Alcalá.
+- Incorporados los formularios facilitados a Alevines, Juveniles y Bachillerato
+  y universitarios (formulario de jóvenes).
+
 ## Buscador y navegación contextual
 
 Vida parroquial permite buscar entre las fichas que tienen categorías. La búsqueda
@@ -25,7 +70,8 @@ se muestran los grupos relacionados y se marca el actual. Todo se deriva de
   `start: "2026-11-01", end: "2026-11-30"`. Los anuncios futuros y caducados
   se ocultan automáticamente al cargar la página. No se han inventado fechas
   de caducidad para los anuncios solicitados.
-- Se muestran tres anuncios inicialmente; «Mostrar más» permite ver el resto.
+- El tablón usa el carrusel descrito al inicio de esta guía; «Ver todos los
+  anuncios» permite consultar todas las tarjetas juntas.
 - Alevines y Juveniles encabezan Adolescentes y jóvenes. Se retira la
   ficha independiente de Confirmación de adolescentes y jóvenes.
 - El coro aparece en Oración y en Encuentros y actividades. Su ficha usa

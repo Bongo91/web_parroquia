@@ -57,12 +57,13 @@ const parishCards = [
     title: "Coro parroquial",
     image: "images/logo_parroquia_1.jpeg",
     summary: "Cantamos juntos para alabar a Dios y cuidar la belleza de la liturgia.",
-    descriptionHtml: `<p>¡Nos gustaría formar un coro en la parroquia Jesús y San Martín para alabar a Dios en la liturgia, cuidando especialmente su belleza! Si tienes oído, voz y disponibilidad, te invitamos a participar.</p>
-      <p><strong>Para todas las edades.</strong></p>
-      <h3>Ensayos</h3><p>Los domingos a las 11:00, antes de la misa de las 12:00.</p>
-      <p>El inicio está previsto para el domingo 25; os confirmaremos la fecha por WhatsApp.</p>
-      <p>Para cualquier duda, puedes contactar con Pilar: 634 549 291.</p>
-      <p>¡Muchas gracias! «Cantad al Señor un cántico nuevo» (Salmo 96, 1).</p>`,
+    descriptionHtml: `<p><span aria-hidden="true">🎶</span> ¡Nos gustaría formar un coro en la parroquia Jesús y San Martín para alabar a Dios en la liturgia, cuidando especialmente su belleza! Si tienes oído, voz y disponibilidad, te invitamos a participar.</p>
+      <p><span aria-hidden="true">🙌</span> <strong>Para todas las edades.</strong></p>
+      <h3><span aria-hidden="true">🎼</span> Ensayos</h3><p>Los domingos a las 11:00, antes de la misa de las 12:00.</p>
+      <p><span aria-hidden="true">📅</span> El inicio está previsto para el domingo 25; os confirmaremos la fecha por WhatsApp.</p>
+      <p><span aria-hidden="true">📞</span> Para cualquier duda, puedes contactar con Pilar: 634 549 291.</p>
+      <p><span aria-hidden="true">📝</span> Puedes apuntarte en el formulario de inscripción que encontrarás a continuación.</p>
+      <p>¡Muchas gracias! <span aria-hidden="true">🎵</span> «Cantad al Señor un cántico nuevo» (Salmo 96, 1).</p>`,
     signupUrl: "https://forms.gle/fCbndzJzs2QAc45H7",
     contacts: [
       {label: "Llamar a Pilar", href: "tel:+34634549291"},
@@ -134,7 +135,7 @@ const parishCards = [
     </ul>
   `,
   "showContact": false,
-  "signupUrl": "",
+  "signupUrl": "https://docs.google.com/forms/d/e/1FAIpQLSfsVHId8D_fRlOEC3itmmkX4oj3--VV_XUFDgXbAhGvWKRYdg/viewform?usp=sharing&ouid=103051851522617591062",
 
 
 
@@ -202,7 +203,7 @@ const parishCards = [
       <li>A quienes desean compartir la fe y sus preguntas con personas de su edad.</li>
     </ul>
   `,
-  "signupUrl": "",
+  "signupUrl": "https://docs.google.com/forms/d/e/1FAIpQLScrhe1SgOwSt6xta2u4BBNNQozVepwV5Xgr0N63JyV_BtxAGw/viewform?usp=sharing&ouid=103051851522617591062",
 
 
 
@@ -229,7 +230,7 @@ const parishCards = [
 
     <p>Ofrece un espacio de encuentro, amistad y reflexión para integrar la fe en los cambios, decisiones y experiencias de esta etapa vital.</p>
   `,
-  "signupUrl": "",
+  "signupUrl": "https://docs.google.com/forms/d/e/1FAIpQLSdpLoaBi2sLwJ0kmtKWxld6ibxjj5tEYHPT8a_5RmQT2zFQ9Q/viewform?usp=sharing&ouid=103051851522617591062",
 
 
 
@@ -866,10 +867,11 @@ const parishIdentityCards = [
 
 // TABLÓN: sin fechas el anuncio es fijo. Con start/end se publica en ese periodo.
 // Para un mes de publicación, indica las dos fechas AAAA-MM-DD. href es opcional.
+// Los anuncios de Cultura y Fe enlazan siempre a cultura-fe.html#proxima-salida.
 const parishAnnouncements = [
   {id: "hollywins", title: "Hollywins", summary: "Una nueva actividad para compartir en la parroquia. Próximamente publicaremos los detalles.", image: "images/logo_parroquia_1.jpeg", priority: 1},
   {id: "confirmacion-adultos", title: "Catequesis de Confirmación de adultos", summary: "Un camino para profundizar en la fe y preparar la Confirmación.", image: "images/Confirmation_card.jpeg", href: "detalle.html?id=confirmacion-adultos", priority: 2},
   {id: "alpha", title: "Cenas Alpha · Jóvenes y adultos", summary: "Las cenas Alpha ya han comenzado. Un espacio para compartir mesa y conversar sobre la vida y la fe.", image: "images/cena_alfa_1.jpg", href: "categoria.html?id=primer-anuncio", priority: 3},
-  {id: "alcala", title: "Próxima salida: Alcalá", summary: "Cultura y Fe prepara su próxima salida a Alcalá. Fecha y detalles próximamente.", image: "images/Cruz monte.png", href: "cultura-fe.html#proxima-salida", priority: 4},
+  {id: "alcala", title: "Próxima salida: Alcalá de Henares", summary: "14 de noviembre: visita guiada a la Catedral Magistral, recorrido por la ciudad y comida juntos. Consulta la información y cómo inscribirte.", image: "images/Cruz monte.png", href: "cultura-fe.html#proxima-salida", priority: 4},
   {id: "coro", title: "¡Forma parte del coro parroquial!", summary: "Para todas las edades. Ensayos los domingos a las 11:00, antes de la misa de las 12:00.", image: "images/logo_parroquia_1.jpeg", href: "detalle.html?id=coro-parroquial", priority: 5}
 ];

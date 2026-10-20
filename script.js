@@ -286,7 +286,7 @@ function isFeaturedActive(card, today){
 
 function createFeaturedItem(card, hidden){
   const item = document.createElement(card.href ? 'a' : 'article');
-  item.className = 'featured-item reveal';
+  item.className = 'featured-item';
   if(card.href) item.href = card.href;
   item.hidden = hidden;
   if(card.href) item.setAttribute('aria-label', `Ver anuncio: ${card.title}`);
@@ -332,30 +332,88 @@ function renderFeaturedContent(){
   }
 
   container.innerHTML = '';
-  featuredCards.forEach((card, index) => {
-    container.appendChild(createFeaturedItem(card, index >= 3));
+  featuredCards.forEach(card => {
+    container.appendChild(createFeaturedItem(card, false));
   });
 
   if(!toggle) return;
+  setupAnnouncementCarousel(container, toggle);
+}
 
-  if(featuredCards.length <= 3){
-    toggle.hidden = true;
-    return;
+function setupAnnouncementCarousel(container, toggle){
+  const root = container.closest('.pastoral-featured');
+  const controls = root.querySelector('.announcement-controls');
+  const pause = controls.querySelector('.announcement-pause');
+  const position = controls.querySelector('.announcement-position');
+  const cards = [...container.children];
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  let expanded = false;
+  let paused = false;
+  let hovered = false;
+  let visible = false;
+  let timer;
+  container.classList.add('announcement-track');
+  container.setAttribute('aria-roledescription', 'carrusel');
+
+  function step(){ return cards.length > 1 && !expanded ? cards[1].offsetLeft - cards[0].offsetLeft : container.clientWidth; }
+  function overflows(){ return container.scrollWidth > container.clientWidth + 2; }
+  function update(){
+    const first = Math.round(container.scrollLeft / step());
+    const shown = Math.max(1, Math.floor((container.clientWidth + 28) / step()));
+    position.textContent = `${first + 1}–${Math.min(cards.length, first + shown)} de ${cards.length}`;
   }
-
-  toggle.hidden = false;
-  toggle.textContent = 'Mostrar más';
-  toggle.setAttribute('aria-expanded', 'false');
-
-  toggle.addEventListener('click', () => {
-    const expanded = toggle.getAttribute('aria-expanded') === 'true';
-    container.querySelectorAll('.featured-item').forEach((item, index) => {
-      if(index >= 3) item.hidden = expanded;
-    });
-    toggle.setAttribute('aria-expanded', String(!expanded));
-    toggle.textContent = expanded ? 'Mostrar más' : 'Mostrar menos';
-    revealOnScroll();
+  function schedule(){
+    clearInterval(timer);
+    const canMove = !expanded && overflows();
+    controls.hidden = !canMove;
+    toggle.hidden = !expanded && !canMove;
+    pause.textContent = reduced.matches ? 'Movimiento reducido' : (paused ? 'Reproducir' : 'Pausar');
+    pause.disabled = reduced.matches;
+    position.setAttribute('aria-live', paused || reduced.matches ? 'polite' : 'off');
+    if(canMove && visible && !paused && !hovered && !reduced.matches && !document.hidden){
+      timer = setInterval(() => advance(1), 8000);
+    }
+    update();
+  }
+  function advance(direction){
+    const max = container.scrollWidth - container.clientWidth;
+    let left = container.scrollLeft + direction * step();
+    if(direction > 0 && container.scrollLeft >= max - 2) left = 0;
+    if(direction < 0 && container.scrollLeft <= 2) left = max;
+    container.scrollTo({left: Math.max(0, Math.min(max, left)), behavior: reduced.matches ? 'instant' : 'smooth'});
+  }
+  controls.querySelectorAll('[data-announcement-step]').forEach(button => {
+    button.addEventListener('click', () => { paused = true; schedule(); advance(Number(button.dataset.announcementStep)); });
   });
+  pause.addEventListener('click', () => { paused = !paused; schedule(); });
+  root.addEventListener('mouseenter', () => { hovered = true; schedule(); });
+  root.addEventListener('mouseleave', () => { hovered = false; schedule(); });
+  root.addEventListener('focusin', event => {
+    if(event.target !== pause){ paused = true; schedule(); }
+  });
+  container.addEventListener('pointerdown', () => { paused = true; schedule(); });
+  container.addEventListener('scroll', update, {passive: true});
+  toggle.hidden = false;
+  toggle.setAttribute('aria-expanded', 'false');
+  toggle.addEventListener('click', () => {
+    expanded = !expanded;
+    paused = true;
+    container.classList.toggle('announcement-track', !expanded);
+    if(expanded) container.removeAttribute('aria-roledescription');
+    else container.setAttribute('aria-roledescription', 'carrusel');
+    container.scrollLeft = 0;
+    toggle.textContent = expanded ? 'Volver al carrusel' : 'Ver todos los anuncios';
+    toggle.setAttribute('aria-expanded', String(expanded));
+    schedule();
+  });
+  new IntersectionObserver(entries => {
+    visible = entries[0].isIntersecting;
+    schedule();
+  }, {threshold: 0.15}).observe(container);
+  new ResizeObserver(schedule).observe(container);
+  document.addEventListener('visibilitychange', schedule);
+  reduced.addEventListener('change', schedule);
+  schedule();
 }
 
 function renderDetailPage(){
@@ -839,6 +897,9 @@ function validatePastoralEvents(events, cards){
     if(event.date && !parseLocalDate(event.date)){
       errors.push(`${reference}: la fecha debe ser válida y usar AAAA-MM-DD.`);
     }
+    if(event.endDate && (!parseLocalDate(event.endDate) || event.endDate < event.date)){
+      errors.push(`${reference}: endDate debe ser una fecha válida igual o posterior al inicio.`);
+    }
 
     if(event.time && !/^([01]\d|2[0-3]):[0-5]\d$/.test(event.time)){
       errors.push(`${reference}: la hora debe usar HH:MM.`);
@@ -858,7 +919,9 @@ function validatePastoralEvents(events, cards){
 
 function createCalendarEvent(event){
   const group = getLinkedGroup(event);
-  const groupButton = group
+  const groupButton = event.category === 'Cultura y Fe'
+    ? '<a class="calendar-link" href="cultura-fe.html#proxima-salida">Cultura y Fe · Próxima salida</a>'
+    : group
     ? `<a class="calendar-link" href="${getDetailUrl(group)}" target="_blank" rel="noopener">Ver grupo</a>`
     : '';
   const signupButton = event.signupUrl
@@ -919,11 +982,23 @@ function renderPastoralCalendar(months = 12){
 
   const today = startOfToday();
   const limit = addMonths(today, months);
+  const pendingRoot = document.getElementById('calendar-pending');
+  if(pendingRoot){
+    const pending = typeof pastoralPendingEvents !== 'undefined' ? pastoralPendingEvents : [];
+    const items = pending.filter(item => {
+      const first = parseLocalDate(`${item.month}-01`);
+      const last = new Date(first.getFullYear(), first.getMonth() + 1, 0);
+      return last >= today && first <= limit;
+    });
+    pendingRoot.hidden = !items.length;
+    pendingRoot.innerHTML = items.length ? `<h2>Por confirmar · Cultura y Fe</h2><p>Propuestas y periodos del programa que todavía no tienen un día confirmado.</p><div class="page-card-grid">${items.map(item => `<article class="page-card"><div><span class="calendar-category">${formatMonthHeading(`${item.month}-01`)}</span><h3>${item.title}</h3><p>${item.summary}</p><a class="calendar-link" href="cultura-fe.html#proxima-salida">Cultura y Fe · Próxima salida</a></div></article>`).join('')}</div>` : '';
+  }
 
   const events = getEvents()
     .filter(event => {
       const eventDate = parseLocalDate(event.date);
-      return eventDate && eventDate >= today && eventDate <= limit;
+      const lastDate = parseLocalDate(event.endDate || event.date);
+      return eventDate && lastDate && lastDate >= today && eventDate <= limit;
     })
     .sort((a, b) => {
       const dateDifference = parseLocalDate(a.date) - parseLocalDate(b.date);
@@ -1048,3 +1123,60 @@ function setupProgressiveGrids(){
 }
 
 setupProgressiveGrids();
+
+// Carrusel de la próxima salida: sin dependencias y con pausa accesible.
+document.querySelectorAll('[data-outing-carousel]').forEach(carousel => {
+  const slides = [...carousel.querySelectorAll('.outing-slides img')];
+  if(slides.length < 2) return;
+  const controls = carousel.querySelector('.outing-controls');
+  const toggle = carousel.querySelector('.outing-pause');
+  const position = carousel.querySelector('.outing-position');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let current = 0;
+  let paused = false;
+  let visible = false;
+  let timer;
+
+  function schedule(){
+    clearInterval(timer);
+    const stopped = paused || reducedMotion.matches;
+    toggle.textContent = reducedMotion.matches ? 'Movimiento reducido' : (paused ? 'Reproducir' : 'Pausar');
+    toggle.disabled = reducedMotion.matches;
+    position.setAttribute('aria-live', stopped ? 'polite' : 'off');
+    if(!stopped && visible && !document.hidden){
+      timer = setInterval(() => show(current + 1), 3000);
+    }
+  }
+  function show(index){
+    current = (index + slides.length) % slides.length;
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('is-active', i === current);
+      slide.setAttribute('aria-hidden', String(i !== current));
+    });
+    position.textContent = `${current + 1} de ${slides.length}`;
+  }
+  // Superponer las fotos permite fundirlas sin alterar la altura del carrusel.
+  carousel.querySelector('.outing-slides').classList.add('is-ready');
+  slides.forEach(slide => { slide.hidden = false; });
+  controls.hidden = false;
+  controls.querySelectorAll('[data-slide-step]').forEach(button => {
+    button.addEventListener('click', () => {
+      paused = true;
+      schedule();
+      show(current + Number(button.dataset.slideStep));
+    });
+  });
+  toggle.addEventListener('click', () => { paused = !paused; schedule(); });
+  carousel.addEventListener('focusin', event => {
+    if(event.target !== toggle){ paused = true; schedule(); }
+  });
+  const observer = new IntersectionObserver(entries => {
+    visible = entries[0].isIntersecting;
+    schedule();
+  }, {threshold: 0.2});
+  observer.observe(carousel);
+  document.addEventListener('visibilitychange', schedule);
+  reducedMotion.addEventListener('change', schedule);
+  show(0);
+  schedule();
+});

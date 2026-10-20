@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261019-5">
+  <link rel="stylesheet" href="styles.css?v=20261020-6">
 </head>
 <body>
   <header class="header" id="header">
@@ -146,8 +146,14 @@
             <h2 id="featured-title">Tablón de anuncios</h2>
             <p>Noticias, actividades y avisos de nuestra comunidad.</p>
           </div>
-          <div class="featured-grid" id="featured-content"></div>
-          <button class="load-more" id="featured-toggle" aria-controls="featured-content" type="button" hidden>Mostrar más</button>
+          <div class="featured-grid" id="featured-content" role="region" aria-label="Anuncios parroquiales"></div>
+          <div class="announcement-controls" hidden>
+            <button type="button" data-announcement-step="-1" aria-label="Anuncios anteriores" aria-controls="featured-content">‹</button>
+            <span class="announcement-position" aria-live="off" aria-atomic="true"></span>
+            <button type="button" data-announcement-step="1" aria-label="Anuncios siguientes" aria-controls="featured-content">›</button>
+            <button type="button" class="announcement-pause" aria-controls="featured-content">Pausar</button>
+          </div>
+          <button class="load-more" id="featured-toggle" aria-controls="featured-content" type="button" hidden>Ver todos los anuncios</button>
         </div>
       </div>
     </section>
@@ -233,7 +239,7 @@
     </div>
   </footer>
 
-  <script src="content.js?v=20261019-5"></script>
-  <script src="script.js?v=20261019-5"></script>
+  <script src="content.js?v=20261020-6"></script>
+  <script src="script.js?v=20261020-6"></script>
 </body>
 </html>
